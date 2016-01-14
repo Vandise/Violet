@@ -6,6 +6,8 @@
 #include <vector>
 #include <boost/variant.hpp>
 
+class Context;
+
 namespace Violet
 {
 
@@ -15,10 +17,13 @@ namespace Violet
       std::vector< boost::variant<int,float,std::string> > literals;
       std::vector< boost::variant<int,float,std::string> > locals;
       std::vector<int> instructions;
+      std::vector<Context*> scopes;
 
       int localIndex(boost::variant<int,float,std::string> local);
       int literalIndex(boost::variant<int,float,std::string> literal);
+      int scopeIndex(Context *context);
       int getIndex(boost::variant<int,float,std::string> search, std::vector< boost::variant<int,float,std::string> > *table);
+      int getScope(Context *context);
       void integerLiteral(boost::variant<int,float,std::string> value);
       void stringLiteral(boost::variant<int,float,std::string> value);
       void floatLiteral(boost::variant<int,float,std::string> value);

@@ -1,5 +1,7 @@
+#include "intermediate/headers/context.hpp"
 #include "headers/violetgenerator.hpp"
 #include "intermediate/headers/bytecode.hpp"
+#include "runtime/headers/stdclass.hpp"
 
 int
 Violet::Generator::localIndex(boost::variant<int,float,std::string> local)
@@ -23,6 +25,35 @@ Violet::Generator::literalIndex(boost::variant<int,float,std::string> literal)
   }
   this->literals.push_back(literal);
   return this->literals.size() - 1;
+}
+
+int
+Violet::Generator::scopeIndex(Context *context)
+{
+  int index = this->getScope(context);
+  if(index >= 0)
+  {
+    return index;
+  }
+  this->scopes.push_back(context);
+  return this->scopes.size() - 1;
+}
+
+int
+Violet::Generator::getScope(Context *context)
+{
+  auto pred = [context](Context* search)
+  {
+    int value = search->getCurrentClass()->getName().compare(context->getCurrentClass()->getName());
+    return value == 0;
+  };
+
+  auto index =  std::find_if(this->scopes.begin(), this->scopes.end(), pred);
+  if(index != this->scopes.end())
+  {
+    return index - this->scopes.begin();
+  }
+  return -1;
 }
 
 int
