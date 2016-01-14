@@ -10,6 +10,8 @@
 #include "intermediate/nodes/headers/literalnode.hpp"
 #include "intermediate/headers/driver.hpp"
 #include "intermediate/headers/nodestack.hpp"
+#include "runtime/headers/runtime.hpp"
+#include "intermediate/headers/context.hpp"
 #include "runtime/headers/valueobject.hpp"
 #include "violet/headers/violetgenerator.hpp"
 

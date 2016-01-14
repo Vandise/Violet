@@ -35,7 +35,7 @@ SCENARIO("Compiling Floats", "[literalnode]")
 
   WHEN("A Float is compiled")
   {
-    NodeStack::stack[0]->compile(NULL, &generator);
+    NodeStack::stack[0]->compile(new Context(Lang::Runtime::mainObject), &generator);
 
     THEN("It is pushed onto the literals table")
     {
