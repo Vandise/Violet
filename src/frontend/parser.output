@@ -32,8 +32,9 @@ Grammar
     6 Literal: INTEGER
     7        | FLOAT
     8        | STRING
+    9        | SELF
 
-    9 Terminator: NEWLINE
+   10 Terminator: NEWLINE
 
 
 Terminals, with rules where they appear
@@ -43,37 +44,38 @@ error (256)
 INTEGER (258) 6
 FLOAT (259) 7
 STRING (260) 8
-NEWLINE (261) 9
-"." (262)
-"!" (263)
-"*" (264)
-"/" (265)
-"+" (266)
-"-" (267)
-">" (268)
-">=" (269)
-"<" (270)
-"<=" (271)
-"==" (272)
-"!=" (273)
-"&&" (274)
-"||" (275)
-"=" (276)
-"," (277)
+SELF (261) 9
+NEWLINE (262) 10
+"." (263)
+"!" (264)
+"*" (265)
+"/" (266)
+"+" (267)
+"-" (268)
+">" (269)
+">=" (270)
+"<" (271)
+"<=" (272)
+"==" (273)
+"!=" (274)
+"&&" (275)
+"||" (276)
+"=" (277)
+"," (278)
 
 
 Nonterminals, with rules where they appear
 
-$accept (23)
+$accept (24)
     on left: 0
-Expressions (24)
+Expressions (25)
     on left: 1 2 3 4, on right: 0 2 4
-Expression (25)
+Expression (26)
     on left: 5, on right: 1 2
-Literal (26)
-    on left: 6 7 8, on right: 5
-Terminator (27)
-    on left: 9, on right: 2 4
+Literal (27)
+    on left: 6 7 8 9, on right: 5
+Terminator (28)
+    on left: 10, on right: 2 4
 
 
 State 0
@@ -83,12 +85,13 @@ State 0
     INTEGER  shift, and go to state 1
     FLOAT    shift, and go to state 2
     STRING   shift, and go to state 3
+    SELF     shift, and go to state 4
 
     $default  reduce using rule 3 (Expressions)
 
-    Expressions  go to state 4
-    Expression   go to state 5
-    Literal      go to state 6
+    Expressions  go to state 5
+    Expression   go to state 6
+    Literal      go to state 7
 
 
 State 1
@@ -114,45 +117,52 @@ State 3
 
 State 4
 
+    9 Literal: SELF .
+
+    $default  reduce using rule 9 (Literal)
+
+
+State 5
+
     0 $accept: Expressions . "end of file"
     2 Expressions: Expressions . Terminator Expression
     4            | Expressions . Terminator
 
-    "end of file"  shift, and go to state 7
-    NEWLINE        shift, and go to state 8
+    "end of file"  shift, and go to state 8
+    NEWLINE        shift, and go to state 9
 
-    Terminator  go to state 9
+    Terminator  go to state 10
 
 
-State 5
+State 6
 
     1 Expressions: Expression .
 
     $default  reduce using rule 1 (Expressions)
 
 
-State 6
+State 7
 
     5 Expression: Literal .
 
     $default  reduce using rule 5 (Expression)
 
 
-State 7
+State 8
 
     0 $accept: Expressions "end of file" .
 
     $default  accept
 
 
-State 8
-
-    9 Terminator: NEWLINE .
-
-    $default  reduce using rule 9 (Terminator)
-
-
 State 9
+
+   10 Terminator: NEWLINE .
+
+    $default  reduce using rule 10 (Terminator)
+
+
+State 10
 
     2 Expressions: Expressions Terminator . Expression
     4            | Expressions Terminator .
@@ -160,14 +170,15 @@ State 9
     INTEGER  shift, and go to state 1
     FLOAT    shift, and go to state 2
     STRING   shift, and go to state 3
+    SELF     shift, and go to state 4
 
     $default  reduce using rule 4 (Expressions)
 
-    Expression  go to state 10
-    Literal     go to state 6
+    Expression  go to state 11
+    Literal     go to state 7
 
 
-State 10
+State 11
 
     2 Expressions: Expressions Terminator Expression .
 

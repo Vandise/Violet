@@ -40,6 +40,9 @@ float_num ({digit}+\.{digit}+)
                       return( token::NEWLINE );   
                     }
 
+"self"              {
+                      return(token::SELF);
+                    }
 \"[^"]*\"           {
                       yylval->sval = STOKEN(yytext);
                       yylval->sval->erase(remove(yylval->sval->begin(), yylval->sval->end(), '\"' ), yylval->sval->end());

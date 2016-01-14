@@ -97,6 +97,14 @@ Violet::Generator::floatLiteral(boost::variant<int,float,std::string> value)
 }
 
 void
+Violet::Generator::selfLiteral(Context *self)
+{
+  std::vector<int> operands;
+  operands.push_back(scopeIndex(self));
+  emit(PUSH_SELF, operands);
+}
+
+void
 Violet::Generator::emit(int opcode, std::vector<int> operands)
 {
   this->instructions.push_back(opcode);

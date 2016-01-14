@@ -10,6 +10,10 @@ enum
   /* 01 */    PUSH_INTEGER,     // index                       []                      [ValueObj]
   /* 02 */    PUSH_FLOAT,       // index                       []                      [ValueObj]
   /* 03 */    PUSH_STRING,      // index                       []                      [ValueObj]
+  /* 04 */    PUSH_ARRAY,       // index                       []                      [ArrayObj]
+  /* 05 */    PUSH_HASH,        // index                       []                      [HashObj]
+  /* 06 */    PUSH_LAMBDA,      // index                       []                      [LambdaObj]
+  /* 07 */    PUSH_SELF,        // index                       []                      [self]
 
   /* FF */    RETURN            //                             []                      []
 };

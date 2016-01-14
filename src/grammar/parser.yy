@@ -51,6 +51,7 @@
    #include "intermediate/nodes/headers/nodes.hpp"
    #include "intermediate/nodes/headers/callnode.hpp"
    #include "intermediate/nodes/headers/literalnode.hpp"
+   #include "intermediate/nodes/headers/selfnode.hpp"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -60,6 +61,7 @@
 %token   <ival>   INTEGER
 %token   <fval>   FLOAT
 %token   <sval>   STRING
+%token            SELF
 
 %token            NEWLINE 
 %token            PRGEND 0     "end of file"
@@ -131,6 +133,9 @@ Literal:
                             }
   | STRING                  {
                               $$ = new Nodes::LiteralNode(*$1);
+                            }
+  | SELF                    {
+                              $$ = new Nodes::SelfNode();
                             }
   ;
 

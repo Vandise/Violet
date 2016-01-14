@@ -27,6 +27,7 @@ namespace Violet
       void integerLiteral(boost::variant<int,float,std::string> value);
       void stringLiteral(boost::variant<int,float,std::string> value);
       void floatLiteral(boost::variant<int,float,std::string> value);
+      void selfLiteral(Context *self);
       void emit(int opcode, std::vector<int> operands);
   };
 
