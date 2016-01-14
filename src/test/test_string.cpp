@@ -51,4 +51,8 @@ SCENARIO("Compiling Strings", "[literalnode]")
       REQUIRE(generator.instructions[1] == 0);
     }
   }
+  NodeStack::stack.clear();
+  generator.instructions.clear();
+  generator.literals.clear();
+  generator.locals.clear();
 }

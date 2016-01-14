@@ -23,3 +23,34 @@ SCENARIO("Parsing Integers", "[valueobject]")
   }
 }
 
+SCENARIO("Compiling Integers", "[literalnode]")
+{
+  FrontEnd::Driver driver;
+  Violet::Generator generator;
+  const char *filename;
+
+  filename = "test/datatypes/integer/single.src";
+  driver.parse(filename);
+
+  WHEN("An Integer is compiled")
+  {
+    NodeStack::stack[0]->compile(NULL, &generator);
+
+    THEN("It is pushed onto the literals table")
+    {
+      int index = generator.literalIndex(10);
+      REQUIRE(index == 0);
+    }
+
+    THEN("It emits PUSH_STRING onto the stack with one operand")
+    {
+      REQUIRE(generator.instructions.size() == 2);
+      REQUIRE(generator.instructions[0] == PUSH_INTEGER);
+      REQUIRE(generator.instructions[1] == 0);
+    }
+  }
+  NodeStack::stack.clear();
+  generator.instructions.clear();
+  generator.literals.clear();
+  generator.locals.clear();
+}
