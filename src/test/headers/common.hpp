@@ -3,6 +3,7 @@
 
 #include <catch.h>
 #include <iostream>
+#include <stdexcept>
 #include <boost/variant.hpp>
 #include <boost/variant/get.hpp>
 #include "intermediate/headers/bytecode.hpp"

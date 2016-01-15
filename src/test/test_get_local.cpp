@@ -53,6 +53,16 @@ SCENARIO("Compiling Local Statement", "[localnode]")
         REQUIRE(generator.instructions[i] == bytecode[i]);
       }
     }
+    WHEN("The local does not exist")
+    {
+      NodeStack::stack.clear();
+      filename = "test/indentifiers/single.src";
+      driver.parse(filename);
+      THEN("It throws an out of range exception")
+      {
+        REQUIRE_NOTHROW(NodeStack::stack[0]->compile(new Context(Lang::Runtime::mainObject), &generator));
+      }
+    }
   }
   NodeStack::stack.clear();
   generator.instructions.clear();

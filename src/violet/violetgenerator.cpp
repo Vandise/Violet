@@ -154,7 +154,6 @@ Violet::Generator::getLocal(std::string name, Context *context)
 {
   std::vector<int> operands;
   int local_index = getLocalIndex(literalIndex(name),&((this->scopes[scopeIndex(context)])->locals));
-
   // does the local variable exist?
   if(local_index < 0)
     throw std::out_of_range("Call to undefined variable '"+name+"'.");
