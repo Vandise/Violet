@@ -47,7 +47,15 @@ float_num ({digit}+\.{digit}+)
                       yylval->sval = STOKEN(yytext);
                       yylval->sval->erase(remove(yylval->sval->begin(), yylval->sval->end(), '\"' ), yylval->sval->end());
                       return(token::STRING);
-                    }           
+                    }
+([A-Z][a-zA-Z]*)+   {
+                      yylval->sval = STOKEN(yytext);
+                      return( token::CONSTANT );     
+                    }
+[_a-zA-Z\\?\\!]+    {
+                      yylval->sval = STOKEN(yytext);
+                      return( token::IDENTIFIER );
+                    }       
 {integer}           {
                       yylval->ival = (atoi(yytext));
                       return( token::INTEGER );
@@ -56,6 +64,7 @@ float_num ({digit}+\.{digit}+)
                       yylval->fval = (atof(yytext));
                       return( token::FLOAT );
                     }
+"="                 { return( token::ASSIGN ); }
 .                   {  }
 
 %%

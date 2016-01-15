@@ -1,5 +1,6 @@
 Terminals unused in grammar
 
+   CONSTANT
    "."
    "!"
    "*"
@@ -28,157 +29,205 @@ Grammar
     4            | Expressions Terminator
 
     5 Expression: Literal
+    6           | SetLocal
 
-    6 Literal: INTEGER
-    7        | FLOAT
-    8        | STRING
-    9        | SELF
+    7 Literal: INTEGER
+    8        | FLOAT
+    9        | STRING
+   10        | SELF
 
-   10 Terminator: NEWLINE
+   11 SetLocal: IDENTIFIER ASSIGN Expression
+
+   12 Terminator: NEWLINE
 
 
 Terminals, with rules where they appear
 
 "end of file" (0) 0
 error (256)
-INTEGER (258) 6
-FLOAT (259) 7
-STRING (260) 8
-SELF (261) 9
-NEWLINE (262) 10
-"." (263)
-"!" (264)
-"*" (265)
-"/" (266)
-"+" (267)
-"-" (268)
-">" (269)
-">=" (270)
-"<" (271)
-"<=" (272)
-"==" (273)
-"!=" (274)
-"&&" (275)
-"||" (276)
-"=" (277)
-"," (278)
+INTEGER (258) 7
+FLOAT (259) 8
+STRING (260) 9
+SELF (261) 10
+CONSTANT (262)
+IDENTIFIER (263) 11
+ASSIGN (264) 11
+NEWLINE (265) 12
+"." (266)
+"!" (267)
+"*" (268)
+"/" (269)
+"+" (270)
+"-" (271)
+">" (272)
+">=" (273)
+"<" (274)
+"<=" (275)
+"==" (276)
+"!=" (277)
+"&&" (278)
+"||" (279)
+"=" (280)
+"," (281)
 
 
 Nonterminals, with rules where they appear
 
-$accept (24)
+$accept (27)
     on left: 0
-Expressions (25)
+Expressions (28)
     on left: 1 2 3 4, on right: 0 2 4
-Expression (26)
-    on left: 5, on right: 1 2
-Literal (27)
-    on left: 6 7 8 9, on right: 5
-Terminator (28)
-    on left: 10, on right: 2 4
+Expression (29)
+    on left: 5 6, on right: 1 2 11
+Literal (30)
+    on left: 7 8 9 10, on right: 5
+SetLocal (31)
+    on left: 11, on right: 6
+Terminator (32)
+    on left: 12, on right: 2 4
 
 
 State 0
 
     0 $accept: . Expressions "end of file"
 
-    INTEGER  shift, and go to state 1
-    FLOAT    shift, and go to state 2
-    STRING   shift, and go to state 3
-    SELF     shift, and go to state 4
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    IDENTIFIER  shift, and go to state 5
 
     $default  reduce using rule 3 (Expressions)
 
-    Expressions  go to state 5
-    Expression   go to state 6
-    Literal      go to state 7
+    Expressions  go to state 6
+    Expression   go to state 7
+    Literal      go to state 8
+    SetLocal     go to state 9
 
 
 State 1
 
-    6 Literal: INTEGER .
-
-    $default  reduce using rule 6 (Literal)
-
-
-State 2
-
-    7 Literal: FLOAT .
+    7 Literal: INTEGER .
 
     $default  reduce using rule 7 (Literal)
 
 
-State 3
+State 2
 
-    8 Literal: STRING .
+    8 Literal: FLOAT .
 
     $default  reduce using rule 8 (Literal)
 
 
-State 4
+State 3
 
-    9 Literal: SELF .
+    9 Literal: STRING .
 
     $default  reduce using rule 9 (Literal)
 
 
+State 4
+
+   10 Literal: SELF .
+
+    $default  reduce using rule 10 (Literal)
+
+
 State 5
+
+   11 SetLocal: IDENTIFIER . ASSIGN Expression
+
+    ASSIGN  shift, and go to state 10
+
+
+State 6
 
     0 $accept: Expressions . "end of file"
     2 Expressions: Expressions . Terminator Expression
     4            | Expressions . Terminator
 
-    "end of file"  shift, and go to state 8
-    NEWLINE        shift, and go to state 9
+    "end of file"  shift, and go to state 11
+    NEWLINE        shift, and go to state 12
 
-    Terminator  go to state 10
+    Terminator  go to state 13
 
 
-State 6
+State 7
 
     1 Expressions: Expression .
 
     $default  reduce using rule 1 (Expressions)
 
 
-State 7
+State 8
 
     5 Expression: Literal .
 
     $default  reduce using rule 5 (Expression)
 
 
-State 8
+State 9
+
+    6 Expression: SetLocal .
+
+    $default  reduce using rule 6 (Expression)
+
+
+State 10
+
+   11 SetLocal: IDENTIFIER ASSIGN . Expression
+
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    IDENTIFIER  shift, and go to state 5
+
+    Expression  go to state 14
+    Literal     go to state 8
+    SetLocal    go to state 9
+
+
+State 11
 
     0 $accept: Expressions "end of file" .
 
     $default  accept
 
 
-State 9
+State 12
 
-   10 Terminator: NEWLINE .
+   12 Terminator: NEWLINE .
 
-    $default  reduce using rule 10 (Terminator)
+    $default  reduce using rule 12 (Terminator)
 
 
-State 10
+State 13
 
     2 Expressions: Expressions Terminator . Expression
     4            | Expressions Terminator .
 
-    INTEGER  shift, and go to state 1
-    FLOAT    shift, and go to state 2
-    STRING   shift, and go to state 3
-    SELF     shift, and go to state 4
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    IDENTIFIER  shift, and go to state 5
 
     $default  reduce using rule 4 (Expressions)
 
-    Expression  go to state 11
-    Literal     go to state 7
+    Expression  go to state 15
+    Literal     go to state 8
+    SetLocal    go to state 9
 
 
-State 11
+State 14
+
+   11 SetLocal: IDENTIFIER ASSIGN Expression .
+
+    $default  reduce using rule 11 (SetLocal)
+
+
+State 15
 
     2 Expressions: Expressions Terminator Expression .
 

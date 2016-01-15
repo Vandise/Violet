@@ -14,6 +14,8 @@ enum
   /* 05 */    PUSH_HASH,        // index                       []                      [HashObj]
   /* 06 */    PUSH_LAMBDA,      // index                       []                      [LambdaObj]
   /* 07 */    PUSH_SELF,        // index                       []                      [self]
+  /* 08 */    GET_LOCAL,        // index                       []                      [value]
+  /* 09 */    SET_LOCAL,        // index                       []                      []
 
   /* FF */    RETURN            //                             []                      []
 };

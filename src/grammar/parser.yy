@@ -52,6 +52,7 @@
    #include "intermediate/nodes/headers/callnode.hpp"
    #include "intermediate/nodes/headers/literalnode.hpp"
    #include "intermediate/nodes/headers/selfnode.hpp"
+   #include "intermediate/nodes/headers/localassignnode.hpp"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -62,6 +63,11 @@
 %token   <fval>   FLOAT
 %token   <sval>   STRING
 %token            SELF
+
+%token   <sval>   CONSTANT
+%token   <sval>   IDENTIFIER
+
+%token            ASSIGN
 
 %token            NEWLINE 
 %token            PRGEND 0     "end of file"
@@ -96,7 +102,7 @@
 }
 
 
-%type <abs_node>     Expression Literal
+%type <abs_node>     Expression Literal SetLocal
 %type <driver>       Expressions
 
 %%
@@ -122,6 +128,7 @@ Expressions:
 
 Expression:
     Literal
+  | SetLocal
   ;
 
 Literal:
@@ -137,6 +144,10 @@ Literal:
   | SELF                    {
                               $$ = new Nodes::SelfNode();
                             }
+  ;
+
+SetLocal:
+    IDENTIFIER ASSIGN Expression     { $$ = new Nodes::LocalAssignNode(*$1, $3); }
   ;
 
 Terminator:

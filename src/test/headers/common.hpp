@@ -9,6 +9,7 @@
 #include "intermediate/nodes/headers/abstractnode.hpp"
 #include "intermediate/nodes/headers/literalnode.hpp"
 #include "intermediate/nodes/headers/selfnode.hpp"
+#include "intermediate/nodes/headers/localassignnode.hpp"
 #include "intermediate/headers/driver.hpp"
 #include "intermediate/headers/nodestack.hpp"
 #include "runtime/headers/runtime.hpp"

@@ -46,6 +46,7 @@ Context::getCurrentClass()
   return this->currentClass;
 }
 
+/*
 Runtime::Object*
 Context::getLocal(std::string name)
 {
@@ -65,6 +66,7 @@ Context::setLocal(std::string name, Runtime::Object *value)
 {
   this->locals[name] = value;
 }
+*/
 
 Context*
 Context::makeChildContext()

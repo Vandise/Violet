@@ -1,5 +1,6 @@
 #include "headers/common.hpp"
 
+/*
 SCENARIO("Adding elements to locals", "[violetgenerator]")
 {
   Violet::Generator generator;
@@ -24,6 +25,7 @@ SCENARIO("Adding elements to locals", "[violetgenerator]")
     }
   }
 }
+*/
 
 SCENARIO("Adding elements to literals", "[violetgenerator]")
 {
