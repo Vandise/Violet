@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "intermediate/headers/context.hpp"
 #include "headers/violetgenerator.hpp"
 #include "intermediate/headers/bytecode.hpp"
@@ -152,7 +153,13 @@ void
 Violet::Generator::getLocal(std::string name, Context *context)
 {
   std::vector<int> operands;
-  operands.push_back(literalIndex(name));
+  int local_index = getLocalIndex(literalIndex(name),&((this->scopes[scopeIndex(context)])->locals));
+
+  // does the local variable exist?
+  if(local_index < 0)
+    throw std::out_of_range("Call to undefined variable '"+name+"'.");
+
+  operands.push_back(local_index);
   operands.push_back(scopeIndex(context));
   emit(GET_LOCAL, operands);
 }
@@ -161,12 +168,6 @@ Violet::Generator::getLocal(std::string name, Context *context)
   get local variable
     SET_LOCAL [context local index] [scope index]
 
-  x = 5
-  push_integer 5
-  literal[0] = 5
-  literal[1] = x
-  Context
-    - locals [0, literal_index 1]
 */
 void
 Violet::Generator::setLocal(std::string name, Context *context)

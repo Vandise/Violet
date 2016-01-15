@@ -40,13 +40,15 @@ SCENARIO("Compiling Assignment Statement", "[localassignmentnode]")
     }
     THEN("It emits PUSH_INTEGER and SET_LOCAL onto the stack")
     {
-      // x = 5
       REQUIRE(generator.instructions.size() == 5);
-      REQUIRE(generator.instructions[0] == PUSH_INTEGER); // instruction
-      REQUIRE(generator.instructions[1] == 0);            // literal location
-      REQUIRE(generator.instructions[2] == SET_LOCAL);    // instruction
-      REQUIRE(generator.instructions[3] == 0);            // literals table variable name ( 0 = 5, 1 = x )
-      REQUIRE(generator.instructions[4] == 0);            // index of context.locals
+      std::vector<int> bytecode = {
+        PUSH_INTEGER, 0,
+        SET_LOCAL,    0, 0
+      };
+      for(int i = 0; i < bytecode.size(); i++)
+      {
+        REQUIRE(generator.instructions[i] == bytecode[i]);
+      }
     }
     THEN("Context.locals contains the literal index of the defined variable")
     {

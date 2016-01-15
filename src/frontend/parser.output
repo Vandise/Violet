@@ -30,29 +30,32 @@ Grammar
 
     5 Expression: Literal
     6           | SetLocal
+    7           | GetLocal
 
-    7 Literal: INTEGER
-    8        | FLOAT
-    9        | STRING
-   10        | SELF
+    8 Literal: INTEGER
+    9        | FLOAT
+   10        | STRING
+   11        | SELF
 
-   11 SetLocal: IDENTIFIER ASSIGN Expression
+   12 SetLocal: IDENTIFIER ASSIGN Expression
 
-   12 Terminator: NEWLINE
+   13 GetLocal: IDENTIFIER
+
+   14 Terminator: NEWLINE
 
 
 Terminals, with rules where they appear
 
 "end of file" (0) 0
 error (256)
-INTEGER (258) 7
-FLOAT (259) 8
-STRING (260) 9
-SELF (261) 10
+INTEGER (258) 8
+FLOAT (259) 9
+STRING (260) 10
+SELF (261) 11
 CONSTANT (262)
-IDENTIFIER (263) 11
-ASSIGN (264) 11
-NEWLINE (265) 12
+IDENTIFIER (263) 12 13
+ASSIGN (264) 12
+NEWLINE (265) 14
 "." (266)
 "!" (267)
 "*" (268)
@@ -78,13 +81,15 @@ $accept (27)
 Expressions (28)
     on left: 1 2 3 4, on right: 0 2 4
 Expression (29)
-    on left: 5 6, on right: 1 2 11
+    on left: 5 6 7, on right: 1 2 12
 Literal (30)
-    on left: 7 8 9 10, on right: 5
+    on left: 8 9 10 11, on right: 5
 SetLocal (31)
-    on left: 11, on right: 6
-Terminator (32)
-    on left: 12, on right: 2 4
+    on left: 12, on right: 6
+GetLocal (32)
+    on left: 13, on right: 7
+Terminator (33)
+    on left: 14, on right: 2 4
 
 
 State 0
@@ -103,41 +108,45 @@ State 0
     Expression   go to state 7
     Literal      go to state 8
     SetLocal     go to state 9
+    GetLocal     go to state 10
 
 
 State 1
 
-    7 Literal: INTEGER .
-
-    $default  reduce using rule 7 (Literal)
-
-
-State 2
-
-    8 Literal: FLOAT .
+    8 Literal: INTEGER .
 
     $default  reduce using rule 8 (Literal)
 
 
-State 3
+State 2
 
-    9 Literal: STRING .
+    9 Literal: FLOAT .
 
     $default  reduce using rule 9 (Literal)
 
 
-State 4
+State 3
 
-   10 Literal: SELF .
+   10 Literal: STRING .
 
     $default  reduce using rule 10 (Literal)
 
 
+State 4
+
+   11 Literal: SELF .
+
+    $default  reduce using rule 11 (Literal)
+
+
 State 5
 
-   11 SetLocal: IDENTIFIER . ASSIGN Expression
+   12 SetLocal: IDENTIFIER . ASSIGN Expression
+   13 GetLocal: IDENTIFIER .
 
-    ASSIGN  shift, and go to state 10
+    ASSIGN  shift, and go to state 11
+
+    $default  reduce using rule 13 (GetLocal)
 
 
 State 6
@@ -146,10 +155,10 @@ State 6
     2 Expressions: Expressions . Terminator Expression
     4            | Expressions . Terminator
 
-    "end of file"  shift, and go to state 11
-    NEWLINE        shift, and go to state 12
+    "end of file"  shift, and go to state 12
+    NEWLINE        shift, and go to state 13
 
-    Terminator  go to state 13
+    Terminator  go to state 14
 
 
 State 7
@@ -175,7 +184,14 @@ State 9
 
 State 10
 
-   11 SetLocal: IDENTIFIER ASSIGN . Expression
+    7 Expression: GetLocal .
+
+    $default  reduce using rule 7 (Expression)
+
+
+State 11
+
+   12 SetLocal: IDENTIFIER ASSIGN . Expression
 
     INTEGER     shift, and go to state 1
     FLOAT       shift, and go to state 2
@@ -183,26 +199,27 @@ State 10
     SELF        shift, and go to state 4
     IDENTIFIER  shift, and go to state 5
 
-    Expression  go to state 14
+    Expression  go to state 15
     Literal     go to state 8
     SetLocal    go to state 9
+    GetLocal    go to state 10
 
 
-State 11
+State 12
 
     0 $accept: Expressions "end of file" .
 
     $default  accept
 
 
-State 12
-
-   12 Terminator: NEWLINE .
-
-    $default  reduce using rule 12 (Terminator)
-
-
 State 13
+
+   14 Terminator: NEWLINE .
+
+    $default  reduce using rule 14 (Terminator)
+
+
+State 14
 
     2 Expressions: Expressions Terminator . Expression
     4            | Expressions Terminator .
@@ -215,19 +232,20 @@ State 13
 
     $default  reduce using rule 4 (Expressions)
 
-    Expression  go to state 15
+    Expression  go to state 16
     Literal     go to state 8
     SetLocal    go to state 9
-
-
-State 14
-
-   11 SetLocal: IDENTIFIER ASSIGN Expression .
-
-    $default  reduce using rule 11 (SetLocal)
+    GetLocal    go to state 10
 
 
 State 15
+
+   12 SetLocal: IDENTIFIER ASSIGN Expression .
+
+    $default  reduce using rule 12 (SetLocal)
+
+
+State 16
 
     2 Expressions: Expressions Terminator Expression .
 

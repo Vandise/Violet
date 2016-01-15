@@ -53,6 +53,7 @@
    #include "intermediate/nodes/headers/literalnode.hpp"
    #include "intermediate/nodes/headers/selfnode.hpp"
    #include "intermediate/nodes/headers/localassignnode.hpp"
+   #include "intermediate/nodes/headers/localnode.hpp"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -102,7 +103,7 @@
 }
 
 
-%type <abs_node>     Expression Literal SetLocal
+%type <abs_node>     Expression Literal SetLocal GetLocal
 %type <driver>       Expressions
 
 %%
@@ -129,6 +130,7 @@ Expressions:
 Expression:
     Literal
   | SetLocal
+  | GetLocal
   ;
 
 Literal:
@@ -148,6 +150,10 @@ Literal:
 
 SetLocal:
     IDENTIFIER ASSIGN Expression     { $$ = new Nodes::LocalAssignNode(*$1, $3); }
+  ;
+
+GetLocal:
+    IDENTIFIER    { $$ = new Nodes::LocalNode(*$1); }
   ;
 
 Terminator:
