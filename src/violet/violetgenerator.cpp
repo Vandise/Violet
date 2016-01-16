@@ -198,3 +198,10 @@ Violet::Generator::emit(int opcode, std::vector<int> operands)
     this->instructions.push_back(operands[i]);
   }
 }
+
+void
+Violet::Generator::assemble()
+{
+  std::vector<int> operands;
+  emit(RETURN, operands);
+}

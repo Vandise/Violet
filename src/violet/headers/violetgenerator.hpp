@@ -32,6 +32,7 @@ namespace Violet
       void getLocal(std::string name, Context *context);
       void setLocal(std::string name, Context *context);
       void emit(int opcode, std::vector<int> operands);
+      void assemble();
   };
 
 }
