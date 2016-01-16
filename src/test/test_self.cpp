@@ -23,6 +23,7 @@ SCENARIO("Compiling Self", "[selfnode]")
 {
   FrontEnd::Driver driver;
   Violet::Generator generator;
+  Context *context = new Context(Lang::Runtime::mainObject);
   const char *filename;
 
   filename = "test/datatypes/self/single.src";
@@ -30,19 +31,24 @@ SCENARIO("Compiling Self", "[selfnode]")
 
   WHEN("Compiling a self node definition")
   {
-    NodeStack::stack[0]->compile(new Context(Lang::Runtime::mainObject), &generator);
+    NodeStack::stack[0]->compile(context, &generator);
 
     THEN("It is pushed onto the scopes table")
     {
-      int index = generator.scopeIndex(new Context(Lang::Runtime::mainObject));
+      int index = generator.scopeIndex(context);
       REQUIRE(index == 0);
       REQUIRE(generator.scopes.size() == 1);
     }
     THEN("It emits PUSH_SELF onto the stack with one operand")
     {
       REQUIRE(generator.instructions.size() == 2);
-      REQUIRE(generator.instructions[0] == PUSH_SELF);
-      REQUIRE(generator.instructions[1] == 0);
+      std::vector<int> bytecode = {
+        PUSH_SELF, 0
+      };
+      for(int i = 0; i < bytecode.size(); i++)
+      {
+        REQUIRE(generator.instructions[i] == bytecode[i]);
+      }
     }
     THEN("It defaults to [main] Object scope")
     {

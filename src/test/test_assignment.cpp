@@ -27,14 +27,15 @@ SCENARIO("Compiling Assignment Statement", "[localassignmentnode]")
 
   filename = "test/indentifiers/assignment.src";
   driver.parse(filename);
+  Context *context = new Context(Lang::Runtime::mainObject);
 
   WHEN("Compiling an assignment node definition")
   {
-    NodeStack::stack[0]->compile(new Context(Lang::Runtime::mainObject), &generator);
+    NodeStack::stack[0]->compile(context, &generator);
 
     THEN("The context is pushed onto the scopes table")
     {
-      int index = generator.scopeIndex(new Context(Lang::Runtime::mainObject));
+      int index = generator.scopeIndex(context);
       REQUIRE(index == 0);
       REQUIRE(generator.scopes.size() == 1);
     }

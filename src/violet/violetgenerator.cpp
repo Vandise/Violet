@@ -83,8 +83,12 @@ Violet::Generator::getScope(Context *context)
 {
   auto pred = [context](Context* search)
   {
-    int value = search->getCurrentClass()->getName().compare(context->getCurrentClass()->getName());
-    return value == 0;
+    //
+    // todo: compare pointers instead of class name
+    //      this will break a lot of tests!
+    //
+    //int value = search->getCurrentClass()->getName().compare(context->getCurrentClass()->getName());
+    return search == context;
   };
 
   auto index =  std::find_if(this->scopes.begin(), this->scopes.end(), pred);

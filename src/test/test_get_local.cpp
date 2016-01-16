@@ -36,7 +36,7 @@ SCENARIO("Compiling Local Statement", "[localnode]")
 
     THEN("The context is pushed onto the scopes table")
     {
-      int index = generator.scopeIndex(new Context(Lang::Runtime::mainObject));
+      int index = generator.scopeIndex(context);
       REQUIRE(index == 0);
       REQUIRE(generator.scopes.size() == 1);
     }
@@ -60,7 +60,7 @@ SCENARIO("Compiling Local Statement", "[localnode]")
       driver.parse(filename);
       THEN("It throws an out of range exception")
       {
-        REQUIRE_NOTHROW(NodeStack::stack[0]->compile(new Context(Lang::Runtime::mainObject), &generator));
+        REQUIRE_NOTHROW(NodeStack::stack[0]->compile(context, &generator));
       }
     }
   }
