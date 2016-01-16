@@ -34,9 +34,9 @@ class Context
 
     Runtime::Object*   getCurrentSelf();
     Runtime::StdClass* getCurrentClass();
-    //Runtime::Object*   getLocal(std::string name);
-    //int                hasLocal(std::string name);
-    //void               setLocal(std::string name, Runtime::Object *value);
+    Runtime::Object*   getLocal(int index);
+    int                hasLocal(int index);
+    void               setLocal(int index, Runtime::Object *value);
     Context*           makeChildContext();
     Runtime::Object*   eval(const char *filename);
     Runtime::Object*   eval(std::string code);

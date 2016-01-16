@@ -46,27 +46,26 @@ Context::getCurrentClass()
   return this->currentClass;
 }
 
-/*
 Runtime::Object*
-Context::getLocal(std::string name)
+Context::getLocal(int index)
 {
-  return this->locals[name];
+  return this->locals[index];
 }
 
+/* probably should be depricated, the generator covers this */
 int
-Context::hasLocal(std::string name)
+Context::hasLocal(int index)
 {
-  if(this->locals.count(name) >= 1)
+  if(this->locals[index] != NULL)
     return 1;
   return 0;
 }
 
 void
-Context::setLocal(std::string name, Runtime::Object *value)
+Context::setLocal(int index, Runtime::Object *value)
 {
-  this->locals[name] = value;
+  this->locals[index] = value;
 }
-*/
 
 Context*
 Context::makeChildContext()
