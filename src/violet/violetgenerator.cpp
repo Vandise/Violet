@@ -9,13 +9,13 @@
 int
 Violet::Generator::localIndex(int literal_index, Context *context)
 {
-  int index = this->getLocalIndex(literal_index, &context->locals);
+  int index = this->getLocalIndex(literal_index, &context->local_bytes);
   if(index >= 0)
   {
     return index;
   }
-  context->locals.push_back(literal_index);
-  return context->locals.size() - 1;
+  context->local_bytes.push_back(literal_index);
+  return context->local_bytes.size() - 1;
 }
 
 int
@@ -157,7 +157,7 @@ void
 Violet::Generator::getLocal(std::string name, Context *context)
 {
   std::vector<int> operands;
-  int local_index = getLocalIndex(literalIndex(name),&((this->scopes[scopeIndex(context)])->locals));
+  int local_index = getLocalIndex(literalIndex(name),&((this->scopes[scopeIndex(context)])->local_bytes));
   // does the local variable exist?
   if(local_index < 0)
     throw std::out_of_range("Call to undefined variable '"+name+"'.");

@@ -51,10 +51,10 @@ SCENARIO("Compiling Assignment Statement", "[localassignmentnode]")
         REQUIRE(generator.instructions[i] == bytecode[i]);
       }
     }
-    THEN("Context.locals contains the literal index of the defined variable")
+    THEN("Context.local_bytes contains the literal index of the defined variable")
     {
-      REQUIRE(generator.scopes[0]->locals[0] == 1);
-      std::string local_value = boost::get<std::string>(generator.literals[generator.scopes[0]->locals[0]]);
+      REQUIRE(generator.scopes[0]->local_bytes[0] == 1);
+      std::string local_value = boost::get<std::string>(generator.literals[generator.scopes[0]->local_bytes[0]]);
       REQUIRE(local_value.compare("x") == 0);
     }
   }

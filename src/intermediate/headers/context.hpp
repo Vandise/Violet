@@ -25,7 +25,8 @@ class Context
 
   public:
     // [index, generator literal index]
-    std::vector<int> locals;
+    std::vector<int> local_bytes;
+    std::vector<Runtime::Object*> locals;
     Context(Runtime::Object *currentSelf, Runtime::StdClass *currentClass, Context *parent);
     Context(Runtime::Object *currentSelf, Runtime::StdClass *currentClass);
     Context(Runtime::Object *currentSelf);
