@@ -65,6 +65,9 @@ float_num ({digit}+\.{digit}+)
                       return( token::FLOAT );
                     }
 "="                 { return( token::ASSIGN ); }
+"("                 { return( token::OPEN_PAREN );  }
+")"                 { return( token::CLOSE_PAREN ); }  
+","                 { return( token::COMMA ); }
 .                   {  }
 
 %%

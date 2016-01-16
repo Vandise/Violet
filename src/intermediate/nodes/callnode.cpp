@@ -14,30 +14,34 @@ Nodes::CallNode::CallNode(std::string method, AbstractNode *receiver, std::vecto
 void
 Nodes::CallNode::compile(Context *context, Violet::Generator *generator)
 {
-  /*
-  if(receiver == NULL && arguments.empty() && context->hasLocal(method))
+  // push all the arguments onto the stack
+  for(int i = 0; i < this->arguments.size(); i++)
   {
-    //return context->getLocal(method);
+    this->arguments[i]->compile(context, generator);
   }
 
-  Runtime::Object* evaledReceiver;
-  if(receiver == NULL)
+  // push the receiver onto the stack
+  if(this->receiver == NULL)
   {
-    evaledReceiver = context->getCurrentSelf();
+    //PUSH_SELF [context]
+    generator->selfLiteral(context);
   }
   else
   {
-    evaledReceiver = receiver->compile(context);
+    // TODO:
+    //  PUSH_CONSTANT [constant, context]
+    //  this->receiver->compile(context, generator);
   }
 
-  std::vector<Runtime::Object*> evalArguments;
+  // push the method onto the stack
+  //generator->emitByte(generator->literalIndex(this->method));
+  generator->stringLiteral(this->method);
 
-  for(int i = 0; i < this->arguments.size(); i++)
-  {
-    Runtime::Object *evalArg = (this->arguments[i])->compile(context);
-    evalArguments.push_back(evalArg);
-  }
-  */
-  //Runtime::Object *evalReciever = this->receiver->eval(context);
-  //return evaledReceiver->call(this->method, evalArguments);
+  // final stack:
+  //  args...
+  //  receiver
+  //  method
+  //  CALL
+  //  argc
+  generator->callMethod(this->arguments.size());
 }

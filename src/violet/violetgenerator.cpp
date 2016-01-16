@@ -183,6 +183,14 @@ Violet::Generator::setLocal(std::string name, Context *context)
   emit(SET_LOCAL, operands);
 }
 
+void
+Violet::Generator::callMethod(int argc)
+{
+  std::vector<int> operands;
+  operands.push_back(argc);
+  emit(CALL, operands);
+}
+
 /* ---------------- EMIT INSTRUCTION ---------------- */
 
 /*
@@ -197,6 +205,15 @@ Violet::Generator::emit(int opcode, std::vector<int> operands)
   {
     this->instructions.push_back(operands[i]);
   }
+}
+
+/*
+  pushes a byte onto the instruction stack, usually a literal from a node
+*/
+void
+Violet::Generator::emitByte(int operand)
+{
+  this->instructions.push_back(operand);
 }
 
 void

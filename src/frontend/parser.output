@@ -29,67 +29,80 @@ Grammar
     4            | Expressions Terminator
 
     5 Expression: Literal
-    6           | SetLocal
-    7           | GetLocal
+    6           | Call
+    7           | SetLocal
+    8           | GetLocal
 
-    8 Literal: INTEGER
-    9        | FLOAT
-   10        | STRING
-   11        | SELF
+    9 Literal: INTEGER
+   10        | FLOAT
+   11        | STRING
+   12        | SELF
 
-   12 SetLocal: IDENTIFIER ASSIGN Expression
+   13 Call: IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-   13 GetLocal: IDENTIFIER
+   14 Arguments: Expression
+   15          | Arguments COMMA Expression
 
-   14 Terminator: NEWLINE
+   16 SetLocal: IDENTIFIER ASSIGN Expression
+
+   17 GetLocal: IDENTIFIER
+
+   18 Terminator: NEWLINE
 
 
 Terminals, with rules where they appear
 
 "end of file" (0) 0
 error (256)
-INTEGER (258) 8
-FLOAT (259) 9
-STRING (260) 10
-SELF (261) 11
+INTEGER (258) 9
+FLOAT (259) 10
+STRING (260) 11
+SELF (261) 12
 CONSTANT (262)
-IDENTIFIER (263) 12 13
-ASSIGN (264) 12
-NEWLINE (265) 14
-"." (266)
-"!" (267)
-"*" (268)
-"/" (269)
-"+" (270)
-"-" (271)
-">" (272)
-">=" (273)
-"<" (274)
-"<=" (275)
-"==" (276)
-"!=" (277)
-"&&" (278)
-"||" (279)
-"=" (280)
-"," (281)
+IDENTIFIER (263) 13 16 17
+ASSIGN (264) 16
+OPEN_PAREN (265) 13
+CLOSE_PAREN (266) 13
+COMMA (267) 15
+NEWLINE (268) 18
+"." (269)
+"!" (270)
+"*" (271)
+"/" (272)
+"+" (273)
+"-" (274)
+">" (275)
+">=" (276)
+"<" (277)
+"<=" (278)
+"==" (279)
+"!=" (280)
+"&&" (281)
+"||" (282)
+"=" (283)
+"," (284)
 
 
 Nonterminals, with rules where they appear
 
-$accept (27)
+$accept (30)
     on left: 0
-Expressions (28)
+Expressions (31)
     on left: 1 2 3 4, on right: 0 2 4
-Expression (29)
-    on left: 5 6 7, on right: 1 2 12
-Literal (30)
-    on left: 8 9 10 11, on right: 5
-SetLocal (31)
-    on left: 12, on right: 6
-GetLocal (32)
-    on left: 13, on right: 7
-Terminator (33)
-    on left: 14, on right: 2 4
+Expression (32)
+    on left: 5 6 7 8, on right: 1 2 14 15 16
+Literal (33)
+    on left: 9 10 11 12, on right: 5
+Call (34)
+    on left: 13, on right: 6
+Arguments (35)
+    on left: 14 15, on right: 13 15
+SetLocal (36)
+    on left: 16, on right: 7
+GetLocal (37)
+    on left: 17, on right: 8
+Terminator (38)
+    on left: 18, on right: 2 4
 
 
 State 0
@@ -107,46 +120,49 @@ State 0
     Expressions  go to state 6
     Expression   go to state 7
     Literal      go to state 8
-    SetLocal     go to state 9
-    GetLocal     go to state 10
+    Call         go to state 9
+    SetLocal     go to state 10
+    GetLocal     go to state 11
 
 
 State 1
 
-    8 Literal: INTEGER .
-
-    $default  reduce using rule 8 (Literal)
-
-
-State 2
-
-    9 Literal: FLOAT .
+    9 Literal: INTEGER .
 
     $default  reduce using rule 9 (Literal)
 
 
-State 3
+State 2
 
-   10 Literal: STRING .
+   10 Literal: FLOAT .
 
     $default  reduce using rule 10 (Literal)
 
 
-State 4
+State 3
 
-   11 Literal: SELF .
+   11 Literal: STRING .
 
     $default  reduce using rule 11 (Literal)
 
 
+State 4
+
+   12 Literal: SELF .
+
+    $default  reduce using rule 12 (Literal)
+
+
 State 5
 
-   12 SetLocal: IDENTIFIER . ASSIGN Expression
-   13 GetLocal: IDENTIFIER .
+   13 Call: IDENTIFIER . OPEN_PAREN Arguments CLOSE_PAREN
+   16 SetLocal: IDENTIFIER . ASSIGN Expression
+   17 GetLocal: IDENTIFIER .
 
-    ASSIGN  shift, and go to state 11
+    ASSIGN      shift, and go to state 12
+    OPEN_PAREN  shift, and go to state 13
 
-    $default  reduce using rule 13 (GetLocal)
+    $default  reduce using rule 17 (GetLocal)
 
 
 State 6
@@ -155,10 +171,10 @@ State 6
     2 Expressions: Expressions . Terminator Expression
     4            | Expressions . Terminator
 
-    "end of file"  shift, and go to state 12
-    NEWLINE        shift, and go to state 13
+    "end of file"  shift, and go to state 14
+    NEWLINE        shift, and go to state 15
 
-    Terminator  go to state 14
+    Terminator  go to state 16
 
 
 State 7
@@ -177,21 +193,28 @@ State 8
 
 State 9
 
-    6 Expression: SetLocal .
+    6 Expression: Call .
 
     $default  reduce using rule 6 (Expression)
 
 
 State 10
 
-    7 Expression: GetLocal .
+    7 Expression: SetLocal .
 
     $default  reduce using rule 7 (Expression)
 
 
 State 11
 
-   12 SetLocal: IDENTIFIER ASSIGN . Expression
+    8 Expression: GetLocal .
+
+    $default  reduce using rule 8 (Expression)
+
+
+State 12
+
+   16 SetLocal: IDENTIFIER ASSIGN . Expression
 
     INTEGER     shift, and go to state 1
     FLOAT       shift, and go to state 2
@@ -199,27 +222,46 @@ State 11
     SELF        shift, and go to state 4
     IDENTIFIER  shift, and go to state 5
 
-    Expression  go to state 15
+    Expression  go to state 17
     Literal     go to state 8
-    SetLocal    go to state 9
-    GetLocal    go to state 10
+    Call        go to state 9
+    SetLocal    go to state 10
+    GetLocal    go to state 11
 
 
-State 12
+State 13
+
+   13 Call: IDENTIFIER OPEN_PAREN . Arguments CLOSE_PAREN
+
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    IDENTIFIER  shift, and go to state 5
+
+    Expression  go to state 18
+    Literal     go to state 8
+    Call        go to state 9
+    Arguments   go to state 19
+    SetLocal    go to state 10
+    GetLocal    go to state 11
+
+
+State 14
 
     0 $accept: Expressions "end of file" .
 
     $default  accept
 
 
-State 13
+State 15
 
-   14 Terminator: NEWLINE .
+   18 Terminator: NEWLINE .
 
-    $default  reduce using rule 14 (Terminator)
+    $default  reduce using rule 18 (Terminator)
 
 
-State 14
+State 16
 
     2 Expressions: Expressions Terminator . Expression
     4            | Expressions Terminator .
@@ -232,21 +274,69 @@ State 14
 
     $default  reduce using rule 4 (Expressions)
 
-    Expression  go to state 16
+    Expression  go to state 20
     Literal     go to state 8
-    SetLocal    go to state 9
-    GetLocal    go to state 10
+    Call        go to state 9
+    SetLocal    go to state 10
+    GetLocal    go to state 11
 
 
-State 15
+State 17
 
-   12 SetLocal: IDENTIFIER ASSIGN Expression .
+   16 SetLocal: IDENTIFIER ASSIGN Expression .
 
-    $default  reduce using rule 12 (SetLocal)
+    $default  reduce using rule 16 (SetLocal)
 
 
-State 16
+State 18
+
+   14 Arguments: Expression .
+
+    $default  reduce using rule 14 (Arguments)
+
+
+State 19
+
+   13 Call: IDENTIFIER OPEN_PAREN Arguments . CLOSE_PAREN
+   15 Arguments: Arguments . COMMA Expression
+
+    CLOSE_PAREN  shift, and go to state 21
+    COMMA        shift, and go to state 22
+
+
+State 20
 
     2 Expressions: Expressions Terminator Expression .
 
     $default  reduce using rule 2 (Expressions)
+
+
+State 21
+
+   13 Call: IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN .
+
+    $default  reduce using rule 13 (Call)
+
+
+State 22
+
+   15 Arguments: Arguments COMMA . Expression
+
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    IDENTIFIER  shift, and go to state 5
+
+    Expression  go to state 23
+    Literal     go to state 8
+    Call        go to state 9
+    SetLocal    go to state 10
+    GetLocal    go to state 11
+
+
+State 23
+
+   15 Arguments: Arguments COMMA Expression .
+
+    $default  reduce using rule 15 (Arguments)

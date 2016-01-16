@@ -32,7 +32,7 @@ namespace FrontEnd
        void parse( const char *filename );
        void push_stack(std::vector<Nodes::AbstractNode*> stack);
        void push_node(Nodes::AbstractNode *node);
-       Runtime::Object* execute(Context *context);
+       void execute(Context *context);
 
     private:
        FrontEnd::Parser  *parser  = nullptr;

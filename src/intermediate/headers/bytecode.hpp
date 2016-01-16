@@ -6,7 +6,7 @@ enum
   //                                                            ------------ STACK ----------
   // Opcode                         operands                    before                  after
   //-----------------------------------------------------------------------------------------------------
-  /* 00 */    CALL,             // index, argc, context        [rcv, args]             [returned]
+  /* 00 */    CALL,             // index, argc                 [rcv, args]             [returned]
 
 // PUSH Opcodes
   /* 01 */    PUSH_INTEGER,     // index                       []                      [ValueObj]

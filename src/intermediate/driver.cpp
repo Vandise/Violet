@@ -8,6 +8,7 @@
 #include "nodes/headers/nodes.hpp"
 #include "nodes/headers/literalnode.hpp"
 #include "nodes/headers/callnode.hpp"
+#include "violet/headers/violetgenerator.hpp"
 
 FrontEnd::Driver::~Driver()
 {
@@ -66,10 +67,10 @@ FrontEnd::Driver::parse( const char * const filename )
    parser->parse();
 }
 
-Runtime::Object*
+void
 FrontEnd::Driver::execute(Context *context)
 {
-  //Nodes::Nodes *node = new Nodes::Nodes(NodeStack::stack);
-  //return node->eval(context);
-  return NULL;
+  Violet::Generator generator;
+  Nodes::Nodes *nodes = new Nodes::Nodes(NodeStack::stack);
+  nodes->compile(context, &generator);
 }

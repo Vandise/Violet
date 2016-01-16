@@ -31,7 +31,9 @@ namespace Violet
       void selfLiteral(Context *self);
       void getLocal(std::string name, Context *context);
       void setLocal(std::string name, Context *context);
+      void callMethod(int argc);
       void emit(int opcode, std::vector<int> operands);
+      void emitByte(int operand);
       void assemble();
   };
 

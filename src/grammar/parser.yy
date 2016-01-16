@@ -69,6 +69,9 @@
 %token   <sval>   IDENTIFIER
 
 %token            ASSIGN
+%token            OPEN_PAREN
+%token            CLOSE_PAREN
+%token            COMMA
 
 %token            NEWLINE 
 %token            PRGEND 0     "end of file"
@@ -103,8 +106,9 @@
 }
 
 
-%type <abs_node>     Expression Literal SetLocal GetLocal
+%type <abs_node>     Expression Literal Call SetLocal GetLocal
 %type <driver>       Expressions
+%type <arguments>    Arguments
 
 %%
 
@@ -129,6 +133,7 @@ Expressions:
 
 Expression:
     Literal
+  | Call
   | SetLocal
   | GetLocal
   ;
@@ -148,6 +153,22 @@ Literal:
                             }
   ;
 
+Call:
+  IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN                 { $$ = new Nodes::CallNode(*$1, NULL, *$3); }
+  ;
+
+Arguments:
+    Expression                  {
+                                  std::vector<Nodes::AbstractNode*> *arguments = new std::vector<Nodes::AbstractNode*>();
+                                  arguments->push_back($1);
+                                  $$ = arguments;
+                                }
+  | Arguments COMMA Expression  {
+                                  $1->push_back($3);
+                                  $$ = $1;
+                                }
+  ;
+ 
 SetLocal:
     IDENTIFIER ASSIGN Expression     { $$ = new Nodes::LocalAssignNode(*$1, $3); }
   ;

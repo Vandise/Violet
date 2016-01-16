@@ -73,12 +73,12 @@ Context::makeChildContext()
   return new Context(this->currentSelf, this->currentClass, this);
 }
 
-Runtime::Object*
-Context::eval(const char * const filename)
+void
+Context::compile(const char * const filename)
 {
   FrontEnd::Driver driver;
   driver.parse( filename );
-  return driver.execute(this);
+  driver.execute(this);
 }
 
 Runtime::Object*

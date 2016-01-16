@@ -30,6 +30,11 @@ Nodes::Nodes::compile(Context *context, Violet::Generator *generator)
     n->compile(context, generator);
   }
 
+  std::cout << "Total Instructions: " << generator->instructions.size() << std::endl;
+  std::cout << "Total Literals: " << generator->literals.size() << std::endl;
+  std::cout << "Total Scopes: " << generator->scopes.size() << std::endl;
+  std::cout << generator->scopes[0]->getCurrentClass()->getName() << std::endl;
+
   //std::cout << "Returned Class: ";
   //std::cout << lastEval->getStdClass()->getName();
   //std::cout << "\n";
