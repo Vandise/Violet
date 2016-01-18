@@ -1,4 +1,7 @@
 #include <iostream>
+#include <algorithm>
+#include <boost/algorithm/string/join.hpp>
+#include <boost/range/adaptor/transformed.hpp>
 #include "headers/violetvm.hpp"
 #include "intermediate/headers/bytecode.hpp"
 #include "runtime/headers/stdclass.hpp"
@@ -24,6 +27,7 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
         {
           arguments.push_back(STACK_POP());
         }
+        std::reverse(arguments.begin(),arguments.end());
         // push the returned valued onto the stack
         STACK_PUSH(receiver->call(method, arguments));
         receiver = NULL;
@@ -33,6 +37,18 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
       {
         ip++;
         STACK_PUSH(new Runtime::ValueObject(boost::get<std::string>(literals[*ip])));
+        break;
+      }
+      case PUSH_INTEGER:
+      {
+        ip++;
+        STACK_PUSH(new Runtime::ValueObject(boost::get<int>(literals[*ip])));
+        break;
+      }
+      case PUSH_FLOAT:
+      {
+        ip++;
+        STACK_PUSH(new Runtime::ValueObject(boost::get<float>(literals[*ip])));
         break;
       }
       case PUSH_SELF:
@@ -66,11 +82,15 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
   }
 
   stackdump:
+    std::string joinedString = boost::algorithm::join(instructions |
+      boost::adaptors::transformed(static_cast<std::string(*)(int)>(std::to_string))
+    , " ");
     std::cout << "-------------------------------------------" << std::endl;
     std::cout << "Total Instructions: " << instructions.size() << std::endl;
     std::cout << "Total Literals: "     << literals.size()     << std::endl;
     std::cout << "Total Scopes: "       << scopes.size()       << std::endl;
     std::cout << "Stack Size: "         << stack.size()        << std::endl;
+    std::cout << joinedString << std::endl;
 }
 
 void

@@ -1,2 +1,4 @@
-foobar = "Hello World"
-print(foobar)
+foobar    = "Hello World"
+float_num = 5.55
+int_num   = 5
+print(foobar,float_num,int_num)
