@@ -221,4 +221,10 @@ void
 Violet::Generator::assemble()
 {
   emitByte(RETURN);
+  for(int i = 0; i < this->scopes.size(); i++)
+  {
+    (this->scopes[i])->locals.reserve(
+      (this->scopes[i])->local_bytes.size()
+    );
+  }
 }

@@ -41,6 +41,22 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
         STACK_PUSH((scopes[*ip])->getCurrentSelf());
         break;
       }
+      case SET_LOCAL:
+      {
+        ip++;
+        int local = *ip;
+        ip++;
+        (scopes[*ip])->setLocal(local, STACK_POP());
+        break;
+      }
+      case GET_LOCAL:
+      {
+        ip++;
+        int local = *ip;
+        ip++;
+        STACK_PUSH((scopes[*ip])->getLocal(local));
+        break;
+      }
       case RETURN:
       {
         goto stackdump;
@@ -50,6 +66,7 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
   }
 
   stackdump:
+    std::cout << "-------------------------------------------" << std::endl;
     std::cout << "Total Instructions: " << instructions.size() << std::endl;
     std::cout << "Total Literals: "     << literals.size()     << std::endl;
     std::cout << "Total Scopes: "       << scopes.size()       << std::endl;
