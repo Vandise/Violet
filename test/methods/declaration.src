@@ -1,0 +1,5 @@
+func greet()
+  "Hello World"
+end
+
+print(greet())

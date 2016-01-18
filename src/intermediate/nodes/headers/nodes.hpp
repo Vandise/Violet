@@ -23,10 +23,12 @@ namespace Nodes
   {
     public:
       std::vector<AbstractNode*> nodes;
+      Violet::Generator          *generator;
     public:
       Nodes(std::vector<AbstractNode*> nodes);
       void add(AbstractNode* node);
       void compile(Context *context, Violet::Generator *generator);
+      void execute();
   };
 }
 

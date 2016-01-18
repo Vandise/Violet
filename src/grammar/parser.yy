@@ -54,6 +54,7 @@
    #include "intermediate/nodes/headers/selfnode.hpp"
    #include "intermediate/nodes/headers/localassignnode.hpp"
    #include "intermediate/nodes/headers/localnode.hpp"
+   #include "intermediate/nodes/headers/methoddefinitionnode.hpp"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -72,6 +73,8 @@
 %token            OPEN_PAREN
 %token            CLOSE_PAREN
 %token            COMMA
+%token            FUNC
+%token            END
 
 %token            NEWLINE 
 %token            PRGEND 0     "end of file"
@@ -106,9 +109,11 @@
 }
 
 
-%type <abs_node>     Expression Literal Call SetLocal GetLocal
+%type <abs_node>     Expression Literal Call SetLocal GetLocal Function
 %type <driver>       Expressions
+%type <nodes>        BodyExpressions
 %type <arguments>    Arguments
+%type <parameters>   Parameters
 
 %%
 
@@ -131,11 +136,30 @@ Expressions:
                                             }
   ;
 
+
+BodyExpressions: 
+    Expression                            {
+                                            std::vector<Nodes::AbstractNode *> nodes;
+                                            nodes.push_back($1);
+                                            Nodes::Nodes *nodelist = new Nodes::Nodes(nodes);
+                                            $$ = nodelist;
+                                          }
+  | BodyExpressions Terminator Expression {
+                                            $1->add($3);
+                                            $$ = $1;
+                                          }
+  |                                       { /* do nothing */ }
+  | BodyExpressions Terminator            {
+                                            $$ = $1;
+                                          }
+  ;
+
 Expression:
     Literal
   | Call
   | SetLocal
   | GetLocal
+  | Function
   ;
 
 Literal:
@@ -157,6 +181,14 @@ Call:
   IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN                 { $$ = new Nodes::CallNode(*$1, NULL, *$3); }
   ;
 
+Function:
+  FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator
+    BodyExpressions
+  END                             {
+                                    $$ = new Nodes::MethodDefinitionNode(*$2, *$4, $7);
+                                  }
+  ;
+
 Arguments:
     Expression                  {
                                   std::vector<Nodes::AbstractNode*> *arguments = new std::vector<Nodes::AbstractNode*>();
@@ -167,6 +199,23 @@ Arguments:
                                   $1->push_back($3);
                                   $$ = $1;
                                 }
+  |                             {
+                                  std::vector<Nodes::AbstractNode*> *arguments = new std::vector<Nodes::AbstractNode*>();
+                                  $$ = arguments;
+                                }
+  ;
+
+Parameters:
+    IDENTIFIER                    {
+                                    std::vector<std::string> *parameters = new std::vector<std::string>();
+                                    parameters->push_back(*$1);
+                                    $$ = parameters;
+                                  }
+  |  Parameters COMMA IDENTIFIER  { $1->push_back(*$3); $$ = $1; }
+  |                               { 
+                                    std::vector<std::string> *parameters = new std::vector<std::string>();
+                                    $$ = parameters;
+                                  }
   ;
  
 SetLocal:

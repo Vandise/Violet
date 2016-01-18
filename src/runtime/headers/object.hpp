@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <boost/variant.hpp>
+#include "violet/headers/violetvm.hpp"
 
 namespace Runtime
 {

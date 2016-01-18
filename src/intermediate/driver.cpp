@@ -73,4 +73,5 @@ FrontEnd::Driver::execute(Context *context)
   Violet::Generator generator;
   Nodes::Nodes *nodes = new Nodes::Nodes(NodeStack::stack);
   nodes->compile(context, &generator);
+  nodes->execute();
 }

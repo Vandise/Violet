@@ -21,18 +21,16 @@ Nodes::Nodes::add(AbstractNode* node)
 void
 Nodes::Nodes::compile(Context *context, Violet::Generator *generator)
 {
+  this->generator = generator;
   //std::cout << "Total Nodes to eval: ";
   //std::cout << this->nodes.size();
   //std::cout << "\n";
 
   //Runtime::Object *lastEval = Lang::Runtime::nilObject;
 
-  VioletVM vm;
   for (auto &n : this->nodes) {
     n->compile(context, generator);
   }
-  generator->assemble();
-  vm.run(generator->instructions, generator->literals, generator->scopes);
 /*
   std::cout << "Total Instructions: " << generator->instructions.size() << std::endl;
   std::cout << "Total Literals: " << generator->literals.size() << std::endl;
@@ -47,4 +45,12 @@ Nodes::Nodes::compile(Context *context, Violet::Generator *generator)
   //std::cout << "\n";
 
   //return lastEval;
+}
+
+void
+Nodes::Nodes::execute()
+{
+  VioletVM vm;
+  generator->assemble();
+  vm.run(generator->instructions, generator->literals, generator->scopes);
 }
