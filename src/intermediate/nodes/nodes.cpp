@@ -1,4 +1,5 @@
 #include <iostream>
+#include "violet/headers/violetvm.hpp"
 #include "headers/nodes.hpp"
 #include "runtime/headers/runtime.hpp"
 #include "headers/abstractnode.hpp"
@@ -26,15 +27,18 @@ Nodes::Nodes::compile(Context *context, Violet::Generator *generator)
 
   //Runtime::Object *lastEval = Lang::Runtime::nilObject;
 
+  VioletVM vm;
   for (auto &n : this->nodes) {
     n->compile(context, generator);
   }
-
+  generator->assemble();
+  vm.run(generator->instructions, generator->literals, generator->scopes);
+/*
   std::cout << "Total Instructions: " << generator->instructions.size() << std::endl;
   std::cout << "Total Literals: " << generator->literals.size() << std::endl;
   std::cout << "Total Scopes: " << generator->scopes.size() << std::endl;
   std::cout << generator->scopes[0]->getCurrentClass()->getName() << std::endl;
-
+*/
   //std::cout << "Returned Class: ";
   //std::cout << lastEval->getStdClass()->getName();
   //std::cout << "\n";

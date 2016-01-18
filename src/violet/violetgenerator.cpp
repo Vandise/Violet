@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <iostream>
 #include "intermediate/headers/context.hpp"
 #include "headers/violetgenerator.hpp"
 #include "intermediate/headers/bytecode.hpp"
@@ -219,6 +220,5 @@ Violet::Generator::emitByte(int operand)
 void
 Violet::Generator::assemble()
 {
-  std::vector<int> operands;
-  emit(RETURN, operands);
+  emitByte(RETURN);
 }

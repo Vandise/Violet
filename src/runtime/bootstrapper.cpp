@@ -4,6 +4,7 @@
 #include "headers/bootstrapper.hpp"
 #include  "intermediate/headers/context.hpp"
 #include "headers/stdclass.hpp"
+#include "methods/methods.hpp"
 
 Context*
 Bootstrapper::run()
@@ -28,6 +29,8 @@ Bootstrapper::run()
   Runtime::StdClass *intClass = objectClass->newSubclass(std::string("Integer"));
   Runtime::StdClass *strClass = objectClass->newSubclass(std::string("String"));
   Runtime::StdClass *floatClass = objectClass->newSubclass(std::string("Float"));
+
+  objectClass->addMethod(std::string("print"),&object_print_method);
 
   return new Context(main);
 }
