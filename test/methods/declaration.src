@@ -1,5 +1,5 @@
-func greet()
-  "Hello World"
+func greet(x,y)
+  print(x,y)
 end
 
-print(greet())
+greet("my","string")

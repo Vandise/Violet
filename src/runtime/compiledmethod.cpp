@@ -31,6 +31,11 @@ CompiledMethod::call(Runtime::Object *receiver, std::vector<Runtime::Object*> ar
 
   for(int i = 0; i < parameters.size(); i++)
   {
+    vm.STACK_PUSH(arguments[i]);
+  }
+
+  for(int i = parameters.size() - 1; i >= 0; i--)
+  {
     generator.setLocal(parameters[i], context);
   }
 
