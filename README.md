@@ -34,3 +34,36 @@ PUSH_SELF     | []                                  | [self]
 GET_LOCAL     | []                                  | [object]
 SET_LOCAL     | []                                  | []
 RETURN        | []                                  | []
+
+## Azalea Language
+Azalea comes default with the Violet Virtual Machine. Azalea treats everything as an object as per specifications in the VioletVM. Even primitive datatypes such as integers, floats, and strings(character arrays) are objects.
+
+### Comments
+```
+// this is a comment
+```
+
+### Assignment
+``` 
+IDENTIFIER = EXPRESSION 
+x = 10
+```
+### Method Definitions
+```
+func IDENTIFIER(arguments)
+  expressions
+end
+
+func return_string(string)
+  string
+end
+```
+
+### Calling Methods
+```
+IDENTIFIER(arguments)
+print("Hello World)
+
+expressions.IDENTIFIER(arguments)
+self.print("Hello World")
+```
