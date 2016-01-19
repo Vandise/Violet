@@ -1,27 +1,36 @@
 # Violet
 Violet Virtual Machine
 
-## Violet Instruction Set Example:
-```Violet
-x = “Hello World”
-print(x)
-——
-[3 0] [17 0 0] [16 0 0] [7 0] [3 2] [0 1] [21]
-——
-[3 0]
-PUSH_STRING    at literal index 0
-[17 0 0] 
-SET_LOCAL      at index 0 in scope 0
-[16 0 0] 
-GET_LOCAL      at index 0 in scope 0
-[7 0]
-PUSH_SELF      at current scope 0
-[3 2]
-PUSH_STRING    at literal index 2 #method name, TBD.
-[0 1]
-CALL           method with 1 argument
-[21]
-RETURN
-```
+## Violet Instruction Set
 
+Opcode        | Operand 1     | Operand 2     | Operand 3     | Operand 4
+------------- | ------------- | ------------- | ------------- | -------------
+CALL          | arg_count     |
+PUSH_INTEGER  | literal_index | 
+PUSH_FLOAT    | literal_index |
+PUSH_STRING   | literal_index |
+PUSH_ARRAY    | N/I           |
+PUSH_HASH     | N/I           |
+PUSH_LAMBDA   | N/I           |
+PUSH_SELF     | scope_index   |
+GET_LOCAL     | local_index   | scope_index   |
+SET_LOCAL     | local_index   | scope_index   |
+RETURN        |
 
+N/I = Not Yet Implemented and subject to change or be removed
+
+## Stack
+
+Opcode        | Before                              | After    
+------------- | ----------------------------------- | ----------------------------------- |
+CALL          | [arg1,arg2..,receiver,method]       | [returned]
+PUSH_INTEGER  | []                                  | [integer]
+PUSH_FLOAT    | []                                  | [float]
+PUSH_STRING   | []                                  | [string]
+PUSH_ARRAY    | N/I                                 |
+PUSH_HASH     | N/I                                 |
+PUSH_LAMBDA   | N/I                                 |
+PUSH_SELF     | []                                  | [self]
+GET_LOCAL     | []                                  | [object]
+SET_LOCAL     | []                                  | []
+RETURN        | []                                  | []
