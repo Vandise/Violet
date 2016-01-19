@@ -75,6 +75,7 @@
 %token            COMMA
 %token            FUNC
 %token            END
+%token            DOT
 
 %token            NEWLINE 
 %token            PRGEND 0     "end of file"
@@ -178,7 +179,8 @@ Literal:
   ;
 
 Call:
-  IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN                 { $$ = new Nodes::CallNode(*$1, NULL, *$3); }
+    IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN                   { $$ = new Nodes::CallNode(*$1, NULL, *$3); }
+  | Expression DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN    { $$ = new Nodes::CallNode(*$3, $1, *$5);   }
   ;
 
 Function:

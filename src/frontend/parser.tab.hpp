@@ -155,7 +155,7 @@ namespace FrontEnd {
     /// Symbol semantic values.
     union semantic_type
     {
-    #line 98 "src/grammar/parser.yy" // lalr1.cc:392
+    #line 99 "src/grammar/parser.yy" // lalr1.cc:392
 
    std::string                        *sval;
    int                                 ival;
@@ -198,7 +198,8 @@ namespace FrontEnd {
         COMMA = 267,
         FUNC = 268,
         END = 269,
-        NEWLINE = 270
+        DOT = 270,
+        NEWLINE = 271
       };
     };
 
@@ -380,7 +381,7 @@ namespace FrontEnd {
   // number is the opposite.  If YYTABLE_NINF, syntax error.
   static const unsigned char yytable_[];
 
-  static const unsigned char yycheck_[];
+  static const signed char yycheck_[];
 
   // YYSTOS[STATE-NUM] -- The (internal number of the) accessing
   // symbol of state STATE-NUM.
@@ -497,12 +498,12 @@ namespace FrontEnd {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 28,     ///< Last index in yytable_.
+      yylast_ = 42,     ///< Last index in yytable_.
       yynnts_ = 12,  ///< Number of nonterminal symbols.
       yyfinal_ = 17, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 32  ///< Number of tokens.
+      yyntokens_ = 33  ///< Number of tokens.
     };
 
 
@@ -514,7 +515,7 @@ namespace FrontEnd {
 
 #line 4 "src/grammar/parser.yy" // lalr1.cc:392
 } // FrontEnd
-#line 518 "src/frontend/parser.tab.hpp" // lalr1.cc:392
+#line 519 "src/frontend/parser.tab.hpp" // lalr1.cc:392
 
 
 

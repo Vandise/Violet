@@ -31,6 +31,7 @@ Nodes::CallNode::compile(Context *context, Violet::Generator *generator)
     // TODO:
     //  PUSH_CONSTANT [constant, context]
     //  this->receiver->compile(context, generator);
+    this->receiver->compile(context, generator);
   }
 
   // push the method onto the stack
