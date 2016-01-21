@@ -69,7 +69,7 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
       case PUSH_LAMBDA:
       {
         ip++;
-        Context *context = scopes[*ip];
+        int context = *ip;
         std::vector<std::string> parameters;
         std::vector<int> instructions;
 
@@ -89,7 +89,7 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
           instructions.push_back(*ip);
         }
 
-        STACK_PUSH(new Runtime::LambdaObject(parameters, instructions, context));
+        STACK_PUSH(new Runtime::LambdaObject(parameters, instructions, context, this));
         break;
       }
       case SET_LOCAL:

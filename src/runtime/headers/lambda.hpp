@@ -13,7 +13,7 @@ namespace Nodes
 }
 namespace Violet
 {
-  class Generator;
+  class VioletVM;
 }
 namespace Runtime
 {
@@ -25,9 +25,10 @@ namespace Runtime
     private:
       std::vector<int>           instructions;
       std::vector<std::string>   parameters;
-      Context                    *context;
+      VioletVM                   *vm;
+      int                        context;
     public:
-      LambdaObject(std::vector<std::string> parameters, std::vector<int> instructions, Context *context);
+      LambdaObject(std::vector<std::string> parameters, std::vector<int> instructions, int context, VioletVM *vm);
       Object* compile(std::vector<Runtime::Object*> arguments);
   };
 }
