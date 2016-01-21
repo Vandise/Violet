@@ -12,6 +12,7 @@ PUSH_STRING   | literal_index |
 PUSH_ARRAY    | N/I           |
 PUSH_HASH     | N/I           |
 PUSH_LAMBDA   | N/I           |
+PUSH_OBJECT   | literal_name  | scope_index   | 
 PUSH_SELF     | scope_index   |
 GET_LOCAL     | local_index   | scope_index   |
 SET_LOCAL     | local_index   | scope_index   |
@@ -30,6 +31,7 @@ PUSH_STRING   | []                                  | [string]
 PUSH_ARRAY    | N/I                                 |
 PUSH_HASH     | N/I                                 |
 PUSH_LAMBDA   | N/I                                 |
+PUSH_OBJECT   | []                                  | [object]
 PUSH_SELF     | []                                  | [self]
 GET_LOCAL     | []                                  | [object]
 SET_LOCAL     | []                                  | []
