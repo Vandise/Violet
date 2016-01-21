@@ -69,3 +69,21 @@ print("Hello World)
 expressions.IDENTIFIER(arguments)
 self.print("Hello World")
 ```
+
+### Lambda
+There's a bug with lambda expressions that defines the parameter in the current scope -- which will override any local variables with the same name. It's on my todo list.
+```
+-> do |arguments|
+  expressions
+end
+
+(-> do |greeting|
+  print(greeting)
+end).call("Hello World")
+
+callable = -> do |hello|
+  print(hello)
+end
+
+callable.call("Hello")
+```
