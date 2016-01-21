@@ -26,7 +26,7 @@ Runtime::LambdaObject::compile(std::vector<Runtime::Object*> arguments)
     throw std::invalid_argument("Invalid argument count for method 'call' in object Lambda");
   }
 
-  for(int i = 0; i < parameters.size(); i++)
+  for(int i = parameters.size() - 1; i >= 0; i--)
   {
     lambda_vm.STACK_PUSH(arguments[i]);
   }

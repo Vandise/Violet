@@ -1,5 +1,8 @@
 #include <stdexcept>
 #include <iostream>
+#include <algorithm>
+#include <boost/algorithm/string/join.hpp>
+#include <boost/range/adaptor/transformed.hpp>
 #include "intermediate/nodes/headers/abstractnode.hpp"
 #include "intermediate/headers/context.hpp"
 #include "headers/violetgenerator.hpp"
@@ -221,11 +224,13 @@ Violet::Generator::pushConstant(std::string name, Context *context)
     PUSH_LAMBDA [ parameter_size, params_literal_index..., instruction size, scope index ]
 */
 void
-Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::AbstractNode *body, Context *context)
+Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::AbstractNode *body, Context *parent)
 {
   std::vector<int>  operands;
   Violet::Generator generator;
   generator.literals = this->literals;
+
+  Context *context = parent->makeChildContext();
 
   operands.push_back(scopeIndex(context));
 
@@ -243,6 +248,9 @@ Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::Abstra
     operands.push_back(scopeIndex(context));
   }
 
+  generator.literals = this->literals;
+  generator.scopes   = this->scopes;
+
   body->compile(context, &generator);
 
   operands.push_back(generator.instructions.size());
@@ -254,6 +262,8 @@ Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::Abstra
   emit(PUSH_LAMBDA, operands);
 
   this->literals = generator.literals;
+  this->scopes   = generator.scopes;
+
 }
 
 /* ---------------- EMIT INSTRUCTION ---------------- */

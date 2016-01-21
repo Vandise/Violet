@@ -84,7 +84,7 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
         for(int i = 1; i <= parameter_count; i++)
         {
           ip++;
-          parameters.push_back(boost::get<std::string>(literals[*ip]));
+          parameters.push_back(boost::get<std::string>( literals[((scopes[context])->local_bytes[*ip])] ));
         }
 
         // setting locals

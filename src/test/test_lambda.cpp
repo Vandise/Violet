@@ -37,8 +37,8 @@ SCENARIO("Compiling Lambda Definition", "[lambdanode]")
     THEN("The context is pushed onto the scopes table")
     {
       int index = generator.scopeIndex(context);
-      REQUIRE(index == 0);
-      REQUIRE(generator.scopes.size() == 1);
+      REQUIRE(index == 1);
+      REQUIRE(generator.scopes.size() == 2);
     }
     THEN("It emits PUSH_LAMBDA onto the stack")
     {
