@@ -42,6 +42,7 @@ float_num ({digit}+\.{digit}+)
 
 "self"              { return(token::SELF); }
 "func"              { return(token::FUNC); }
+"do"                { return(token::DO); }
 "end"               { return(token::END); }
 
 \"[^"]*\"           {
@@ -65,6 +66,8 @@ float_num ({digit}+\.{digit}+)
                       yylval->fval = (atof(yytext));
                       return( token::FLOAT );
                     }
+"|"                 { return(token::PIPE); }
+"->"                { return(token::LAMBDA); }
 "="                 { return( token::ASSIGN ); }
 "("                 { return( token::OPEN_PAREN );  }
 ")"                 { return( token::CLOSE_PAREN ); }  

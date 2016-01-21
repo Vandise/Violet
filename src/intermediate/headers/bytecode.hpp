@@ -17,7 +17,7 @@ enum
   /* 06 */    PUSH_LAMBDA,      // index                       []                      [LambdaObj]
   /* 07 */    PUSH_SELF,        // index, context              []                      [self]
   /* 08 */    PUSH_OBJECT,      // index                       []                      [object]
-  /* 09 */    PUSH_RESV2,
+  /* 09 */    PUSH_CONSTANT,    // index                       []                      [object]
   /* 10 */    PUSH_RESV3,
   /* 11 */    PUSH_RESV4,
   /* 12 */    PUSH_RESV5,

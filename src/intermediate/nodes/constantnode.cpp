@@ -12,5 +12,5 @@ Nodes::ConstantNode::ConstantNode(std::string name)
 void
 Nodes::ConstantNode::compile(Context *context, Violet::Generator *generator)
 {
-  generator->pushObject(this->name, context);
+  generator->pushConstant(this->name, context);
 }

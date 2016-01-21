@@ -8,6 +8,16 @@
 
 class Context;
 
+namespace Runtime
+{
+  class Object;
+}
+
+namespace Nodes
+{
+  class AbstractNode;
+}
+
 namespace Violet
 {
 
@@ -32,7 +42,8 @@ namespace Violet
       void getLocal(std::string name, Context *context);
       void setLocal(std::string name, Context *context);
       void callMethod(int argc);
-      void pushObject(std::string name, Context *context);
+      void pushConstant(std::string name, Context *context);
+      void pushLambda(std::vector<std::string> parameters, Nodes::AbstractNode *body, Context *context);
       void emit(int opcode, std::vector<int> operands);
       void emitByte(int operand);
       void assemble();

@@ -56,6 +56,7 @@
    #include "intermediate/nodes/headers/localnode.hpp"
    #include "intermediate/nodes/headers/methoddefinitionnode.hpp"
    #include "intermediate/nodes/headers/constantnode.hpp"
+   #include "intermediate/nodes/headers/lambdanode.hpp"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -75,8 +76,11 @@
 %token            CLOSE_PAREN
 %token            COMMA
 %token            FUNC
+%token            DO
 %token            END
 %token            DOT
+%token            PIPE
+%token            LAMBDA
 
 %token            NEWLINE 
 %token            PRGEND 0     "end of file"
@@ -111,7 +115,7 @@
 }
 
 
-%type <abs_node>     Expression Literal Call SetLocal GetLocal Function GetConstant
+%type <abs_node>     Expression Literal Call SetLocal GetLocal Function GetConstant Lambda
 %type <driver>       Expressions
 %type <nodes>        BodyExpressions
 %type <arguments>    Arguments
@@ -163,6 +167,7 @@ Expression:
   | SetLocal
   | GetLocal
   | Function
+  | Lambda
   ;
 
 Literal:
@@ -190,6 +195,15 @@ Function:
     BodyExpressions
   END                             {
                                     $$ = new Nodes::MethodDefinitionNode(*$2, *$4, $7);
+                                  }
+  ;
+
+
+Lambda:
+    LAMBDA DO PIPE Parameters PIPE Terminator
+      BodyExpressions
+    END                           {
+                                    $$ = new Nodes::LambdaNode(*$4,$7);
                                   }
   ;
 

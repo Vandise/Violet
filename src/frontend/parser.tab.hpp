@@ -155,7 +155,7 @@ namespace FrontEnd {
     /// Symbol semantic values.
     union semantic_type
     {
-    #line 100 "src/grammar/parser.yy" // lalr1.cc:392
+    #line 104 "src/grammar/parser.yy" // lalr1.cc:392
 
    std::string                        *sval;
    int                                 ival;
@@ -197,9 +197,12 @@ namespace FrontEnd {
         CLOSE_PAREN = 266,
         COMMA = 267,
         FUNC = 268,
-        END = 269,
-        DOT = 270,
-        NEWLINE = 271
+        DO = 269,
+        END = 270,
+        DOT = 271,
+        PIPE = 272,
+        LAMBDA = 273,
+        NEWLINE = 274
       };
     };
 
@@ -498,12 +501,12 @@ namespace FrontEnd {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 44,     ///< Last index in yytable_.
-      yynnts_ = 13,  ///< Number of nonterminal symbols.
-      yyfinal_ = 19, ///< Termination state number.
+      yylast_ = 52,     ///< Last index in yytable_.
+      yynnts_ = 14,  ///< Number of nonterminal symbols.
+      yyfinal_ = 22, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 33  ///< Number of tokens.
+      yyntokens_ = 36  ///< Number of tokens.
     };
 
 
@@ -515,7 +518,7 @@ namespace FrontEnd {
 
 #line 4 "src/grammar/parser.yy" // lalr1.cc:392
 } // FrontEnd
-#line 519 "src/frontend/parser.tab.hpp" // lalr1.cc:392
+#line 522 "src/frontend/parser.tab.hpp" // lalr1.cc:392
 
 
 

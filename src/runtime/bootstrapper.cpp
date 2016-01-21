@@ -30,6 +30,8 @@ Bootstrapper::run()
   Runtime::StdClass *strClass = objectClass->newSubclass(std::string("String"));
   Runtime::StdClass *floatClass = objectClass->newSubclass(std::string("Float"));
 
+  Runtime::StdClass *lambdaClass = objectClass->newSubclass(std::string("Lambda"));
+
   objectClass->addMethod(std::string("print"),&object_print_method);
 
   return new Context(main);

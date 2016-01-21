@@ -1,9 +1,11 @@
 #include <stdexcept>
 #include <iostream>
+#include "intermediate/nodes/headers/abstractnode.hpp"
 #include "intermediate/headers/context.hpp"
 #include "headers/violetgenerator.hpp"
 #include "intermediate/headers/bytecode.hpp"
 #include "runtime/headers/stdclass.hpp"
+#include "runtime/headers/lambda.hpp"
 
 /* ---------------- LOCAL INDEX MANAGEMENT ---------------- */
 
@@ -200,18 +202,48 @@ Violet::Generator::callMethod(int argc)
 }
 
 /*
-  Pushes an object onto the stack
-    PUSH_OBJECT [ object ]
+  Pushes a user-defined or runtime object onto the stack
+    PUSH_CONSTANT [ object ]
 */
 void
-Violet::Generator::pushObject(std::string name, Context *context)
+Violet::Generator::pushConstant(std::string name, Context *context)
 {
   std::vector<int> operands;
   operands.push_back(
     localIndex(literalIndex(name), this->scopes[scopeIndex(context)])
   );
   operands.push_back(scopeIndex(context));
-  emit(PUSH_OBJECT, operands);
+  emit(PUSH_CONSTANT, operands);
+}
+
+/*
+  Pushes lambda instructions onto the stack
+    PUSH_LAMBDA [ parameter_size, params_literal_index..., instruction size, scope index ]
+*/
+void
+Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::AbstractNode *body, Context *context)
+{
+  std::vector<int>  operands;
+  Violet::Generator generator;
+  generator.literals = this->literals;
+
+  operands.push_back(parameters.size());
+  for(int i = 0; i < parameters.size(); i++)
+  {
+    operands.push_back(localIndex(literalIndex(parameters[i]), this->scopes[scopeIndex(context)]));
+  }
+
+  body->compile(context, &generator);
+
+  operands.push_back(generator.instructions.size());
+  for(int i = 0; i < generator.instructions.size(); i++)
+  {
+    operands.push_back(generator.instructions[i]);
+  }
+  operands.push_back(scopeIndex(context));
+  emit(PUSH_LAMBDA, operands);
+
+  this->literals = generator.literals;
 }
 
 /* ---------------- EMIT INSTRUCTION ---------------- */
