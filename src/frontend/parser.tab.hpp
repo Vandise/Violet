@@ -501,9 +501,9 @@ namespace FrontEnd {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 52,     ///< Last index in yytable_.
+      yylast_ = 55,     ///< Last index in yytable_.
       yynnts_ = 14,  ///< Number of nonterminal symbols.
-      yyfinal_ = 22, ///< Termination state number.
+      yyfinal_ = 24, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
       yyntokens_ = 36  ///< Number of tokens.

@@ -18,23 +18,21 @@ Runtime::LambdaObject::LambdaObject(std::vector<std::string> parameters, std::ve
 Runtime::Object*
 Runtime::LambdaObject::compile(std::vector<Runtime::Object*> arguments)
 {
-  //
-  // Lambda objects should preserve local variables in the given scope
-  // Context *context = new Context(this);
-  //
 
-/*
+  VioletVM lambda_vm;
+
   if(this->parameters.size() != arguments.size())
   {
     throw std::invalid_argument("Invalid argument count for method 'call' in object Lambda");
   }
 
-  for(int i = 0; i < this->parameters.size(); i++)
+  for(int i = 0; i < parameters.size(); i++)
   {
-    this->context->setLocal(this->parameters[i], arguments[i]);
+    lambda_vm.STACK_PUSH(arguments[i]);
   }
 
-  return this->body->eval(context);
-*/
+  lambda_vm.run(this->instructions, this->vm->literals, this->vm->scopes);
+
+  return lambda_vm.STACK_POP();
 
 }

@@ -22,6 +22,10 @@ class VioletVM
     std::vector<Runtime::Object*> stack;
 
   public:
+    std::vector<int> instructions;
+    std::vector< boost::variant<int,float,std::string> > literals;
+    std::vector<Context*> scopes;
+
     void run(std::vector<int> instructions, std::vector< boost::variant<int,float,std::string> > literals, std::vector<Context*> scopes);
     void STACK_PUSH(Runtime::Object* object);
     Runtime::Object* STACK_POP();

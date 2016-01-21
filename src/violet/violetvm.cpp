@@ -12,6 +12,11 @@
 void
 VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,float,std::string> > literals, std::vector<Context*> scopes)
 {
+
+  this->instructions = instructions;
+  this->literals     = literals;
+  this->scopes       = scopes;
+
   for (std::vector<int>::iterator ip = instructions.begin() ; ip != instructions.end(); ++ip)
   {
     switch(*ip)
@@ -73,6 +78,7 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
         std::vector<std::string> parameters;
         std::vector<int> instructions;
 
+        //parameter information
         ip++;
         int parameter_count = *ip;
         for(int i = 1; i <= parameter_count; i++)
@@ -81,6 +87,19 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
           parameters.push_back(boost::get<std::string>(literals[*ip]));
         }
 
+        // setting locals
+        ip++;
+        int argument_count = *ip;
+        for(int i = 1; i <= argument_count; i++)
+        {
+          for(int j = 1; j <= 3; j++)
+          {
+            ip++;
+            instructions.push_back(*ip);
+          }
+        }
+
+        // lambda body code
         ip++;
         int instruction_count = *ip;
         for(int i = 1; i <= instruction_count; i++)
@@ -88,6 +107,10 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
           ip++;
           instructions.push_back(*ip);
         }
+
+        // RETURN opcode
+        ip++;
+        instructions.push_back(*ip);
 
         STACK_PUSH(new Runtime::LambdaObject(parameters, instructions, context, this));
         break;

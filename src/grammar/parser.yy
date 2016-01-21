@@ -168,6 +168,7 @@ Expression:
   | GetLocal
   | Function
   | Lambda
+  | OPEN_PAREN Expression CLOSE_PAREN     { $$ = $2; }
   ;
 
 Literal:

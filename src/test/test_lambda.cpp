@@ -42,13 +42,15 @@ SCENARIO("Compiling Lambda Definition", "[lambdanode]")
     }
     THEN("It emits PUSH_LAMBDA onto the stack")
     {
-      REQUIRE(generator.instructions.size() == 8);
+      REQUIRE(generator.instructions.size() == 13);
       std::vector<int> bytecode = {
-        PUSH_LAMBDA, 0, 1, 0,   // scope, parameter size, parameter literal index
-        3,                   // body instruction count
+        PUSH_LAMBDA, 0, 1, 0, 1,   // scope, parameter size, parameter literal index, locals size
+        SET_LOCAL,   0, 0,      // set parameter locals
+        3,                      // body instruction count
         //---- body
         GET_LOCAL,   0, 0,  // literal index, scope
         //---- end body
+        RETURN
       };
       for(int i = 0; i < bytecode.size(); i++)
       {

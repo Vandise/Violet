@@ -235,6 +235,14 @@ Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::Abstra
     operands.push_back(localIndex(literalIndex(parameters[i]), this->scopes[scopeIndex(context)]));
   }
 
+  operands.push_back(parameters.size());
+  for(int i = 0; i < parameters.size(); i++)
+  {
+    operands.push_back(SET_LOCAL);
+    operands.push_back(localIndex(literalIndex(parameters[i]), this->scopes[scopeIndex(context)]));
+    operands.push_back(scopeIndex(context));
+  }
+
   body->compile(context, &generator);
 
   operands.push_back(generator.instructions.size());
@@ -242,6 +250,7 @@ Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::Abstra
   {
     operands.push_back(generator.instructions[i]);
   }
+  operands.push_back(RETURN);
   emit(PUSH_LAMBDA, operands);
 
   this->literals = generator.literals;
