@@ -1,6 +1,5 @@
 Terminals unused in grammar
 
-   CONSTANT
    "."
    "!"
    "*"
@@ -19,7 +18,7 @@ Terminals unused in grammar
    ","
 
 
-State 21 conflicts: 1 shift/reduce
+State 23 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -38,53 +37,56 @@ Grammar
 
     9 Expression: Literal
    10           | Call
-   11           | SetLocal
-   12           | GetLocal
-   13           | Function
+   11           | GetConstant
+   12           | SetLocal
+   13           | GetLocal
+   14           | Function
 
-   14 Literal: INTEGER
-   15        | FLOAT
-   16        | STRING
-   17        | SELF
+   15 Literal: INTEGER
+   16        | FLOAT
+   17        | STRING
+   18        | SELF
 
-   18 Call: IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
-   19     | Expression DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+   19 Call: IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+   20     | Expression DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-   20 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END
+   21 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END
 
-   21 Arguments: Expression
-   22          | Arguments COMMA Expression
-   23          | %empty
+   22 Arguments: Expression
+   23          | Arguments COMMA Expression
+   24          | %empty
 
-   24 Parameters: IDENTIFIER
-   25           | Parameters COMMA IDENTIFIER
-   26           | %empty
+   25 Parameters: IDENTIFIER
+   26           | Parameters COMMA IDENTIFIER
+   27           | %empty
 
-   27 SetLocal: IDENTIFIER ASSIGN Expression
+   28 SetLocal: IDENTIFIER ASSIGN Expression
 
-   28 GetLocal: IDENTIFIER
+   29 GetLocal: IDENTIFIER
 
-   29 Terminator: NEWLINE
+   30 GetConstant: CONSTANT
+
+   31 Terminator: NEWLINE
 
 
 Terminals, with rules where they appear
 
 "end of file" (0) 0
 error (256)
-INTEGER (258) 14
-FLOAT (259) 15
-STRING (260) 16
-SELF (261) 17
-CONSTANT (262)
-IDENTIFIER (263) 18 19 20 24 25 27 28
-ASSIGN (264) 27
-OPEN_PAREN (265) 18 19 20
-CLOSE_PAREN (266) 18 19 20
-COMMA (267) 22 25
-FUNC (268) 20
-END (269) 20
-DOT (270) 19
-NEWLINE (271) 29
+INTEGER (258) 15
+FLOAT (259) 16
+STRING (260) 17
+SELF (261) 18
+CONSTANT (262) 30
+IDENTIFIER (263) 19 20 21 25 26 28 29
+ASSIGN (264) 28
+OPEN_PAREN (265) 19 20 21
+CLOSE_PAREN (266) 19 20 21
+COMMA (267) 23 26
+FUNC (268) 21
+END (269) 21
+DOT (270) 20
+NEWLINE (271) 31
 "." (272)
 "!" (273)
 "*" (274)
@@ -110,25 +112,27 @@ $accept (33)
 Expressions (34)
     on left: 1 2 3 4, on right: 0 2 4
 BodyExpressions (35)
-    on left: 5 6 7 8, on right: 6 8 20
+    on left: 5 6 7 8, on right: 6 8 21
 Expression (36)
-    on left: 9 10 11 12 13, on right: 1 2 5 6 19 21 22 27
+    on left: 9 10 11 12 13 14, on right: 1 2 5 6 20 22 23 28
 Literal (37)
-    on left: 14 15 16 17, on right: 9
+    on left: 15 16 17 18, on right: 9
 Call (38)
-    on left: 18 19, on right: 10
+    on left: 19 20, on right: 10
 Function (39)
-    on left: 20, on right: 13
+    on left: 21, on right: 14
 Arguments (40)
-    on left: 21 22 23, on right: 18 19 22
+    on left: 22 23 24, on right: 19 20 23
 Parameters (41)
-    on left: 24 25 26, on right: 20 25
+    on left: 25 26 27, on right: 21 26
 SetLocal (42)
-    on left: 27, on right: 11
-GetLocal (43)
     on left: 28, on right: 12
-Terminator (44)
-    on left: 29, on right: 2 4 6 8 20
+GetLocal (43)
+    on left: 29, on right: 13
+GetConstant (44)
+    on left: 30, on right: 11
+Terminator (45)
+    on left: 31, on right: 2 4 6 8 21
 
 
 State 0
@@ -139,187 +143,207 @@ State 0
     FLOAT       shift, and go to state 2
     STRING      shift, and go to state 3
     SELF        shift, and go to state 4
-    IDENTIFIER  shift, and go to state 5
-    FUNC        shift, and go to state 6
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    FUNC        shift, and go to state 7
 
     $default  reduce using rule 3 (Expressions)
 
-    Expressions  go to state 7
-    Expression   go to state 8
-    Literal      go to state 9
-    Call         go to state 10
-    Function     go to state 11
-    SetLocal     go to state 12
-    GetLocal     go to state 13
+    Expressions  go to state 8
+    Expression   go to state 9
+    Literal      go to state 10
+    Call         go to state 11
+    Function     go to state 12
+    SetLocal     go to state 13
+    GetLocal     go to state 14
+    GetConstant  go to state 15
 
 
 State 1
 
-   14 Literal: INTEGER .
-
-    $default  reduce using rule 14 (Literal)
-
-
-State 2
-
-   15 Literal: FLOAT .
+   15 Literal: INTEGER .
 
     $default  reduce using rule 15 (Literal)
 
 
-State 3
+State 2
 
-   16 Literal: STRING .
+   16 Literal: FLOAT .
 
     $default  reduce using rule 16 (Literal)
 
 
-State 4
+State 3
 
-   17 Literal: SELF .
+   17 Literal: STRING .
 
     $default  reduce using rule 17 (Literal)
 
 
+State 4
+
+   18 Literal: SELF .
+
+    $default  reduce using rule 18 (Literal)
+
+
 State 5
 
-   18 Call: IDENTIFIER . OPEN_PAREN Arguments CLOSE_PAREN
-   27 SetLocal: IDENTIFIER . ASSIGN Expression
-   28 GetLocal: IDENTIFIER .
+   30 GetConstant: CONSTANT .
 
-    ASSIGN      shift, and go to state 14
-    OPEN_PAREN  shift, and go to state 15
-
-    $default  reduce using rule 28 (GetLocal)
+    $default  reduce using rule 30 (GetConstant)
 
 
 State 6
 
-   20 Function: FUNC . IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END
+   19 Call: IDENTIFIER . OPEN_PAREN Arguments CLOSE_PAREN
+   28 SetLocal: IDENTIFIER . ASSIGN Expression
+   29 GetLocal: IDENTIFIER .
 
-    IDENTIFIER  shift, and go to state 16
+    ASSIGN      shift, and go to state 16
+    OPEN_PAREN  shift, and go to state 17
+
+    $default  reduce using rule 29 (GetLocal)
 
 
 State 7
+
+   21 Function: FUNC . IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END
+
+    IDENTIFIER  shift, and go to state 18
+
+
+State 8
 
     0 $accept: Expressions . "end of file"
     2 Expressions: Expressions . Terminator Expression
     4            | Expressions . Terminator
 
-    "end of file"  shift, and go to state 17
-    NEWLINE        shift, and go to state 18
+    "end of file"  shift, and go to state 19
+    NEWLINE        shift, and go to state 20
 
-    Terminator  go to state 19
+    Terminator  go to state 21
 
 
-State 8
+State 9
 
     1 Expressions: Expression .
-   19 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+   20 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-    DOT  shift, and go to state 20
+    DOT  shift, and go to state 22
 
     $default  reduce using rule 1 (Expressions)
 
 
-State 9
+State 10
 
     9 Expression: Literal .
 
     $default  reduce using rule 9 (Expression)
 
 
-State 10
+State 11
 
    10 Expression: Call .
 
     $default  reduce using rule 10 (Expression)
 
 
-State 11
-
-   13 Expression: Function .
-
-    $default  reduce using rule 13 (Expression)
-
-
 State 12
 
-   11 Expression: SetLocal .
+   14 Expression: Function .
 
-    $default  reduce using rule 11 (Expression)
+    $default  reduce using rule 14 (Expression)
 
 
 State 13
 
-   12 Expression: GetLocal .
+   12 Expression: SetLocal .
 
     $default  reduce using rule 12 (Expression)
 
 
 State 14
 
-   27 SetLocal: IDENTIFIER ASSIGN . Expression
+   13 Expression: GetLocal .
 
-    INTEGER     shift, and go to state 1
-    FLOAT       shift, and go to state 2
-    STRING      shift, and go to state 3
-    SELF        shift, and go to state 4
-    IDENTIFIER  shift, and go to state 5
-    FUNC        shift, and go to state 6
-
-    Expression  go to state 21
-    Literal     go to state 9
-    Call        go to state 10
-    Function    go to state 11
-    SetLocal    go to state 12
-    GetLocal    go to state 13
+    $default  reduce using rule 13 (Expression)
 
 
 State 15
 
-   18 Call: IDENTIFIER OPEN_PAREN . Arguments CLOSE_PAREN
+   11 Expression: GetConstant .
+
+    $default  reduce using rule 11 (Expression)
+
+
+State 16
+
+   28 SetLocal: IDENTIFIER ASSIGN . Expression
 
     INTEGER     shift, and go to state 1
     FLOAT       shift, and go to state 2
     STRING      shift, and go to state 3
     SELF        shift, and go to state 4
-    IDENTIFIER  shift, and go to state 5
-    FUNC        shift, and go to state 6
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    FUNC        shift, and go to state 7
 
-    $default  reduce using rule 23 (Arguments)
-
-    Expression  go to state 22
-    Literal     go to state 9
-    Call        go to state 10
-    Function    go to state 11
-    Arguments   go to state 23
-    SetLocal    go to state 12
-    GetLocal    go to state 13
-
-
-State 16
-
-   20 Function: FUNC IDENTIFIER . OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END
-
-    OPEN_PAREN  shift, and go to state 24
+    Expression   go to state 23
+    Literal      go to state 10
+    Call         go to state 11
+    Function     go to state 12
+    SetLocal     go to state 13
+    GetLocal     go to state 14
+    GetConstant  go to state 15
 
 
 State 17
+
+   19 Call: IDENTIFIER OPEN_PAREN . Arguments CLOSE_PAREN
+
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    FUNC        shift, and go to state 7
+
+    $default  reduce using rule 24 (Arguments)
+
+    Expression   go to state 24
+    Literal      go to state 10
+    Call         go to state 11
+    Function     go to state 12
+    Arguments    go to state 25
+    SetLocal     go to state 13
+    GetLocal     go to state 14
+    GetConstant  go to state 15
+
+
+State 18
+
+   21 Function: FUNC IDENTIFIER . OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END
+
+    OPEN_PAREN  shift, and go to state 26
+
+
+State 19
 
     0 $accept: Expressions "end of file" .
 
     $default  accept
 
 
-State 18
+State 20
 
-   29 Terminator: NEWLINE .
+   31 Terminator: NEWLINE .
 
-    $default  reduce using rule 29 (Terminator)
+    $default  reduce using rule 31 (Terminator)
 
 
-State 19
+State 21
 
     2 Expressions: Expressions Terminator . Expression
     4            | Expressions Terminator .
@@ -328,249 +352,257 @@ State 19
     FLOAT       shift, and go to state 2
     STRING      shift, and go to state 3
     SELF        shift, and go to state 4
-    IDENTIFIER  shift, and go to state 5
-    FUNC        shift, and go to state 6
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    FUNC        shift, and go to state 7
 
     $default  reduce using rule 4 (Expressions)
 
-    Expression  go to state 25
-    Literal     go to state 9
-    Call        go to state 10
-    Function    go to state 11
-    SetLocal    go to state 12
-    GetLocal    go to state 13
-
-
-State 20
-
-   19 Call: Expression DOT . IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
-
-    IDENTIFIER  shift, and go to state 26
-
-
-State 21
-
-   19 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
-   27 SetLocal: IDENTIFIER ASSIGN Expression .
-
-    DOT  shift, and go to state 20
-
-    DOT       [reduce using rule 27 (SetLocal)]
-    $default  reduce using rule 27 (SetLocal)
+    Expression   go to state 27
+    Literal      go to state 10
+    Call         go to state 11
+    Function     go to state 12
+    SetLocal     go to state 13
+    GetLocal     go to state 14
+    GetConstant  go to state 15
 
 
 State 22
 
-   19 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
-   21 Arguments: Expression .
+   20 Call: Expression DOT . IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-    DOT  shift, and go to state 20
-
-    $default  reduce using rule 21 (Arguments)
+    IDENTIFIER  shift, and go to state 28
 
 
 State 23
 
-   18 Call: IDENTIFIER OPEN_PAREN Arguments . CLOSE_PAREN
-   22 Arguments: Arguments . COMMA Expression
+   20 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+   28 SetLocal: IDENTIFIER ASSIGN Expression .
 
-    CLOSE_PAREN  shift, and go to state 27
-    COMMA        shift, and go to state 28
+    DOT  shift, and go to state 22
+
+    DOT       [reduce using rule 28 (SetLocal)]
+    $default  reduce using rule 28 (SetLocal)
 
 
 State 24
 
-   20 Function: FUNC IDENTIFIER OPEN_PAREN . Parameters CLOSE_PAREN Terminator BodyExpressions END
+   20 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+   22 Arguments: Expression .
 
-    IDENTIFIER  shift, and go to state 29
-
-    $default  reduce using rule 26 (Parameters)
-
-    Parameters  go to state 30
-
-
-State 25
-
-    2 Expressions: Expressions Terminator Expression .
-   19 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
-
-    DOT  shift, and go to state 20
-
-    $default  reduce using rule 2 (Expressions)
-
-
-State 26
-
-   19 Call: Expression DOT IDENTIFIER . OPEN_PAREN Arguments CLOSE_PAREN
-
-    OPEN_PAREN  shift, and go to state 31
-
-
-State 27
-
-   18 Call: IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN .
-
-    $default  reduce using rule 18 (Call)
-
-
-State 28
-
-   22 Arguments: Arguments COMMA . Expression
-
-    INTEGER     shift, and go to state 1
-    FLOAT       shift, and go to state 2
-    STRING      shift, and go to state 3
-    SELF        shift, and go to state 4
-    IDENTIFIER  shift, and go to state 5
-    FUNC        shift, and go to state 6
-
-    Expression  go to state 32
-    Literal     go to state 9
-    Call        go to state 10
-    Function    go to state 11
-    SetLocal    go to state 12
-    GetLocal    go to state 13
-
-
-State 29
-
-   24 Parameters: IDENTIFIER .
-
-    $default  reduce using rule 24 (Parameters)
-
-
-State 30
-
-   20 Function: FUNC IDENTIFIER OPEN_PAREN Parameters . CLOSE_PAREN Terminator BodyExpressions END
-   25 Parameters: Parameters . COMMA IDENTIFIER
-
-    CLOSE_PAREN  shift, and go to state 33
-    COMMA        shift, and go to state 34
-
-
-State 31
-
-   19 Call: Expression DOT IDENTIFIER OPEN_PAREN . Arguments CLOSE_PAREN
-
-    INTEGER     shift, and go to state 1
-    FLOAT       shift, and go to state 2
-    STRING      shift, and go to state 3
-    SELF        shift, and go to state 4
-    IDENTIFIER  shift, and go to state 5
-    FUNC        shift, and go to state 6
-
-    $default  reduce using rule 23 (Arguments)
-
-    Expression  go to state 22
-    Literal     go to state 9
-    Call        go to state 10
-    Function    go to state 11
-    Arguments   go to state 35
-    SetLocal    go to state 12
-    GetLocal    go to state 13
-
-
-State 32
-
-   19 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
-   22 Arguments: Arguments COMMA Expression .
-
-    DOT  shift, and go to state 20
+    DOT  shift, and go to state 22
 
     $default  reduce using rule 22 (Arguments)
 
 
-State 33
+State 25
 
-   20 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN . Terminator BodyExpressions END
+   19 Call: IDENTIFIER OPEN_PAREN Arguments . CLOSE_PAREN
+   23 Arguments: Arguments . COMMA Expression
 
-    NEWLINE  shift, and go to state 18
-
-    Terminator  go to state 36
-
-
-State 34
-
-   25 Parameters: Parameters COMMA . IDENTIFIER
-
-    IDENTIFIER  shift, and go to state 37
+    CLOSE_PAREN  shift, and go to state 29
+    COMMA        shift, and go to state 30
 
 
-State 35
+State 26
 
-   19 Call: Expression DOT IDENTIFIER OPEN_PAREN Arguments . CLOSE_PAREN
-   22 Arguments: Arguments . COMMA Expression
+   21 Function: FUNC IDENTIFIER OPEN_PAREN . Parameters CLOSE_PAREN Terminator BodyExpressions END
 
-    CLOSE_PAREN  shift, and go to state 38
-    COMMA        shift, and go to state 28
+    IDENTIFIER  shift, and go to state 31
+
+    $default  reduce using rule 27 (Parameters)
+
+    Parameters  go to state 32
 
 
-State 36
+State 27
 
-   20 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator . BodyExpressions END
+    2 Expressions: Expressions Terminator Expression .
+   20 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+
+    DOT  shift, and go to state 22
+
+    $default  reduce using rule 2 (Expressions)
+
+
+State 28
+
+   20 Call: Expression DOT IDENTIFIER . OPEN_PAREN Arguments CLOSE_PAREN
+
+    OPEN_PAREN  shift, and go to state 33
+
+
+State 29
+
+   19 Call: IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN .
+
+    $default  reduce using rule 19 (Call)
+
+
+State 30
+
+   23 Arguments: Arguments COMMA . Expression
 
     INTEGER     shift, and go to state 1
     FLOAT       shift, and go to state 2
     STRING      shift, and go to state 3
     SELF        shift, and go to state 4
-    IDENTIFIER  shift, and go to state 5
-    FUNC        shift, and go to state 6
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    FUNC        shift, and go to state 7
 
-    $default  reduce using rule 7 (BodyExpressions)
-
-    BodyExpressions  go to state 39
-    Expression       go to state 40
-    Literal          go to state 9
-    Call             go to state 10
-    Function         go to state 11
-    SetLocal         go to state 12
-    GetLocal         go to state 13
+    Expression   go to state 34
+    Literal      go to state 10
+    Call         go to state 11
+    Function     go to state 12
+    SetLocal     go to state 13
+    GetLocal     go to state 14
+    GetConstant  go to state 15
 
 
-State 37
+State 31
 
-   25 Parameters: Parameters COMMA IDENTIFIER .
+   25 Parameters: IDENTIFIER .
 
     $default  reduce using rule 25 (Parameters)
 
 
+State 32
+
+   21 Function: FUNC IDENTIFIER OPEN_PAREN Parameters . CLOSE_PAREN Terminator BodyExpressions END
+   26 Parameters: Parameters . COMMA IDENTIFIER
+
+    CLOSE_PAREN  shift, and go to state 35
+    COMMA        shift, and go to state 36
+
+
+State 33
+
+   20 Call: Expression DOT IDENTIFIER OPEN_PAREN . Arguments CLOSE_PAREN
+
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    FUNC        shift, and go to state 7
+
+    $default  reduce using rule 24 (Arguments)
+
+    Expression   go to state 24
+    Literal      go to state 10
+    Call         go to state 11
+    Function     go to state 12
+    Arguments    go to state 37
+    SetLocal     go to state 13
+    GetLocal     go to state 14
+    GetConstant  go to state 15
+
+
+State 34
+
+   20 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+   23 Arguments: Arguments COMMA Expression .
+
+    DOT  shift, and go to state 22
+
+    $default  reduce using rule 23 (Arguments)
+
+
+State 35
+
+   21 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN . Terminator BodyExpressions END
+
+    NEWLINE  shift, and go to state 20
+
+    Terminator  go to state 38
+
+
+State 36
+
+   26 Parameters: Parameters COMMA . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 39
+
+
+State 37
+
+   20 Call: Expression DOT IDENTIFIER OPEN_PAREN Arguments . CLOSE_PAREN
+   23 Arguments: Arguments . COMMA Expression
+
+    CLOSE_PAREN  shift, and go to state 40
+    COMMA        shift, and go to state 30
+
+
 State 38
 
-   19 Call: Expression DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN .
+   21 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator . BodyExpressions END
 
-    $default  reduce using rule 19 (Call)
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    FUNC        shift, and go to state 7
+
+    $default  reduce using rule 7 (BodyExpressions)
+
+    BodyExpressions  go to state 41
+    Expression       go to state 42
+    Literal          go to state 10
+    Call             go to state 11
+    Function         go to state 12
+    SetLocal         go to state 13
+    GetLocal         go to state 14
+    GetConstant      go to state 15
 
 
 State 39
 
-    6 BodyExpressions: BodyExpressions . Terminator Expression
-    8                | BodyExpressions . Terminator
-   20 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions . END
+   26 Parameters: Parameters COMMA IDENTIFIER .
 
-    END      shift, and go to state 41
-    NEWLINE  shift, and go to state 18
-
-    Terminator  go to state 42
+    $default  reduce using rule 26 (Parameters)
 
 
 State 40
 
-    5 BodyExpressions: Expression .
-   19 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+   20 Call: Expression DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN .
 
-    DOT  shift, and go to state 20
-
-    $default  reduce using rule 5 (BodyExpressions)
+    $default  reduce using rule 20 (Call)
 
 
 State 41
 
-   20 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END .
+    6 BodyExpressions: BodyExpressions . Terminator Expression
+    8                | BodyExpressions . Terminator
+   21 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions . END
 
-    $default  reduce using rule 20 (Function)
+    END      shift, and go to state 43
+    NEWLINE  shift, and go to state 20
+
+    Terminator  go to state 44
 
 
 State 42
+
+    5 BodyExpressions: Expression .
+   20 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+
+    DOT  shift, and go to state 22
+
+    $default  reduce using rule 5 (BodyExpressions)
+
+
+State 43
+
+   21 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END .
+
+    $default  reduce using rule 21 (Function)
+
+
+State 44
 
     6 BodyExpressions: BodyExpressions Terminator . Expression
     8                | BodyExpressions Terminator .
@@ -579,24 +611,26 @@ State 42
     FLOAT       shift, and go to state 2
     STRING      shift, and go to state 3
     SELF        shift, and go to state 4
-    IDENTIFIER  shift, and go to state 5
-    FUNC        shift, and go to state 6
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    FUNC        shift, and go to state 7
 
     $default  reduce using rule 8 (BodyExpressions)
 
-    Expression  go to state 43
-    Literal     go to state 9
-    Call        go to state 10
-    Function    go to state 11
-    SetLocal    go to state 12
-    GetLocal    go to state 13
+    Expression   go to state 45
+    Literal      go to state 10
+    Call         go to state 11
+    Function     go to state 12
+    SetLocal     go to state 13
+    GetLocal     go to state 14
+    GetConstant  go to state 15
 
 
-State 43
+State 45
 
     6 BodyExpressions: BodyExpressions Terminator Expression .
-   19 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+   20 Call: Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-    DOT  shift, and go to state 20
+    DOT  shift, and go to state 22
 
     $default  reduce using rule 6 (BodyExpressions)

@@ -14,6 +14,7 @@
 #include "intermediate/nodes/headers/localnode.hpp"
 #include "intermediate/nodes/headers/callnode.hpp"
 #include "intermediate/nodes/headers/methoddefinitionnode.hpp"
+#include "intermediate/nodes/headers/constantnode.hpp"
 #include "intermediate/headers/driver.hpp"
 #include "intermediate/headers/nodestack.hpp"
 #include "runtime/headers/runtime.hpp"

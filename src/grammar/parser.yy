@@ -55,6 +55,7 @@
    #include "intermediate/nodes/headers/localassignnode.hpp"
    #include "intermediate/nodes/headers/localnode.hpp"
    #include "intermediate/nodes/headers/methoddefinitionnode.hpp"
+   #include "intermediate/nodes/headers/constantnode.hpp"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -110,7 +111,7 @@
 }
 
 
-%type <abs_node>     Expression Literal Call SetLocal GetLocal Function
+%type <abs_node>     Expression Literal Call SetLocal GetLocal Function GetConstant
 %type <driver>       Expressions
 %type <nodes>        BodyExpressions
 %type <arguments>    Arguments
@@ -158,6 +159,7 @@ BodyExpressions:
 Expression:
     Literal
   | Call
+  | GetConstant
   | SetLocal
   | GetLocal
   | Function
@@ -226,6 +228,10 @@ SetLocal:
 
 GetLocal:
     IDENTIFIER    { $$ = new Nodes::LocalNode(*$1); }
+  ;
+
+GetConstant:
+    CONSTANT                      { $$ = new Nodes::ConstantNode(*$1); }
   ;
 
 Terminator:

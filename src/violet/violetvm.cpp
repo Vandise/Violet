@@ -57,6 +57,14 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
         STACK_PUSH((scopes[*ip])->getCurrentSelf());
         break;
       }
+      case PUSH_OBJECT:
+      {
+        ip++;
+        int obj_name = *ip;
+        ip++;
+        STACK_PUSH(scopes[*ip]->getCurrentClass()->getConstant(boost::get<std::string>(literals[obj_name])));
+        break;
+      }
       case SET_LOCAL:
       {
         ip++;

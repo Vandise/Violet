@@ -184,12 +184,34 @@ Violet::Generator::setLocal(std::string name, Context *context)
   emit(SET_LOCAL, operands);
 }
 
+
+/*
+  Calls a method
+    CALL [ number of arguments ]
+    stack: [arg1...arg2, receiver, method]
+
+*/
 void
 Violet::Generator::callMethod(int argc)
 {
   std::vector<int> operands;
   operands.push_back(argc);
   emit(CALL, operands);
+}
+
+/*
+  Pushes an object onto the stack
+    PUSH_OBJECT [ object ]
+*/
+void
+Violet::Generator::pushObject(std::string name, Context *context)
+{
+  std::vector<int> operands;
+  operands.push_back(
+    localIndex(literalIndex(name), this->scopes[scopeIndex(context)])
+  );
+  operands.push_back(scopeIndex(context));
+  emit(PUSH_OBJECT, operands);
 }
 
 /* ---------------- EMIT INSTRUCTION ---------------- */
