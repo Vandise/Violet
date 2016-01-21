@@ -6,13 +6,12 @@
 #include "violet/headers/violetvm.hpp"
 #include <iostream>
 
-Runtime::LambdaObject::LambdaObject(std::vector<std::string> parameters, Nodes::AbstractNode *body, Context *context, Violet::Generator *generator)
+Runtime::LambdaObject::LambdaObject(std::vector<std::string> parameters, std::vector<int> instructions, Context *context)
 {
   this->klass = Lang::Runtime::getRootClass(std::string("Lambda"));
   this->parameters = parameters;
-  this->body = body;
+  this->instructions = instructions;
   this->context = context;
-  this->generator = generator;
 }
 
 Runtime::Object*

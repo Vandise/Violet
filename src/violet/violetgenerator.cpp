@@ -227,6 +227,8 @@ Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::Abstra
   Violet::Generator generator;
   generator.literals = this->literals;
 
+  operands.push_back(scopeIndex(context));
+
   operands.push_back(parameters.size());
   for(int i = 0; i < parameters.size(); i++)
   {
@@ -240,7 +242,6 @@ Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::Abstra
   {
     operands.push_back(generator.instructions[i]);
   }
-  operands.push_back(scopeIndex(context));
   emit(PUSH_LAMBDA, operands);
 
   this->literals = generator.literals;

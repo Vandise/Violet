@@ -23,12 +23,11 @@ namespace Runtime
   class LambdaObject : public Object
   {
     private:
-      Nodes::AbstractNode        *body;
+      std::vector<int>           instructions;
       std::vector<std::string>   parameters;
       Context                    *context;
-      Violet::Generator          *generator;
     public:
-      LambdaObject(std::vector<std::string> parameters, Nodes::AbstractNode *body, Context *context, Violet::Generator *generator);
+      LambdaObject(std::vector<std::string> parameters, std::vector<int> instructions, Context *context);
       Object* compile(std::vector<Runtime::Object*> arguments);
   };
 }

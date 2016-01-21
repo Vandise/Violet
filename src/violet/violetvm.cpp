@@ -6,6 +6,7 @@
 #include "intermediate/headers/bytecode.hpp"
 #include "runtime/headers/stdclass.hpp"
 #include "runtime/headers/valueobject.hpp"
+#include "runtime/headers/lambda.hpp"
 #include "intermediate/headers/context.hpp"
 
 void
@@ -63,6 +64,32 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
         int obj_name = *ip;
         ip++;
         STACK_PUSH(scopes[*ip]->getCurrentClass()->getConstant(boost::get<std::string>(literals[obj_name])));
+        break;
+      }
+      case PUSH_LAMBDA:
+      {
+        ip++;
+        Context *context = scopes[*ip];
+        std::vector<std::string> parameters;
+        std::vector<int> instructions;
+
+        ip++;
+        int parameter_count = *ip;
+        for(int i = 1; i <= parameter_count; i++)
+        {
+          ip++;
+          parameters.push_back(boost::get<std::string>(literals[*ip]));
+        }
+
+        ip++;
+        int instruction_count = *ip;
+        for(int i = 1; i <= instruction_count; i++)
+        {
+          ip++;
+          instructions.push_back(*ip);
+        }
+
+        STACK_PUSH(new Runtime::LambdaObject(parameters, instructions, context));
         break;
       }
       case SET_LOCAL:

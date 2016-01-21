@@ -44,12 +44,11 @@ SCENARIO("Compiling Lambda Definition", "[lambdanode]")
     {
       REQUIRE(generator.instructions.size() == 8);
       std::vector<int> bytecode = {
-        PUSH_LAMBDA, 1, 0,   // parameter size, parameter literal index
+        PUSH_LAMBDA, 0, 1, 0,   // scope, parameter size, parameter literal index
         3,                   // body instruction count
         //---- body
         GET_LOCAL,   0, 0,  // literal index, scope
         //---- end body
-        0                   // scope index
       };
       for(int i = 0; i < bytecode.size(); i++)
       {
