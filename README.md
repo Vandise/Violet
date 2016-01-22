@@ -97,3 +97,23 @@ lambda.include(outside_int,var_2, var_3, ...).call(5)
 print(outside_int)
 => 5
 ```
+
+### Class Definitions
+```
+class CONSTANT
+  Expressions
+END
+
+class CONSTANT : CONSTANT
+  Expressions
+END
+
+class Person
+  func say_something(words)
+    print(words)
+  end
+end
+
+Person.say_something("Hello")
+=> Hello
+```
