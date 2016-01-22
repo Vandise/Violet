@@ -40,6 +40,7 @@ float_num ({digit}+\.{digit}+)
                       return( token::NEWLINE );   
                     }
 
+"class"             { return(token::CLASS); }
 "self"              { return(token::SELF); }
 "func"              { return(token::FUNC); }
 "do"                { return(token::DO); }

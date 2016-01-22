@@ -57,6 +57,7 @@
    #include "intermediate/nodes/headers/methoddefinitionnode.hpp"
    #include "intermediate/nodes/headers/constantnode.hpp"
    #include "intermediate/nodes/headers/lambdanode.hpp"
+   #include "intermediate/nodes/headers/classdefinitionnode.hpp"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -81,6 +82,7 @@
 %token            DOT
 %token            PIPE
 %token            LAMBDA
+%token            CLASS
 
 %token            NEWLINE 
 %token            PRGEND 0     "end of file"
@@ -115,7 +117,7 @@
 }
 
 
-%type <abs_node>     Expression Literal Call SetLocal GetLocal Function GetConstant Lambda
+%type <abs_node>     Expression Literal Call Class SetLocal GetLocal Function GetConstant Lambda
 %type <driver>       Expressions
 %type <nodes>        BodyExpressions
 %type <arguments>    Arguments
@@ -168,6 +170,7 @@ Expression:
   | GetLocal
   | Function
   | Lambda
+  | Class
   | OPEN_PAREN Expression CLOSE_PAREN     { $$ = $2; }
   ;
 
@@ -236,7 +239,15 @@ Parameters:
                                     $$ = parameters;
                                   }
   ;
- 
+
+Class:
+    CLASS CONSTANT Terminator
+      BodyExpressions
+    END                           {
+                                    $$ = new Nodes::ClassDefinitionNode(*$2, std::string(""), $4);
+                                  }
+  ;
+
 SetLocal:
     IDENTIFIER ASSIGN Expression     { $$ = new Nodes::LocalAssignNode(*$1, $3); }
   ;
