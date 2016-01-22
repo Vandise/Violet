@@ -11,7 +11,7 @@ PUSH_FLOAT    | literal_index |
 PUSH_STRING   | literal_index |
 PUSH_ARRAY    | N/I           |
 PUSH_HASH     | N/I           |
-PUSH_LAMBDA   | N/I           |
+PUSH_LAMBDA   | params        | lambda_body   | parent_scope  |
 PUSH_OBJECT   | literal_name  | scope_index   | 
 PUSH_SELF     | scope_index   |
 GET_LOCAL     | local_index   | scope_index   |
@@ -30,7 +30,7 @@ PUSH_FLOAT    | []                                  | [float]
 PUSH_STRING   | []                                  | [string]
 PUSH_ARRAY    | N/I                                 |
 PUSH_HASH     | N/I                                 |
-PUSH_LAMBDA   | N/I                                 |
+PUSH_LAMBDA   | []                                  | [lambda_object]
 PUSH_OBJECT   | []                                  | [object]
 PUSH_SELF     | []                                  | [self]
 GET_LOCAL     | []                                  | [object]
@@ -71,7 +71,7 @@ self.print("Hello World")
 ```
 
 ### Lambda
-There's a bug with lambda expressions that defines the parameter in the current scope -- which will override any local variables with the same name. It's on my todo list.
+The lambda body is executed within a child scope, meaning it does not have access to outside variables. Currently Violet does not allow the inclusion of outside variables by reference or value.
 ```
 -> do |arguments|
   expressions
@@ -86,4 +86,14 @@ callable = -> do |hello|
 end
 
 callable.call("Hello")
+
+// proposed
+outside_int = 10
+lambda = -> do |param_int| 
+  outside_int = param_int
+end
+
+lambda.include(outside_int,var_2, var_3, ...).call(5)
+print(outside_int)
+=> 5
 ```
