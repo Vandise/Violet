@@ -71,7 +71,7 @@ self.print("Hello World")
 ```
 
 ### Lambda
-The lambda body is executed within a child scope, meaning it does not have access to outside variables. Currently Violet does not allow the inclusion of outside variables by reference or value.
+The lambda body is executed within a child scope, meaning it has access to parent variables.
 ```
 -> do |arguments|
   expressions
@@ -87,13 +87,13 @@ end
 
 callable.call("Hello")
 
-// proposed
+// parent variable example
 outside_int = 10
 lambda = -> do |param_int| 
   outside_int = param_int
 end
 
-lambda.include(outside_int,var_2, var_3, ...).call(5)
+lambda.call(5)
 print(outside_int)
 => 5
 ```
