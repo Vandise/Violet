@@ -190,9 +190,26 @@ void
 Violet::Generator::setLocal(std::string name, Context *context)
 {
   std::vector<int> operands;
-  operands.push_back(
-    localIndex(literalIndex(name), this->scopes[scopeIndex(context)])
-  );
+  int local_index = -1;
+
+  if( (this->scopes[scopeIndex(context)])->getParent() != NULL)
+  {
+    local_index = getLocalIndex(literalIndex(name),&((this->scopes[scopeIndex(context->getParent())])->local_bytes));
+  }
+
+  if(local_index < 0)
+  {
+    operands.push_back(
+      localIndex(literalIndex(name), this->scopes[scopeIndex(context)])
+    );
+  }
+  else
+  {
+    context = context->getParent();
+    operands.push_back(
+      localIndex(literalIndex(name), this->scopes[scopeIndex(context)])
+    );
+  }
   operands.push_back(scopeIndex(context));
   emit(SET_LOCAL, operands);
 }
