@@ -17,21 +17,24 @@ Context::Context(Runtime::Object *currentSelf, Runtime::StdClass *currentClass, 
 
 Context::Context(Runtime::Object *currentSelf, Runtime::StdClass *currentClass)
 {
-  this->currentSelf = currentSelf;
+  this->currentSelf  = currentSelf;
   this->currentClass = currentClass;
+  this->parent       = NULL;
   this->locals.clear();
 }
 
 Context::Context(Runtime::Object *currentSelf)
 {
-  this->currentSelf = currentSelf;
+  this->currentSelf  = currentSelf;
   this->currentClass = currentSelf->getStdClass();
+  this->parent       = NULL;
 }
 
 Context::Context()
 {
-  this->currentSelf = Lang::Runtime::getMainObject();
+  this->currentSelf  = Lang::Runtime::getMainObject();
   this->currentClass = currentSelf->getStdClass();
+  this->parent       = NULL;
 }
 
 Runtime::Object*
