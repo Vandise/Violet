@@ -74,6 +74,8 @@ float_num ({digit}+\.{digit}+)
 ")"                 { return( token::CLOSE_PAREN ); }  
 ","                 { return( token::COMMA ); }
 "."                 { return( token::DOT ); }
+":"                 { return( token::COLON ); }
+
 .                   {  }
 
 %%

@@ -23,7 +23,7 @@ Runtime::ValueObject::ValueObject(Runtime::StdClass *klass, boost::variant<int,s
 */
 Runtime::ValueObject::ValueObject(std::string value)
 {
-  //this->klass = Lang::Runtime::getRootClass(std::string("String"));
+  this->klass = Lang::Runtime::getRootClass(std::string("String"));
   this->value = value;
 }
 
@@ -36,7 +36,7 @@ Runtime::ValueObject::ValueObject(std::string value)
 Runtime::ValueObject::ValueObject(int value)
 {
   this->value = value;
-  //this->klass = Lang::Runtime::getRootClass(std::string("Integer"));
+  this->klass = Lang::Runtime::getRootClass(std::string("Integer"));
 }
 
 /*
@@ -49,6 +49,7 @@ Runtime::ValueObject::ValueObject(float value)
 /* TODO: Call Super after runtime is initialized -- : super(i), J(j) etc */
 {
   this->value = value;
+  this->klass = Lang::Runtime::getRootClass(std::string("Float"));
 }
 
 int

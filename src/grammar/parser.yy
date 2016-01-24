@@ -84,6 +84,7 @@
 %token            LAMBDA
 %token            CLASS
 
+%token            COLON
 %token            NEWLINE 
 %token            PRGEND 0     "end of file"
 
@@ -241,7 +242,12 @@ Parameters:
   ;
 
 Class:
-    CLASS CONSTANT Terminator
+    CLASS CONSTANT COLON CONSTANT Terminator
+      BodyExpressions
+    END                           {
+                                    $$ = new Nodes::ClassDefinitionNode(*$2, *$4, $6);
+                                  }
+  | CLASS CONSTANT Terminator
       BodyExpressions
     END                           {
                                     $$ = new Nodes::ClassDefinitionNode(*$2, std::string(""), $4);
