@@ -61,6 +61,12 @@ Context::hasLocal(int index)
   return 0;
 }
 
+Context*
+Context::getParent()
+{
+  return this->parent;
+}
+
 void
 Context::setLocal(int index, Runtime::Object *value)
 {
