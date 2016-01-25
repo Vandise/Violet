@@ -58,6 +58,45 @@ SCENARIO("Compiling Lambda Definition", "[lambdanode]")
       }
     }
   }
+
+  NodeStack::stack.clear();
+  generator.instructions.clear();
+  generator.literals.clear();
+  generator.locals.clear();
+
+  WHEN("Accessing a parent variable")
+  {
+    filename = "test/lambda/scope.src";
+    driver.parse(filename);
+
+    Context *context = new Context(Lang::Runtime::mainObject);
+    for(int i = 0; i < NodeStack::stack.size(); i++)
+    {
+      NodeStack::stack[i]->compile(context, &generator);
+    }
+
+    THEN("The parent variable can be accessed appropriately")
+    {
+      REQUIRE(generator.instructions.size() == 24);
+      std::vector<int> bytecode = {
+        PUSH_INTEGER, 0,            // push the integer
+        SET_LOCAL,    0, 0,         // set parent local
+        PUSH_LAMBDA,  1, 1, 0, 1,   // scope, parameter size, parameter literal index, locals size
+        SET_LOCAL,    0, 1,         // set parameter locals
+        6,                          // body instruction count
+        //---- body
+        GET_LOCAL,   0, 1,          // literal index, scope
+        GET_LOCAL,   0, 0,          // literal index, parent scope
+        //---- end body
+        RETURN,                     // return lambda
+        SET_LOCAL,   1, 0           // assign lambda object to variable
+      };
+      for(int i = 0; i < bytecode.size(); i++)
+      {
+        REQUIRE(generator.instructions[i] == bytecode[i]);
+      }
+    }
+  }
   NodeStack::stack.clear();
   generator.instructions.clear();
   generator.literals.clear();

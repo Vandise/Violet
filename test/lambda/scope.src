@@ -1,0 +1,6 @@
+variable = 10
+
+lambda = -> do |string|
+  string
+  variable
+end
