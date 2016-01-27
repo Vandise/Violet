@@ -117,3 +117,17 @@ end
 Person.say_something("Hello")
 => Hello
 ```
+### Operators
+Operators are methods and can be overloaded by the "operator" declaration. Every operator method accepts one argument.
+```
+// operators: + - * / > < >= <= ==
+
+class User
+  operator ==(argument)
+    print("Called == on User Object, passed argument: ", argument)
+  end
+end
+
+User == 10
+=> Called == on User Object, passed argument: 10
+```
