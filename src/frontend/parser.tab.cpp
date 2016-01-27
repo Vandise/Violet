@@ -351,93 +351,107 @@ namespace FrontEnd {
     {
             case 5: // STRING
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 357 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 7: // CONSTANT
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 364 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 8: // IDENTIFIER
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 371 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 21: // PLUS
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 378 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 22: // MINUS
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 385 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 23: // MULT
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 392 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 24: // DIV
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 399 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 25: // GT
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 406 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 26: // LT
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 413 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 27: // GE
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 420 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 28: // LE
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 427 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
       case 29: // EQ
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 434 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
-      case 53: // Operators
+      case 30: // AND
 
-#line 104 "src/grammar/parser.yy" // lalr1.cc:617
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
         { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
 #line 441 "src/frontend/parser.tab.cpp" // lalr1.cc:617
+        break;
+
+      case 31: // OR
+
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
+        { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
+#line 448 "src/frontend/parser.tab.cpp" // lalr1.cc:617
+        break;
+
+      case 43: // Operators
+
+#line 106 "src/grammar/parser.yy" // lalr1.cc:617
+        { if ((yysym.value.sval))  { delete ((yysym.value.sval)); ((yysym.value.sval)) = nullptr; } }
+#line 455 "src/frontend/parser.tab.cpp" // lalr1.cc:617
         break;
 
 
@@ -665,254 +679,254 @@ namespace FrontEnd {
           switch (yyn)
             {
   case 2:
-#line 142 "src/grammar/parser.yy" // lalr1.cc:859
+#line 144 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                               std::vector<Nodes::AbstractNode *> nodes;
                                               nodes.push_back((yystack_[0].value.abs_node));
                                               driver.push_stack(nodes);
                                               (yylhs.value.driver) = &driver;
                                             }
-#line 676 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 690 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 3:
-#line 148 "src/grammar/parser.yy" // lalr1.cc:859
+#line 150 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                               (yystack_[2].value.driver)->push_node((yystack_[0].value.abs_node));
                                               (yylhs.value.driver) = (yystack_[2].value.driver);
                                             }
-#line 685 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 699 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 4:
-#line 152 "src/grammar/parser.yy" // lalr1.cc:859
+#line 154 "src/grammar/parser.yy" // lalr1.cc:859
     {
     
                                             }
-#line 693 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 707 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 5:
-#line 155 "src/grammar/parser.yy" // lalr1.cc:859
+#line 157 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                               (yylhs.value.driver) = (yystack_[1].value.driver);
                                             }
-#line 701 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 715 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 6:
-#line 162 "src/grammar/parser.yy" // lalr1.cc:859
+#line 164 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                             std::vector<Nodes::AbstractNode *> nodes;
                                             nodes.push_back((yystack_[0].value.abs_node));
                                             Nodes::Nodes *nodelist = new Nodes::Nodes(nodes);
                                             (yylhs.value.nodes) = nodelist;
                                           }
-#line 712 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 726 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 7:
-#line 168 "src/grammar/parser.yy" // lalr1.cc:859
+#line 170 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                             (yystack_[2].value.nodes)->add((yystack_[0].value.abs_node));
                                             (yylhs.value.nodes) = (yystack_[2].value.nodes);
                                           }
-#line 721 "src/frontend/parser.tab.cpp" // lalr1.cc:859
-    break;
-
-  case 8:
-#line 172 "src/grammar/parser.yy" // lalr1.cc:859
-    { /* do nothing */ }
-#line 727 "src/frontend/parser.tab.cpp" // lalr1.cc:859
-    break;
-
-  case 9:
-#line 173 "src/grammar/parser.yy" // lalr1.cc:859
-    {
-                                            (yylhs.value.nodes) = (yystack_[1].value.nodes);
-                                          }
 #line 735 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
-  case 18:
-#line 187 "src/grammar/parser.yy" // lalr1.cc:859
-    { (yylhs.value.abs_node) = (yystack_[1].value.abs_node); }
+  case 8:
+#line 174 "src/grammar/parser.yy" // lalr1.cc:859
+    { /* do nothing */ }
 #line 741 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
-  case 19:
-#line 191 "src/grammar/parser.yy" // lalr1.cc:859
+  case 9:
+#line 175 "src/grammar/parser.yy" // lalr1.cc:859
     {
-                              (yylhs.value.abs_node) = new Nodes::LiteralNode((yystack_[0].value.ival));
-                            }
+                                            (yylhs.value.nodes) = (yystack_[1].value.nodes);
+                                          }
 #line 749 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
+  case 18:
+#line 189 "src/grammar/parser.yy" // lalr1.cc:859
+    { (yylhs.value.abs_node) = (yystack_[1].value.abs_node); }
+#line 755 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+    break;
+
+  case 19:
+#line 193 "src/grammar/parser.yy" // lalr1.cc:859
+    {
+                              (yylhs.value.abs_node) = new Nodes::LiteralNode((yystack_[0].value.ival));
+                            }
+#line 763 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+    break;
+
   case 20:
-#line 194 "src/grammar/parser.yy" // lalr1.cc:859
+#line 196 "src/grammar/parser.yy" // lalr1.cc:859
     {
                               (yylhs.value.abs_node) = new Nodes::LiteralNode((yystack_[0].value.fval));
                             }
-#line 757 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 771 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 21:
-#line 197 "src/grammar/parser.yy" // lalr1.cc:859
+#line 199 "src/grammar/parser.yy" // lalr1.cc:859
     {
                               (yylhs.value.abs_node) = new Nodes::LiteralNode(*(yystack_[0].value.sval));
                             }
-#line 765 "src/frontend/parser.tab.cpp" // lalr1.cc:859
-    break;
-
-  case 22:
-#line 200 "src/grammar/parser.yy" // lalr1.cc:859
-    {
-                              (yylhs.value.abs_node) = new Nodes::SelfNode();
-                            }
-#line 773 "src/frontend/parser.tab.cpp" // lalr1.cc:859
-    break;
-
-  case 31:
-#line 205 "src/grammar/parser.yy" // lalr1.cc:859
-    { (yylhs.value.sval) = (yystack_[0].value.sval); }
 #line 779 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
+  case 22:
+#line 202 "src/grammar/parser.yy" // lalr1.cc:859
+    {
+                              (yylhs.value.abs_node) = new Nodes::SelfNode();
+                            }
+#line 787 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+    break;
+
+  case 31:
+#line 207 "src/grammar/parser.yy" // lalr1.cc:859
+    { (yylhs.value.sval) = (yystack_[0].value.sval); }
+#line 793 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+    break;
+
   case 32:
-#line 208 "src/grammar/parser.yy" // lalr1.cc:859
-    { (yylhs.value.abs_node) = new Nodes::CallNode(*(yystack_[3].value.sval), NULL, *(yystack_[1].value.arguments)); }
-#line 785 "src/frontend/parser.tab.cpp" // lalr1.cc:859
-    break;
-
-  case 33:
-#line 209 "src/grammar/parser.yy" // lalr1.cc:859
-    { (yylhs.value.abs_node) = new Nodes::CallNode(*(yystack_[3].value.sval), (yystack_[5].value.abs_node), *(yystack_[1].value.arguments));   }
-#line 791 "src/frontend/parser.tab.cpp" // lalr1.cc:859
-    break;
-
-  case 34:
 #line 210 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                                                     std::vector<Nodes::AbstractNode*> arguments;
                                                                     arguments.push_back((yystack_[0].value.abs_node));
                                                                     (yylhs.value.abs_node) = new Nodes::CallNode(*(yystack_[1].value.sval), (yystack_[2].value.abs_node), arguments);
                                                                   }
-#line 801 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 803 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
-  case 35:
-#line 220 "src/grammar/parser.yy" // lalr1.cc:859
-    {
-                                    (yylhs.value.abs_node) = new Nodes::MethodDefinitionNode(*(yystack_[6].value.sval), *(yystack_[4].value.parameters), (yystack_[1].value.nodes));
-                                  }
+  case 33:
+#line 215 "src/grammar/parser.yy" // lalr1.cc:859
+    { (yylhs.value.abs_node) = new Nodes::CallNode(*(yystack_[3].value.sval), NULL, *(yystack_[1].value.arguments)); }
 #line 809 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
-  case 36:
-#line 226 "src/grammar/parser.yy" // lalr1.cc:859
+  case 34:
+#line 216 "src/grammar/parser.yy" // lalr1.cc:859
+    { (yylhs.value.abs_node) = new Nodes::CallNode(*(yystack_[3].value.sval), (yystack_[5].value.abs_node), *(yystack_[1].value.arguments));   }
+#line 815 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+    break;
+
+  case 35:
+#line 222 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     (yylhs.value.abs_node) = new Nodes::MethodDefinitionNode(*(yystack_[6].value.sval), *(yystack_[4].value.parameters), (yystack_[1].value.nodes));
                                   }
-#line 817 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 823 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+    break;
+
+  case 36:
+#line 228 "src/grammar/parser.yy" // lalr1.cc:859
+    {
+                                    (yylhs.value.abs_node) = new Nodes::MethodDefinitionNode(*(yystack_[6].value.sval), *(yystack_[4].value.parameters), (yystack_[1].value.nodes));
+                                  }
+#line 831 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 37:
-#line 235 "src/grammar/parser.yy" // lalr1.cc:859
+#line 237 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     (yylhs.value.abs_node) = new Nodes::LambdaNode(*(yystack_[4].value.parameters),(yystack_[1].value.nodes));
                                   }
-#line 825 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 839 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 38:
-#line 241 "src/grammar/parser.yy" // lalr1.cc:859
+#line 243 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                   std::vector<Nodes::AbstractNode*> *arguments = new std::vector<Nodes::AbstractNode*>();
                                   arguments->push_back((yystack_[0].value.abs_node));
                                   (yylhs.value.arguments) = arguments;
                                 }
-#line 835 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 849 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 39:
-#line 246 "src/grammar/parser.yy" // lalr1.cc:859
+#line 248 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                   (yystack_[2].value.arguments)->push_back((yystack_[0].value.abs_node));
                                   (yylhs.value.arguments) = (yystack_[2].value.arguments);
                                 }
-#line 844 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 858 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 40:
-#line 250 "src/grammar/parser.yy" // lalr1.cc:859
+#line 252 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                   std::vector<Nodes::AbstractNode*> *arguments = new std::vector<Nodes::AbstractNode*>();
                                   (yylhs.value.arguments) = arguments;
                                 }
-#line 853 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 867 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 41:
-#line 257 "src/grammar/parser.yy" // lalr1.cc:859
+#line 259 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     std::vector<std::string> *parameters = new std::vector<std::string>();
                                     parameters->push_back(*(yystack_[0].value.sval));
                                     (yylhs.value.parameters) = parameters;
                                   }
-#line 863 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 877 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 42:
-#line 262 "src/grammar/parser.yy" // lalr1.cc:859
+#line 264 "src/grammar/parser.yy" // lalr1.cc:859
     { (yystack_[2].value.parameters)->push_back(*(yystack_[0].value.sval)); (yylhs.value.parameters) = (yystack_[2].value.parameters); }
-#line 869 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 883 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 43:
-#line 263 "src/grammar/parser.yy" // lalr1.cc:859
+#line 265 "src/grammar/parser.yy" // lalr1.cc:859
     { 
                                     std::vector<std::string> *parameters = new std::vector<std::string>();
                                     (yylhs.value.parameters) = parameters;
                                   }
-#line 878 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 892 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 44:
-#line 272 "src/grammar/parser.yy" // lalr1.cc:859
+#line 274 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     (yylhs.value.abs_node) = new Nodes::ClassDefinitionNode(*(yystack_[5].value.sval), *(yystack_[3].value.sval), (yystack_[1].value.nodes));
                                   }
-#line 886 "src/frontend/parser.tab.cpp" // lalr1.cc:859
-    break;
-
-  case 45:
-#line 277 "src/grammar/parser.yy" // lalr1.cc:859
-    {
-                                    (yylhs.value.abs_node) = new Nodes::ClassDefinitionNode(*(yystack_[3].value.sval), std::string(""), (yystack_[1].value.nodes));
-                                  }
-#line 894 "src/frontend/parser.tab.cpp" // lalr1.cc:859
-    break;
-
-  case 46:
-#line 283 "src/grammar/parser.yy" // lalr1.cc:859
-    { (yylhs.value.abs_node) = new Nodes::LocalAssignNode(*(yystack_[2].value.sval), (yystack_[0].value.abs_node)); }
 #line 900 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
+  case 45:
+#line 279 "src/grammar/parser.yy" // lalr1.cc:859
+    {
+                                    (yylhs.value.abs_node) = new Nodes::ClassDefinitionNode(*(yystack_[3].value.sval), std::string(""), (yystack_[1].value.nodes));
+                                  }
+#line 908 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+    break;
+
+  case 46:
+#line 285 "src/grammar/parser.yy" // lalr1.cc:859
+    { (yylhs.value.abs_node) = new Nodes::LocalAssignNode(*(yystack_[2].value.sval), (yystack_[0].value.abs_node)); }
+#line 914 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+    break;
+
   case 47:
-#line 287 "src/grammar/parser.yy" // lalr1.cc:859
+#line 289 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = new Nodes::LocalNode(*(yystack_[0].value.sval)); }
-#line 906 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 920 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 48:
-#line 291 "src/grammar/parser.yy" // lalr1.cc:859
+#line 293 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = new Nodes::ConstantNode(*(yystack_[0].value.sval)); }
-#line 912 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 926 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
 
-#line 916 "src/frontend/parser.tab.cpp" // lalr1.cc:859
+#line 930 "src/frontend/parser.tab.cpp" // lalr1.cc:859
             default:
               break;
             }
@@ -1073,22 +1087,22 @@ namespace FrontEnd {
   }
 
 
-  const signed char Parser::yypact_ninf_ = -67;
+  const signed char Parser::yypact_ninf_ = -65;
 
   const signed char Parser::yytable_ninf_ = -1;
 
   const signed char
   Parser::yypact_[] =
   {
-      40,   -67,   -67,   -67,   -67,   -67,     8,    40,    -2,    -3,
-      27,    60,     2,    51,   -67,   -67,   -67,   -67,   -67,   -67,
-     -67,   -67,    40,    40,     3,    29,    24,    32,   -67,   -67,
-     -67,   -67,   -67,   -67,   -67,   -67,   -67,    84,   -67,   -67,
-      40,    87,    40,    51,    51,    54,   -67,    88,    88,    30,
-      40,    88,    51,    89,    51,   -67,    40,   -67,    58,    -8,
-      66,   -10,    51,    79,    40,    51,    66,    90,    66,    40,
-     -67,    40,    66,    81,    40,   -67,    40,     5,    51,    40,
-     -67,    20,    23,   -67,    37,   -67,   -67,   -67
+      40,   -65,   -65,   -65,   -65,   -65,     8,    40,    -2,    -1,
+      32,    60,     2,    51,   -65,   -65,   -65,   -65,   -65,   -65,
+     -65,   -65,    40,    40,     3,    27,    24,    30,   -65,   -65,
+     -65,   -65,   -65,   -65,   -65,   -65,   -65,    84,   -65,   -65,
+      40,    62,    40,   -65,    51,    54,   -65,    87,    87,    89,
+      40,    87,    51,    88,    51,   -65,    40,   -65,    57,    -8,
+      64,   -12,    51,    79,    40,    51,    64,    91,    64,    40,
+     -65,    40,    64,    81,    40,   -65,    40,     5,    51,    40,
+     -65,    18,    19,   -65,    21,   -65,   -65,   -65
   };
 
   const unsigned char
@@ -1099,17 +1113,17 @@ namespace FrontEnd {
       14,    12,     0,    40,     0,     0,     0,     0,    23,    24,
       25,    26,    28,    27,    30,    29,    31,     0,     1,    49,
        5,     0,     0,    46,    38,     0,    18,    43,    43,     0,
-       8,    43,     3,     0,    34,    32,     0,    41,     0,     0,
+       8,    43,     3,     0,    32,    33,     0,    41,     0,     0,
        0,     0,     6,     0,    40,    39,     0,     0,     0,     8,
       45,     9,     0,     0,     8,    42,     8,     0,     7,     8,
-      33,     0,     0,    44,     0,    35,    37,    36
+      34,     0,     0,    44,     0,    35,    37,    36
   };
 
   const signed char
   Parser::yypgoto_[] =
   {
-     -67,   -67,   -66,     0,   -67,    91,   -67,   -67,   -67,    36,
-     -36,   -67,   -67,   -67,   -67,   -11
+     -65,   -65,   -64,     0,   -65,    90,   -65,   -65,   -65,    36,
+     -40,   -65,   -65,   -65,   -65,   -11
   };
 
   const signed char
@@ -1122,57 +1136,57 @@ namespace FrontEnd {
   const unsigned char
   Parser::yytable_[] =
   {
-      13,    40,    38,    77,    67,    70,    25,    24,    81,    68,
-      82,    26,    59,    84,    46,    63,    50,    22,    23,    41,
+      13,    40,    38,    70,    67,    77,    25,    24,    59,    68,
+      81,    63,    82,    26,    46,    84,    50,    22,    23,    41,
       83,    39,    43,    44,    28,    29,    30,    31,    32,    33,
-      34,    35,    36,    39,    27,    85,    39,    60,    86,    47,
+      34,    35,    36,    85,    86,    39,    87,    47,    39,    27,
       52,    48,    54,     1,     2,     3,     4,     5,     6,    69,
-       7,    39,    87,     8,    39,    74,    65,    76,     9,    10,
-      11,    79,    49,    39,    44,    55,    56,    41,    39,    66,
-      67,    78,    28,    29,    30,    31,    32,    33,    34,    35,
+       7,    39,    39,     8,    39,    74,    65,    76,     9,    10,
+      11,    79,    49,    39,    44,    55,    56,    41,    66,    67,
+      53,    78,    28,    29,    30,    31,    32,    33,    34,    35,
       36,    28,    29,    30,    31,    32,    33,    34,    35,    36,
-      72,    67,    80,    56,    51,    53,    57,    39,    75,    64,
-      73,     0,    37
+      72,    67,    80,    56,    51,    57,    60,    39,    64,    75,
+      73,    37
   };
 
-  const signed char
+  const unsigned char
   Parser::yycheck_[] =
   {
-       0,    12,     0,    69,    12,    15,     8,     7,    74,    17,
-      76,    14,    48,    79,    11,    51,    27,     9,    10,    16,
-      15,    31,    22,    23,    21,    22,    23,    24,    25,    26,
-      27,    28,    29,    31,     7,    15,    31,     7,    15,    10,
+       0,    12,     0,    15,    12,    69,     8,     7,    48,    17,
+      74,    51,    76,    14,    11,    79,    27,     9,    10,    16,
+      15,    33,    22,    23,    21,    22,    23,    24,    25,    26,
+      27,    28,    29,    15,    15,    33,    15,    10,    33,     7,
       40,    17,    42,     3,     4,     5,     6,     7,     8,    60,
-      10,    31,    15,    13,    31,    66,    56,    68,    18,    19,
-      20,    72,    30,    31,    64,    11,    12,    16,    31,    11,
-      12,    71,    21,    22,    23,    24,    25,    26,    27,    28,
+      10,    33,    33,    13,    33,    66,    56,    68,    18,    19,
+      20,    72,    32,    33,    64,    11,    12,    16,    11,    12,
+       8,    71,    21,    22,    23,    24,    25,    26,    27,    28,
       29,    21,    22,    23,    24,    25,    26,    27,    28,    29,
-      11,    12,    11,    12,    10,     8,     8,    31,     8,    10,
-      64,    -1,    11
+      11,    12,    11,    12,    10,     8,     7,    33,    10,     8,
+      64,    11
   };
 
   const unsigned char
   Parser::yystos_[] =
   {
        0,     3,     4,     5,     6,     7,     8,    10,    13,    18,
-      19,    20,    49,    51,    52,    54,    55,    56,    59,    60,
-      61,    62,     9,    10,    51,     8,    14,     7,    21,    22,
-      23,    24,    25,    26,    27,    28,    29,    53,     0,    31,
-      63,    16,    53,    51,    51,    57,    11,    10,    17,    30,
-      63,    10,    51,     8,    51,    11,    12,     8,    58,    58,
-       7,    50,    51,    58,    10,    51,    11,    12,    17,    63,
-      15,    63,    11,    57,    63,     8,    63,    50,    51,    63,
-      11,    50,    50,    15,    50,    15,    15,    15
+      19,    20,    39,    41,    42,    44,    45,    46,    49,    50,
+      51,    52,     9,    10,    41,     8,    14,     7,    21,    22,
+      23,    24,    25,    26,    27,    28,    29,    43,     0,    33,
+      53,    16,    43,    41,    41,    47,    11,    10,    17,    32,
+      53,    10,    41,     8,    41,    11,    12,     8,    48,    48,
+       7,    40,    41,    48,    10,    41,    11,    12,    17,    53,
+      15,    53,    11,    47,    53,     8,    53,    40,    41,    53,
+      11,    40,    40,    15,    40,    15,    15,    15
   };
 
   const unsigned char
   Parser::yyr1_[] =
   {
-       0,    48,    49,    49,    49,    49,    50,    50,    50,    50,
-      51,    51,    51,    51,    51,    51,    51,    51,    51,    52,
-      52,    52,    52,    53,    53,    53,    53,    53,    53,    53,
-      53,    53,    54,    54,    54,    55,    55,    56,    57,    57,
-      57,    58,    58,    58,    59,    59,    60,    61,    62,    63
+       0,    38,    39,    39,    39,    39,    40,    40,    40,    40,
+      41,    41,    41,    41,    41,    41,    41,    41,    41,    42,
+      42,    42,    42,    43,    43,    43,    43,    43,    43,    43,
+      43,    43,    44,    44,    44,    45,    45,    46,    47,    47,
+      47,    48,    48,    48,    49,    49,    50,    51,    52,    53
   };
 
   const unsigned char
@@ -1181,7 +1195,7 @@ namespace FrontEnd {
        0,     2,     1,     3,     0,     2,     1,     3,     0,     2,
        1,     1,     1,     1,     1,     1,     1,     1,     3,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     4,     6,     3,     8,     8,     8,     1,     3,
+       1,     1,     3,     4,     6,     8,     8,     8,     1,     3,
        0,     1,     3,     0,     7,     5,     3,     1,     1,     1
   };
 
@@ -1196,23 +1210,21 @@ namespace FrontEnd {
   "SELF", "CONSTANT", "IDENTIFIER", "ASSIGN", "OPEN_PAREN", "CLOSE_PAREN",
   "COMMA", "FUNC", "DO", "END", "DOT", "PIPE", "LAMBDA", "CLASS",
   "OPERATOR", "PLUS", "MINUS", "MULT", "DIV", "GT", "LT", "GE", "LE", "EQ",
-  "COLON", "NEWLINE", "\".\"", "\"!\"", "\"*\"", "\"/\"", "\"+\"", "\"-\"",
-  "\">\"", "\">=\"", "\"<\"", "\"<=\"", "\"==\"", "\"!=\"", "\"&&\"",
-  "\"||\"", "\"=\"", "\",\"", "$accept", "Expressions", "BodyExpressions",
-  "Expression", "Literal", "Operators", "Call", "Function", "Lambda",
-  "Arguments", "Parameters", "Class", "SetLocal", "GetLocal",
-  "GetConstant", "Terminator", YY_NULLPTR
+  "AND", "OR", "COLON", "NEWLINE", "\"!\"", "\"!=\"", "\"&&\"", "\"||\"",
+  "$accept", "Expressions", "BodyExpressions", "Expression", "Literal",
+  "Operators", "Call", "Function", "Lambda", "Arguments", "Parameters",
+  "Class", "SetLocal", "GetLocal", "GetConstant", "Terminator", YY_NULLPTR
   };
 
 
   const unsigned short int
   Parser::yyrline_[] =
   {
-       0,   142,   142,   148,   152,   155,   162,   168,   172,   173,
-     179,   180,   181,   182,   183,   184,   185,   186,   187,   191,
-     194,   197,   200,   205,   205,   205,   205,   205,   205,   205,
-     205,   205,   208,   209,   210,   218,   224,   233,   241,   246,
-     250,   257,   262,   263,   270,   275,   283,   287,   291,   295
+       0,   144,   144,   150,   154,   157,   164,   170,   174,   175,
+     181,   182,   183,   184,   185,   186,   187,   188,   189,   193,
+     196,   199,   202,   207,   207,   207,   207,   207,   207,   207,
+     207,   207,   210,   215,   216,   220,   226,   235,   243,   248,
+     252,   259,   264,   265,   272,   277,   285,   289,   293,   297
   };
 
   // Print the state stack on the debug stream.
@@ -1282,10 +1294,9 @@ namespace FrontEnd {
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47
+      35,    36,    37
     };
-    const unsigned int user_token_number_max_ = 302;
+    const unsigned int user_token_number_max_ = 292;
     const token_number_type undef_token_ = 2;
 
     if (static_cast<int>(t) <= yyeof_)
@@ -1298,8 +1309,8 @@ namespace FrontEnd {
 
 #line 4 "src/grammar/parser.yy" // lalr1.cc:1167
 } // FrontEnd
-#line 1302 "src/frontend/parser.tab.cpp" // lalr1.cc:1167
-#line 297 "src/grammar/parser.yy" // lalr1.cc:1168
+#line 1313 "src/frontend/parser.tab.cpp" // lalr1.cc:1167
+#line 299 "src/grammar/parser.yy" // lalr1.cc:1168
 
 
 

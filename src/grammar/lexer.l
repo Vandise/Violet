@@ -76,7 +76,18 @@ float_num ({digit}+\.{digit}+)
 "."                 { return( token::DOT ); }
 ":"                 { return( token::COLON ); }
 
-
+"&&"         {
+                yylval->sval = STOKEN(yytext); 
+                return( token::AND ); 
+             }
+"||"         {
+                yylval->sval = STOKEN(yytext); 
+                return( token::OR ); 
+             }
+"=="         {
+                yylval->sval = STOKEN(yytext); 
+                return( token::EQ ); 
+             }  
 "<="         {
               yylval->sval = STOKEN(yytext);
               return( token::LE );
@@ -84,8 +95,7 @@ float_num ({digit}+\.{digit}+)
 ">="        {
               yylval->sval = STOKEN(yytext);
               return( token::GE );
-            }
-"=="        { return( token::EQ ); }            
+            }          
 "="         { return( token::ASSIGN ); }
 "<"         {
               yylval->sval = STOKEN(yytext);

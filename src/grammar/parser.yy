@@ -94,6 +94,8 @@
 %token   <sval>   GE
 %token   <sval>   LE
 %token   <sval>   EQ
+%token   <sval>   AND
+%token   <sval>   OR
 
 %token            COLON
 %token            NEWLINE 
@@ -103,16 +105,16 @@
 /* destructor rule for <sval> objects */
 %destructor { if ($$)  { delete ($$); ($$) = nullptr; } } <sval>
 
-%left  "."
+%left  DOT
 %right "!"
-%left  "*" "/"
-%left  "+" "-"
-%left  ">" ">=" "<" "<="
-%left  "==" "!="
+%left  MULT DIV
+%left  PLUS MINUS
+%left  GT GE LT LE
+%left  EQ "!="
 %left  "&&"
 %left  "||"
-%right "="
-%left  ","
+%right ASSIGN
+%left  COMMA
 
 /* token types */
 %union {
@@ -205,13 +207,13 @@ Literal:
 Operators: PLUS | MINUS | MULT | DIV | LT | GT | LE | GE | EQ { $$ = $1; }
 
 Call:
-    IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN                   { $$ = new Nodes::CallNode(*$1, NULL, *$3); }
-  | Expression DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN    { $$ = new Nodes::CallNode(*$3, $1, *$5);   }
-  | Expression Operators Expression                               {
+    Expression Operators Expression                               {
                                                                     std::vector<Nodes::AbstractNode*> arguments;
                                                                     arguments.push_back($3);
                                                                     $$ = new Nodes::CallNode(*$2, $1, arguments);
-                                                                  }
+                                                                  } 
+  | IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN                   { $$ = new Nodes::CallNode(*$1, NULL, *$3); }
+  | Expression DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN    { $$ = new Nodes::CallNode(*$3, $1, *$5);   }
   ;
 
 Function:
