@@ -83,6 +83,17 @@
 %token            PIPE
 %token            LAMBDA
 %token            CLASS
+%token            OPERATOR
+
+%token   <sval>   PLUS
+%token   <sval>   MINUS
+%token   <sval>   MULT
+%token   <sval>   DIV
+%token   <sval>   GT
+%token   <sval>   LT
+%token   <sval>   GE
+%token   <sval>   LE
+%token   <sval>   EQ
 
 %token            COLON
 %token            NEWLINE 
@@ -123,6 +134,7 @@
 %type <nodes>        BodyExpressions
 %type <arguments>    Arguments
 %type <parameters>   Parameters
+%type <sval>         Operators
 
 %%
 
@@ -190,15 +202,28 @@ Literal:
                             }
   ;
 
+Operators: PLUS | MINUS | MULT | DIV | LT | GT | LE | GE | EQ { $$ = $1; }
+
 Call:
     IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN                   { $$ = new Nodes::CallNode(*$1, NULL, *$3); }
   | Expression DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN    { $$ = new Nodes::CallNode(*$3, $1, *$5);   }
+  | Expression Operators Expression                               {
+                                                                    std::vector<Nodes::AbstractNode*> arguments;
+                                                                    arguments.push_back($3);
+                                                                    $$ = new Nodes::CallNode(*$2, $1, arguments);
+                                                                  }
   ;
 
 Function:
-  FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator
-    BodyExpressions
-  END                             {
+    FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator
+      BodyExpressions
+    END                           {
+                                    $$ = new Nodes::MethodDefinitionNode(*$2, *$4, $7);
+                                  }
+
+  | OPERATOR Operators OPEN_PAREN Parameters CLOSE_PAREN Terminator
+      BodyExpressions
+    END                           {
                                     $$ = new Nodes::MethodDefinitionNode(*$2, *$4, $7);
                                   }
   ;

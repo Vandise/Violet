@@ -45,6 +45,7 @@ float_num ({digit}+\.{digit}+)
 "func"              { return(token::FUNC); }
 "do"                { return(token::DO); }
 "end"               { return(token::END); }
+"operator"          { return(token::OPERATOR); }
 
 \"[^"]*\"           {
                       yylval->sval = STOKEN(yytext);
@@ -69,12 +70,50 @@ float_num ({digit}+\.{digit}+)
                     }
 "|"                 { return(token::PIPE); }
 "->"                { return(token::LAMBDA); }
-"="                 { return( token::ASSIGN ); }
 "("                 { return( token::OPEN_PAREN );  }
 ")"                 { return( token::CLOSE_PAREN ); }  
 ","                 { return( token::COMMA ); }
 "."                 { return( token::DOT ); }
 ":"                 { return( token::COLON ); }
+
+
+"<="         {
+              yylval->sval = STOKEN(yytext);
+              return( token::LE );
+            }
+">="        {
+              yylval->sval = STOKEN(yytext);
+              return( token::GE );
+            }
+"=="        { return( token::EQ ); }            
+"="         { return( token::ASSIGN ); }
+"<"         {
+              yylval->sval = STOKEN(yytext);
+              return( token::LT );
+            }
+">"         {
+              yylval->sval = STOKEN(yytext);
+              return( token::GT );
+            }
+"+"         {
+              yylval->sval = STOKEN(yytext);
+              return( token::PLUS );
+            }
+
+"-"         {
+              yylval->sval = STOKEN(yytext);
+              return( token::MINUS );
+            }
+
+"*"         {
+              yylval->sval = STOKEN(yytext);
+              return( token::MULT );
+            }
+
+"/"         {
+              yylval->sval = STOKEN(yytext);
+              return( token::DIV );
+            }
 
 .                   {  }
 
