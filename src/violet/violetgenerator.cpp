@@ -291,6 +291,37 @@ Violet::Generator::pushLambda(std::vector<std::string> parameters, Nodes::Abstra
 
 }
 
+/*
+  Compiles if instructions onto the stack
+    object JUMP_UNLESS instruction count
+*/
+void
+Violet::Generator::pushIf(Nodes::AbstractNode *expressions, Nodes::AbstractNode *body, Context *context)
+{
+  std::vector<int>  operands;
+  Violet::Generator generator;
+  generator.literals = this->literals;
+  generator.scopes   = this->scopes;
+
+  // push object onto the stack from the expression
+  expressions->compile(context, this);
+
+  // get instruction count from if body
+  body->compile(context, &generator);
+  operands.push_back(generator.instructions.size());
+
+  // push the instructions
+  for(int i = 0; i < generator.instructions.size(); i++)
+  {
+    operands.push_back(generator.instructions[i]);
+  }
+
+  emit(JUMP_UNLESS, operands);
+
+  this->literals = generator.literals;
+  this->scopes   = generator.scopes;
+}
+
 /* ---------------- EMIT INSTRUCTION ---------------- */
 
 /*

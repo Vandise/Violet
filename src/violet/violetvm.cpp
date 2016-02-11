@@ -71,6 +71,15 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
         STACK_PUSH(scopes[*ip]->getCurrentClass()->getConstant(boost::get<std::string>(literals[obj_name])));
         break;
       }
+      case JUMP_UNLESS:
+      {
+        Runtime::Object *bool_result = STACK_POP();
+        ip++;
+        int instruction_count = *ip;
+        std::cout << "Convert bool_result to boolean (implement in object)" << std::endl;
+        std::cout << "If statement instruction count: " << instruction_count << std::endl;
+        break;
+      }
       case PUSH_LAMBDA:
       {
         ip++;

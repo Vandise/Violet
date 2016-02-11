@@ -17,6 +17,7 @@
 #include "intermediate/nodes/headers/constantnode.hpp"
 #include "intermediate/nodes/headers/lambdanode.hpp"
 #include "intermediate/nodes/headers/classdefinitionnode.hpp"
+#include "intermediate/nodes/headers/ifnode.hpp"
 #include "intermediate/headers/driver.hpp"
 #include "intermediate/headers/nodestack.hpp"
 #include "runtime/headers/runtime.hpp"

@@ -44,6 +44,7 @@ namespace Violet
       void callMethod(int argc);
       void pushConstant(std::string name, Context *context);
       void pushLambda(std::vector<std::string> parameters, Nodes::AbstractNode *body, Context *context);
+      void pushIf(Nodes::AbstractNode *expressions, Nodes::AbstractNode *body, Context *context);
       void emit(int opcode, std::vector<int> operands);
       void emitByte(int operand);
       void assemble();

@@ -32,6 +32,9 @@ enum
   /* 19 */    LOCAL_RESV2,
   /* 20 */    LOCAL_RESV3,
 
+// SHIFTING
+  /* 21 */    JUMP_UNLESS,      // instruction count           [object]                []
+
   /* FF */    RETURN            //                             []                      []
 };
 

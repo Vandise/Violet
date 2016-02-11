@@ -14,6 +14,5 @@ Nodes::IfNode::IfNode(Nodes::AbstractNode *expressions, AbstractNode *body)
 void
 Nodes::IfNode::compile(Context *context, Violet::Generator *generator)
 {
-  std::cout << "Compiling if Node" << std::endl;
-  //generator->pushLambda(this->parameters, this->body, context);
+  generator->pushIf(this->expressions, this->body, context);
 }
