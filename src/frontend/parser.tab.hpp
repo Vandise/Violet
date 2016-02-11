@@ -155,7 +155,7 @@ namespace FrontEnd {
     /// Symbol semantic values.
     union semantic_type
     {
-    #line 120 "src/grammar/parser.yy" // lalr1.cc:392
+    #line 122 "src/grammar/parser.yy" // lalr1.cc:392
 
    std::string                        *sval;
    int                                 ival;
@@ -204,19 +204,20 @@ namespace FrontEnd {
         LAMBDA = 273,
         CLASS = 274,
         OPERATOR = 275,
-        PLUS = 276,
-        MINUS = 277,
-        MULT = 278,
-        DIV = 279,
-        GT = 280,
-        LT = 281,
-        GE = 282,
-        LE = 283,
-        EQ = 284,
-        AND = 285,
-        OR = 286,
-        COLON = 287,
-        NEWLINE = 288
+        IF = 276,
+        PLUS = 277,
+        MINUS = 278,
+        MULT = 279,
+        DIV = 280,
+        GT = 281,
+        LT = 282,
+        GE = 283,
+        LE = 284,
+        EQ = 285,
+        AND = 286,
+        OR = 287,
+        COLON = 288,
+        NEWLINE = 289
       };
     };
 
@@ -398,7 +399,7 @@ namespace FrontEnd {
   // number is the opposite.  If YYTABLE_NINF, syntax error.
   static const unsigned char yytable_[];
 
-  static const unsigned char yycheck_[];
+  static const signed char yycheck_[];
 
   // YYSTOS[STATE-NUM] -- The (internal number of the) accessing
   // symbol of state STATE-NUM.
@@ -515,12 +516,12 @@ namespace FrontEnd {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 101,     ///< Last index in yytable_.
-      yynnts_ = 16,  ///< Number of nonterminal symbols.
-      yyfinal_ = 38, ///< Termination state number.
+      yylast_ = 124,     ///< Last index in yytable_.
+      yynnts_ = 17,  ///< Number of nonterminal symbols.
+      yyfinal_ = 42, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 38  ///< Number of tokens.
+      yyntokens_ = 39  ///< Number of tokens.
     };
 
 
@@ -532,7 +533,7 @@ namespace FrontEnd {
 
 #line 4 "src/grammar/parser.yy" // lalr1.cc:392
 } // FrontEnd
-#line 536 "src/frontend/parser.tab.hpp" // lalr1.cc:392
+#line 537 "src/frontend/parser.tab.hpp" // lalr1.cc:392
 
 
 

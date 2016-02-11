@@ -44,6 +44,7 @@ float_num ({digit}+\.{digit}+)
 "self"              { return(token::SELF); }
 "func"              { return(token::FUNC); }
 "do"                { return(token::DO); }
+"if"                { return(token::IF); }
 "end"               { return(token::END); }
 "operator"          { return(token::OPERATOR); }
 

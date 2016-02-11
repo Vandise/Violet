@@ -1,0 +1,49 @@
+class Person
+
+  operator +(argument)
+    print("Calling +",argument)
+  end
+
+  operator -(argument)
+    print("Calling -",argument)
+  end
+
+  operator *(argument)
+    print("Calling *",argument)
+  end
+
+  operator /(argument)
+    print("Calling /",argument)
+  end
+
+  operator >(argument)
+    print("Calling >",argument)
+  end
+
+  operator <(argument)
+    print("Calling <",argument)
+  end
+
+  operator >=(argument)
+    print("Calling >=",argument)
+  end
+
+  operator <=(argument)
+    print("Calling <=",argument)
+  end
+
+  operator ==(argument)
+    print("Calling ==",argument)
+  end
+
+end
+
+Person + "string"
+Person - "string"
+Person * "string"
+Person / "string"
+Person > "string"
+Person < "string"
+Person >= "string"
+Person <= "string"
+Person == "string"

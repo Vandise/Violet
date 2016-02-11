@@ -58,6 +58,7 @@
    #include "intermediate/nodes/headers/constantnode.hpp"
    #include "intermediate/nodes/headers/lambdanode.hpp"
    #include "intermediate/nodes/headers/classdefinitionnode.hpp"
+   #include "intermediate/nodes/headers/ifnode.hpp"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -84,6 +85,7 @@
 %token            LAMBDA
 %token            CLASS
 %token            OPERATOR
+%token            IF
 
 %token   <sval>   PLUS
 %token   <sval>   MINUS
@@ -131,7 +133,7 @@
 }
 
 
-%type <abs_node>     Expression Literal Call Class SetLocal GetLocal Function GetConstant Lambda
+%type <abs_node>     Expression Literal Call Class SetLocal GetLocal Function GetConstant Lambda If
 %type <driver>       Expressions
 %type <nodes>        BodyExpressions
 %type <arguments>    Arguments
@@ -186,6 +188,7 @@ Expression:
   | Function
   | Lambda
   | Class
+  | If
   | OPEN_PAREN Expression CLOSE_PAREN     { $$ = $2; }
   ;
 
@@ -281,6 +284,12 @@ Class:
                                   }
   ;
 
+If:
+    IF BodyExpressions Terminator
+      BodyExpressions
+    END                           { $$ = new Nodes::IfNode($2, $4); }
+  ;
+  
 SetLocal:
     IDENTIFIER ASSIGN Expression     { $$ = new Nodes::LocalAssignNode(*$1, $3); }
   ;
