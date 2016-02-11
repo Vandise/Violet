@@ -303,9 +303,6 @@ Violet::Generator::pushIf(Nodes::AbstractNode *expressions, Nodes::AbstractNode 
   generator.literals = this->literals;
   generator.scopes   = this->scopes;
 
-  // push object onto the stack from the expression
-  expressions->compile(context, this);
-
   // get instruction count from if body
   body->compile(context, &generator);
   operands.push_back(generator.instructions.size());
