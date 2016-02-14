@@ -16,6 +16,7 @@ PUSH_OBJECT   | literal_name  | scope_index   |
 PUSH_SELF     | scope_index   |
 GET_LOCAL     | local_index   | scope_index   |
 SET_LOCAL     | local_index   | scope_index   |
+JUMP_UNLESS   | inst_count    |
 RETURN        |
 
 N/I = Not Yet Implemented and subject to change or be removed
@@ -35,6 +36,7 @@ PUSH_OBJECT   | []                                  | [object]
 PUSH_SELF     | []                                  | [self]
 GET_LOCAL     | []                                  | [object]
 SET_LOCAL     | []                                  | []
+JUMP_UNLESS   | [bool_obj]                          | []
 RETURN        | []                                  | []
 
 ## Azalea Language
@@ -130,4 +132,18 @@ end
 
 User == 10
 => Called == on User Object, passed argument: 10
+```
+### Conditionals and control structures
+
+```
+// if statement
+IF conditions
+  expressions
+end
+
+if 10 == 5
+  print("They are equal")
+end
+print("Completed)
+=> "Completed"
 ```
