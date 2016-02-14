@@ -135,6 +135,7 @@ User == 10
 ```
 ### Conditionals and control structures
 
+#### IF
 ```
 // if statement
 IF conditions
@@ -146,4 +147,22 @@ if 10 == 5
 end
 print("Completed)
 => "Completed"
+```
+
+#### RETURN (ret)
+Pushes a value to the stack and exits the current scope.
+```
+y = ((-> do |n|
+  if n == 2
+    ret "iterated to 2"
+  end
+  print("Adding 1")
+  self.call(n+1)
+end).call(0))
+
+print("The value of y is", y)
+
+=> "Adding 1"
+=> "Adding 1"
+=> "The value of y is" "iterated to 2" 
 ```
