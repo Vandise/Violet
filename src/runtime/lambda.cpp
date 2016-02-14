@@ -31,7 +31,11 @@ Runtime::LambdaObject::compile(std::vector<Runtime::Object*> arguments)
     lambda_vm.STACK_PUSH(arguments[i]);
   }
 
+  Runtime::Object *currentSelf = this->vm->scopes[this->context]->getCurrentSelf();
+  this->vm->scopes[this->context]->setCurrentSelf(this);
   lambda_vm.run(this->instructions, this->vm->literals, this->vm->scopes);
+  this->vm->scopes[this->context]->setCurrentSelf(currentSelf);
+  currentSelf = NULL;
 
   return lambda_vm.STACK_POP();
 

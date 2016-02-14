@@ -43,6 +43,12 @@ Context::getCurrentSelf()
   return this->currentSelf;
 }
 
+void
+Context::setCurrentSelf(Runtime::Object *currentSelf)
+{
+  this->currentSelf = currentSelf;
+}
+
 Runtime::StdClass*
 Context::getCurrentClass()
 {

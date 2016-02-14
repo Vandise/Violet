@@ -47,6 +47,7 @@ float_num ({digit}+\.{digit}+)
 "if"                { return(token::IF); }
 "end"               { return(token::END); }
 "operator"          { return(token::OPERATOR); }
+"ret"               { return(token::RETURN); }
 
 \"[^"]*\"           {
                       yylval->sval = STOKEN(yytext);

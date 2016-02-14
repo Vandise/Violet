@@ -1,0 +1,11 @@
+y = ((-> do |n|
+  if n == 2
+    ret "iterated to 2"
+  end
+  print("Adding 1")
+  self.call(n+1)
+end).call(0))
+
+print(y)
+
+

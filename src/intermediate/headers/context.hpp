@@ -40,6 +40,7 @@ class Context
     Context*           makeChildContext();
     Context*           getParent();
     void               compile(const char *filename);
+    void               setCurrentSelf(Runtime::Object *currentSelf);
     Runtime::Object*   eval(std::string code);
 };
 

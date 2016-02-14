@@ -319,6 +319,12 @@ Violet::Generator::pushIf(Nodes::AbstractNode *expressions, Nodes::AbstractNode 
   this->scopes   = generator.scopes;
 }
 
+void
+Violet::Generator::emitReturn()
+{
+  emitByte(RETURN);
+}
+
 /* ---------------- EMIT INSTRUCTION ---------------- */
 
 /*
