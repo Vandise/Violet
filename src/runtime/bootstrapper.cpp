@@ -35,5 +35,13 @@ Bootstrapper::run()
 
   objectClass->addMethod(std::string("print"),&object_print_method);
 
+  intClass->addMethod(std::string("+"),&int_add_method);
+  intClass->addMethod(std::string("-"),&int_subtract_method);
+  intClass->addMethod(std::string("*"),&int_multiply_method);
+  intClass->addMethod(std::string("/"),&int_divide_method);
+  intClass->addMethod(std::string("<"),&int_less_than_method);
+  intClass->addMethod(std::string(">"),&int_greater_than_method);
+  intClass->addMethod(std::string("=="),&int_equal_method);
+
   return new Context(main);
 }

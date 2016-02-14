@@ -76,8 +76,7 @@ VioletVM::run(std::vector<int> instructions, std::vector< boost::variant<int,flo
         Runtime::Object *bool_result = STACK_POP();
         ip++;
         int instruction_count = *ip;
-        std::cout << "Convert bool_result to boolean (implement in object)" << std::endl;
-        std::cout << "If statement instruction count: " << instruction_count << std::endl;
+        if(bool_result->getStdClass()->getName() == std::string("FalseClass")) ip += instruction_count;
         break;
       }
       case PUSH_LAMBDA:

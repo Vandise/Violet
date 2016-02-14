@@ -26,21 +26,16 @@ struct OperatorMethod : Method
   Runtime::Object* call(Runtime::Object *receiver, std::vector<Runtime::Object*> arguments)
   {
     Runtime::ValueObject* argument_object = (Runtime::ValueObject*)arguments[0];
-    std::string class_name = argument_object->getStdClass()->getName();
-    
-    if(class_name != std::string("Integer"))
-    {
-      throw std::invalid_argument("No valid conversion from class "+class_name+" class Integer\n");
-    }
-    
+
     T self     = boost::get<T>(((Runtime::ValueObject*)receiver)->getValue());
     T argument = boost::get<T>((argument_object)->getValue());
-    return perform(self, argument);
+    return perform(self, argument, receiver->getStdClass()->getName(), argument_object->getStdClass()->getName());
   }
 
-  virtual Runtime::Object* perform(T receiver, T argument);
+  virtual Runtime::Object* perform(T receiver, T argument, std::string receiver_class, std::string argument_class);
 };
 
+/*
 template<typename S, typename I>
 struct StringOperatorMethod : Method
 {
@@ -53,5 +48,6 @@ struct StringOperatorMethod : Method
 
   virtual Runtime::Object* perform(S receiver, I argument);
 };
+*/
 
 #endif

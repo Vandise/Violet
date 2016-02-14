@@ -8,7 +8,9 @@ Terminals unused in grammar
    "||"
 
 
+State 56 conflicts: 1 reduce/reduce
 State 59 conflicts: 10 shift/reduce
+State 69 conflicts: 1 reduce/reduce
 
 
 Grammar
@@ -71,7 +73,7 @@ Grammar
    44 Class: CLASS CONSTANT COLON CONSTANT Terminator BodyExpressions END
    45      | CLASS CONSTANT Terminator BodyExpressions END
 
-   46 If: IF OPEN_PAREN BodyExpressions CLOSE_PAREN Terminator BodyExpressions END
+   46 If: IF BodyExpressions Terminator BodyExpressions END
 
    47 SetLocal: IDENTIFIER ASSIGN Expression
 
@@ -93,8 +95,8 @@ SELF (261) 22
 CONSTANT (262) 44 45 49
 IDENTIFIER (263) 33 34 35 41 42 47 48
 ASSIGN (264) 47
-OPEN_PAREN (265) 18 33 34 35 36 46
-CLOSE_PAREN (266) 18 33 34 35 36 46
+OPEN_PAREN (265) 18 33 34 35 36
+CLOSE_PAREN (266) 18 33 34 35 36
 COMMA (267) 39 42
 FUNC (268) 35
 DO (269) 37
@@ -312,9 +314,34 @@ State 11
 
 State 12
 
-   46 If: IF . OPEN_PAREN BodyExpressions CLOSE_PAREN Terminator BodyExpressions END
+   46 If: IF . BodyExpressions Terminator BodyExpressions END
 
-    OPEN_PAREN  shift, and go to state 40
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    OPEN_PAREN  shift, and go to state 7
+    FUNC        shift, and go to state 8
+    LAMBDA      shift, and go to state 9
+    CLASS       shift, and go to state 10
+    OPERATOR    shift, and go to state 11
+    IF          shift, and go to state 12
+
+    $default  reduce using rule 7 (BodyExpressions)
+
+    BodyExpressions  go to state 40
+    Expression       go to state 41
+    Literal          go to state 15
+    Call             go to state 16
+    Function         go to state 17
+    Lambda           go to state 18
+    Class            go to state 19
+    If               go to state 20
+    SetLocal         go to state 21
+    GetLocal         go to state 22
+    GetConstant      go to state 23
 
 
 State 13
@@ -323,10 +350,10 @@ State 13
     2 Expressions: Expressions . Terminator Expression
     4            | Expressions . Terminator
 
-    "end of file"  shift, and go to state 41
-    NEWLINE        shift, and go to state 42
+    "end of file"  shift, and go to state 42
+    NEWLINE        shift, and go to state 43
 
-    Terminator  go to state 43
+    Terminator  go to state 44
 
 
 State 14
@@ -335,7 +362,7 @@ State 14
    32 Call: Expression . Operators Expression
    34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-    DOT    shift, and go to state 44
+    DOT    shift, and go to state 45
     PLUS   shift, and go to state 30
     MINUS  shift, and go to state 31
     MULT   shift, and go to state 32
@@ -348,7 +375,7 @@ State 14
 
     $default  reduce using rule 1 (Expressions)
 
-    Operators  go to state 45
+    Operators  go to state 46
 
 
 State 15
@@ -431,7 +458,7 @@ State 24
     OPERATOR    shift, and go to state 11
     IF          shift, and go to state 12
 
-    Expression   go to state 46
+    Expression   go to state 47
     Literal      go to state 15
     Call         go to state 16
     Function     go to state 17
@@ -462,12 +489,12 @@ State 25
 
     $default  reduce using rule 40 (Arguments)
 
-    Expression   go to state 47
+    Expression   go to state 48
     Literal      go to state 15
     Call         go to state 16
     Function     go to state 17
     Lambda       go to state 18
-    Arguments    go to state 48
+    Arguments    go to state 49
     Class        go to state 19
     If           go to state 20
     SetLocal     go to state 21
@@ -481,8 +508,8 @@ State 26
    32 Call: Expression . Operators Expression
    34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-    CLOSE_PAREN  shift, and go to state 49
-    DOT          shift, and go to state 44
+    CLOSE_PAREN  shift, and go to state 50
+    DOT          shift, and go to state 45
     PLUS         shift, and go to state 30
     MINUS        shift, and go to state 31
     MULT         shift, and go to state 32
@@ -493,21 +520,21 @@ State 26
     LE           shift, and go to state 37
     EQ           shift, and go to state 38
 
-    Operators  go to state 45
+    Operators  go to state 46
 
 
 State 27
 
    35 Function: FUNC IDENTIFIER . OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END
 
-    OPEN_PAREN  shift, and go to state 50
+    OPEN_PAREN  shift, and go to state 51
 
 
 State 28
 
    37 Lambda: LAMBDA DO . PIPE Parameters PIPE Terminator BodyExpressions END
 
-    PIPE  shift, and go to state 51
+    PIPE  shift, and go to state 52
 
 
 State 29
@@ -515,10 +542,10 @@ State 29
    44 Class: CLASS CONSTANT . COLON CONSTANT Terminator BodyExpressions END
    45      | CLASS CONSTANT . Terminator BodyExpressions END
 
-    COLON    shift, and go to state 52
-    NEWLINE  shift, and go to state 42
+    COLON    shift, and go to state 53
+    NEWLINE  shift, and go to state 43
 
-    Terminator  go to state 53
+    Terminator  go to state 54
 
 
 State 30
@@ -588,56 +615,57 @@ State 39
 
    36 Function: OPERATOR Operators . OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END
 
-    OPEN_PAREN  shift, and go to state 54
+    OPEN_PAREN  shift, and go to state 55
 
 
 State 40
 
-   46 If: IF OPEN_PAREN . BodyExpressions CLOSE_PAREN Terminator BodyExpressions END
+    6 BodyExpressions: BodyExpressions . Terminator Expression
+    8                | BodyExpressions . Terminator
+   46 If: IF BodyExpressions . Terminator BodyExpressions END
 
-    INTEGER     shift, and go to state 1
-    FLOAT       shift, and go to state 2
-    STRING      shift, and go to state 3
-    SELF        shift, and go to state 4
-    CONSTANT    shift, and go to state 5
-    IDENTIFIER  shift, and go to state 6
-    OPEN_PAREN  shift, and go to state 7
-    FUNC        shift, and go to state 8
-    LAMBDA      shift, and go to state 9
-    CLASS       shift, and go to state 10
-    OPERATOR    shift, and go to state 11
-    IF          shift, and go to state 12
+    NEWLINE  shift, and go to state 43
 
-    $default  reduce using rule 7 (BodyExpressions)
-
-    BodyExpressions  go to state 55
-    Expression       go to state 56
-    Literal          go to state 15
-    Call             go to state 16
-    Function         go to state 17
-    Lambda           go to state 18
-    Class            go to state 19
-    If               go to state 20
-    SetLocal         go to state 21
-    GetLocal         go to state 22
-    GetConstant      go to state 23
+    Terminator  go to state 56
 
 
 State 41
+
+    5 BodyExpressions: Expression .
+   32 Call: Expression . Operators Expression
+   34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+
+    DOT    shift, and go to state 45
+    PLUS   shift, and go to state 30
+    MINUS  shift, and go to state 31
+    MULT   shift, and go to state 32
+    DIV    shift, and go to state 33
+    GT     shift, and go to state 34
+    LT     shift, and go to state 35
+    GE     shift, and go to state 36
+    LE     shift, and go to state 37
+    EQ     shift, and go to state 38
+
+    $default  reduce using rule 5 (BodyExpressions)
+
+    Operators  go to state 46
+
+
+State 42
 
     0 $accept: Expressions "end of file" .
 
     $default  accept
 
 
-State 42
+State 43
 
    50 Terminator: NEWLINE .
 
     $default  reduce using rule 50 (Terminator)
 
 
-State 43
+State 44
 
     2 Expressions: Expressions Terminator . Expression
     4            | Expressions Terminator .
@@ -669,14 +697,14 @@ State 43
     GetConstant  go to state 23
 
 
-State 44
+State 45
 
    34 Call: Expression DOT . IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
     IDENTIFIER  shift, and go to state 58
 
 
-State 45
+State 46
 
    32 Call: Expression Operators . Expression
 
@@ -705,7 +733,7 @@ State 45
     GetConstant  go to state 23
 
 
-State 46
+State 47
 
    32 Call: Expression . Operators Expression
    34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
@@ -713,16 +741,16 @@ State 46
 
     $default  reduce using rule 47 (SetLocal)
 
-    Operators  go to state 45
+    Operators  go to state 46
 
 
-State 47
+State 48
 
    32 Call: Expression . Operators Expression
    34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
    38 Arguments: Expression .
 
-    DOT    shift, and go to state 44
+    DOT    shift, and go to state 45
     PLUS   shift, and go to state 30
     MINUS  shift, and go to state 31
     MULT   shift, and go to state 32
@@ -735,10 +763,10 @@ State 47
 
     $default  reduce using rule 38 (Arguments)
 
-    Operators  go to state 45
+    Operators  go to state 46
 
 
-State 48
+State 49
 
    33 Call: IDENTIFIER OPEN_PAREN Arguments . CLOSE_PAREN
    39 Arguments: Arguments . COMMA Expression
@@ -747,14 +775,14 @@ State 48
     COMMA        shift, and go to state 61
 
 
-State 49
+State 50
 
    18 Expression: OPEN_PAREN Expression CLOSE_PAREN .
 
     $default  reduce using rule 18 (Expression)
 
 
-State 50
+State 51
 
    35 Function: FUNC IDENTIFIER OPEN_PAREN . Parameters CLOSE_PAREN Terminator BodyExpressions END
 
@@ -765,7 +793,7 @@ State 50
     Parameters  go to state 63
 
 
-State 51
+State 52
 
    37 Lambda: LAMBDA DO PIPE . Parameters PIPE Terminator BodyExpressions END
 
@@ -776,14 +804,14 @@ State 51
     Parameters  go to state 64
 
 
-State 52
+State 53
 
    44 Class: CLASS CONSTANT COLON . CONSTANT Terminator BodyExpressions END
 
     CONSTANT  shift, and go to state 65
 
 
-State 53
+State 54
 
    45 Class: CLASS CONSTANT Terminator . BodyExpressions END
 
@@ -803,7 +831,7 @@ State 53
     $default  reduce using rule 7 (BodyExpressions)
 
     BodyExpressions  go to state 66
-    Expression       go to state 56
+    Expression       go to state 41
     Literal          go to state 15
     Call             go to state 16
     Function         go to state 17
@@ -815,7 +843,7 @@ State 53
     GetConstant      go to state 23
 
 
-State 54
+State 55
 
    36 Function: OPERATOR Operators OPEN_PAREN . Parameters CLOSE_PAREN Terminator BodyExpressions END
 
@@ -826,38 +854,40 @@ State 54
     Parameters  go to state 67
 
 
-State 55
-
-    6 BodyExpressions: BodyExpressions . Terminator Expression
-    8                | BodyExpressions . Terminator
-   46 If: IF OPEN_PAREN BodyExpressions . CLOSE_PAREN Terminator BodyExpressions END
-
-    CLOSE_PAREN  shift, and go to state 68
-    NEWLINE      shift, and go to state 42
-
-    Terminator  go to state 69
-
-
 State 56
 
-    5 BodyExpressions: Expression .
-   32 Call: Expression . Operators Expression
-   34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+    6 BodyExpressions: BodyExpressions Terminator . Expression
+    8                | BodyExpressions Terminator .
+   46 If: IF BodyExpressions Terminator . BodyExpressions END
 
-    DOT    shift, and go to state 44
-    PLUS   shift, and go to state 30
-    MINUS  shift, and go to state 31
-    MULT   shift, and go to state 32
-    DIV    shift, and go to state 33
-    GT     shift, and go to state 34
-    LT     shift, and go to state 35
-    GE     shift, and go to state 36
-    LE     shift, and go to state 37
-    EQ     shift, and go to state 38
+    INTEGER     shift, and go to state 1
+    FLOAT       shift, and go to state 2
+    STRING      shift, and go to state 3
+    SELF        shift, and go to state 4
+    CONSTANT    shift, and go to state 5
+    IDENTIFIER  shift, and go to state 6
+    OPEN_PAREN  shift, and go to state 7
+    FUNC        shift, and go to state 8
+    LAMBDA      shift, and go to state 9
+    CLASS       shift, and go to state 10
+    OPERATOR    shift, and go to state 11
+    IF          shift, and go to state 12
 
-    $default  reduce using rule 5 (BodyExpressions)
+    NEWLINE   reduce using rule 7 (BodyExpressions)
+    NEWLINE   [reduce using rule 8 (BodyExpressions)]
+    $default  reduce using rule 7 (BodyExpressions)
 
-    Operators  go to state 45
+    BodyExpressions  go to state 68
+    Expression       go to state 69
+    Literal          go to state 15
+    Call             go to state 16
+    Function         go to state 17
+    Lambda           go to state 18
+    Class            go to state 19
+    If               go to state 20
+    SetLocal         go to state 21
+    GetLocal         go to state 22
+    GetConstant      go to state 23
 
 
 State 57
@@ -866,7 +896,7 @@ State 57
    32 Call: Expression . Operators Expression
    34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-    DOT    shift, and go to state 44
+    DOT    shift, and go to state 45
     PLUS   shift, and go to state 30
     MINUS  shift, and go to state 31
     MULT   shift, and go to state 32
@@ -879,7 +909,7 @@ State 57
 
     $default  reduce using rule 2 (Expressions)
 
-    Operators  go to state 45
+    Operators  go to state 46
 
 
 State 58
@@ -895,7 +925,7 @@ State 59
    32     | Expression Operators Expression .
    34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-    DOT    shift, and go to state 44
+    DOT    shift, and go to state 45
     PLUS   shift, and go to state 30
     MINUS  shift, and go to state 31
     MULT   shift, and go to state 32
@@ -918,7 +948,7 @@ State 59
     EQ        [reduce using rule 32 (Call)]
     $default  reduce using rule 32 (Call)
 
-    Operators  go to state 45
+    Operators  go to state 46
 
 
 State 60
@@ -986,7 +1016,7 @@ State 65
 
    44 Class: CLASS CONSTANT COLON CONSTANT . Terminator BodyExpressions END
 
-    NEWLINE  shift, and go to state 42
+    NEWLINE  shift, and go to state 43
 
     Terminator  go to state 75
 
@@ -998,9 +1028,9 @@ State 66
    45 Class: CLASS CONSTANT Terminator BodyExpressions . END
 
     END      shift, and go to state 76
-    NEWLINE  shift, and go to state 42
+    NEWLINE  shift, and go to state 43
 
-    Terminator  go to state 69
+    Terminator  go to state 77
 
 
 State 67
@@ -1008,49 +1038,45 @@ State 67
    36 Function: OPERATOR Operators OPEN_PAREN Parameters . CLOSE_PAREN Terminator BodyExpressions END
    42 Parameters: Parameters . COMMA IDENTIFIER
 
-    CLOSE_PAREN  shift, and go to state 77
+    CLOSE_PAREN  shift, and go to state 78
     COMMA        shift, and go to state 73
 
 
 State 68
 
-   46 If: IF OPEN_PAREN BodyExpressions CLOSE_PAREN . Terminator BodyExpressions END
+    6 BodyExpressions: BodyExpressions . Terminator Expression
+    8                | BodyExpressions . Terminator
+   46 If: IF BodyExpressions Terminator BodyExpressions . END
 
-    NEWLINE  shift, and go to state 42
+    END      shift, and go to state 79
+    NEWLINE  shift, and go to state 43
 
-    Terminator  go to state 78
+    Terminator  go to state 77
 
 
 State 69
 
-    6 BodyExpressions: BodyExpressions Terminator . Expression
-    8                | BodyExpressions Terminator .
+    5 BodyExpressions: Expression .
+    6                | BodyExpressions Terminator Expression .
+   32 Call: Expression . Operators Expression
+   34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
 
-    INTEGER     shift, and go to state 1
-    FLOAT       shift, and go to state 2
-    STRING      shift, and go to state 3
-    SELF        shift, and go to state 4
-    CONSTANT    shift, and go to state 5
-    IDENTIFIER  shift, and go to state 6
-    OPEN_PAREN  shift, and go to state 7
-    FUNC        shift, and go to state 8
-    LAMBDA      shift, and go to state 9
-    CLASS       shift, and go to state 10
-    OPERATOR    shift, and go to state 11
-    IF          shift, and go to state 12
+    DOT    shift, and go to state 45
+    PLUS   shift, and go to state 30
+    MINUS  shift, and go to state 31
+    MULT   shift, and go to state 32
+    DIV    shift, and go to state 33
+    GT     shift, and go to state 34
+    LT     shift, and go to state 35
+    GE     shift, and go to state 36
+    LE     shift, and go to state 37
+    EQ     shift, and go to state 38
 
-    $default  reduce using rule 8 (BodyExpressions)
+    NEWLINE   reduce using rule 5 (BodyExpressions)
+    NEWLINE   [reduce using rule 6 (BodyExpressions)]
+    $default  reduce using rule 5 (BodyExpressions)
 
-    Expression   go to state 79
-    Literal      go to state 15
-    Call         go to state 16
-    Function     go to state 17
-    Lambda       go to state 18
-    Class        go to state 19
-    If           go to state 20
-    SetLocal     go to state 21
-    GetLocal     go to state 22
-    GetConstant  go to state 23
+    Operators  go to state 46
 
 
 State 70
@@ -1072,7 +1098,7 @@ State 70
 
     $default  reduce using rule 40 (Arguments)
 
-    Expression   go to state 47
+    Expression   go to state 48
     Literal      go to state 15
     Call         go to state 16
     Function     go to state 17
@@ -1091,7 +1117,7 @@ State 71
    34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
    39 Arguments: Arguments COMMA Expression .
 
-    DOT    shift, and go to state 44
+    DOT    shift, and go to state 45
     PLUS   shift, and go to state 30
     MINUS  shift, and go to state 31
     MULT   shift, and go to state 32
@@ -1104,14 +1130,14 @@ State 71
 
     $default  reduce using rule 39 (Arguments)
 
-    Operators  go to state 45
+    Operators  go to state 46
 
 
 State 72
 
    35 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN . Terminator BodyExpressions END
 
-    NEWLINE  shift, and go to state 42
+    NEWLINE  shift, and go to state 43
 
     Terminator  go to state 81
 
@@ -1127,7 +1153,7 @@ State 74
 
    37 Lambda: LAMBDA DO PIPE Parameters PIPE . Terminator BodyExpressions END
 
-    NEWLINE  shift, and go to state 42
+    NEWLINE  shift, and go to state 43
 
     Terminator  go to state 83
 
@@ -1152,7 +1178,7 @@ State 75
     $default  reduce using rule 7 (BodyExpressions)
 
     BodyExpressions  go to state 84
-    Expression       go to state 56
+    Expression       go to state 41
     Literal          go to state 15
     Call             go to state 16
     Function         go to state 17
@@ -1173,16 +1199,8 @@ State 76
 
 State 77
 
-   36 Function: OPERATOR Operators OPEN_PAREN Parameters CLOSE_PAREN . Terminator BodyExpressions END
-
-    NEWLINE  shift, and go to state 42
-
-    Terminator  go to state 85
-
-
-State 78
-
-   46 If: IF OPEN_PAREN BodyExpressions CLOSE_PAREN Terminator . BodyExpressions END
+    6 BodyExpressions: BodyExpressions Terminator . Expression
+    8                | BodyExpressions Terminator .
 
     INTEGER     shift, and go to state 1
     FLOAT       shift, and go to state 2
@@ -1197,41 +1215,34 @@ State 78
     OPERATOR    shift, and go to state 11
     IF          shift, and go to state 12
 
-    $default  reduce using rule 7 (BodyExpressions)
+    $default  reduce using rule 8 (BodyExpressions)
 
-    BodyExpressions  go to state 86
-    Expression       go to state 56
-    Literal          go to state 15
-    Call             go to state 16
-    Function         go to state 17
-    Lambda           go to state 18
-    Class            go to state 19
-    If               go to state 20
-    SetLocal         go to state 21
-    GetLocal         go to state 22
-    GetConstant      go to state 23
+    Expression   go to state 85
+    Literal      go to state 15
+    Call         go to state 16
+    Function     go to state 17
+    Lambda       go to state 18
+    Class        go to state 19
+    If           go to state 20
+    SetLocal     go to state 21
+    GetLocal     go to state 22
+    GetConstant  go to state 23
+
+
+State 78
+
+   36 Function: OPERATOR Operators OPEN_PAREN Parameters CLOSE_PAREN . Terminator BodyExpressions END
+
+    NEWLINE  shift, and go to state 43
+
+    Terminator  go to state 86
 
 
 State 79
 
-    6 BodyExpressions: BodyExpressions Terminator Expression .
-   32 Call: Expression . Operators Expression
-   34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+   46 If: IF BodyExpressions Terminator BodyExpressions END .
 
-    DOT    shift, and go to state 44
-    PLUS   shift, and go to state 30
-    MINUS  shift, and go to state 31
-    MULT   shift, and go to state 32
-    DIV    shift, and go to state 33
-    GT     shift, and go to state 34
-    LT     shift, and go to state 35
-    GE     shift, and go to state 36
-    LE     shift, and go to state 37
-    EQ     shift, and go to state 38
-
-    $default  reduce using rule 6 (BodyExpressions)
-
-    Operators  go to state 45
+    $default  reduce using rule 46 (If)
 
 
 State 80
@@ -1263,7 +1274,7 @@ State 81
     $default  reduce using rule 7 (BodyExpressions)
 
     BodyExpressions  go to state 88
-    Expression       go to state 56
+    Expression       go to state 41
     Literal          go to state 15
     Call             go to state 16
     Function         go to state 17
@@ -1302,7 +1313,7 @@ State 83
     $default  reduce using rule 7 (BodyExpressions)
 
     BodyExpressions  go to state 89
-    Expression       go to state 56
+    Expression       go to state 41
     Literal          go to state 15
     Call             go to state 16
     Function         go to state 17
@@ -1321,12 +1332,34 @@ State 84
    44 Class: CLASS CONSTANT COLON CONSTANT Terminator BodyExpressions . END
 
     END      shift, and go to state 90
-    NEWLINE  shift, and go to state 42
+    NEWLINE  shift, and go to state 43
 
-    Terminator  go to state 69
+    Terminator  go to state 77
 
 
 State 85
+
+    6 BodyExpressions: BodyExpressions Terminator Expression .
+   32 Call: Expression . Operators Expression
+   34     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
+
+    DOT    shift, and go to state 45
+    PLUS   shift, and go to state 30
+    MINUS  shift, and go to state 31
+    MULT   shift, and go to state 32
+    DIV    shift, and go to state 33
+    GT     shift, and go to state 34
+    LT     shift, and go to state 35
+    GE     shift, and go to state 36
+    LE     shift, and go to state 37
+    EQ     shift, and go to state 38
+
+    $default  reduce using rule 6 (BodyExpressions)
+
+    Operators  go to state 46
+
+
+State 86
 
    36 Function: OPERATOR Operators OPEN_PAREN Parameters CLOSE_PAREN Terminator . BodyExpressions END
 
@@ -1346,7 +1379,7 @@ State 85
     $default  reduce using rule 7 (BodyExpressions)
 
     BodyExpressions  go to state 91
-    Expression       go to state 56
+    Expression       go to state 41
     Literal          go to state 15
     Call             go to state 16
     Function         go to state 17
@@ -1356,18 +1389,6 @@ State 85
     SetLocal         go to state 21
     GetLocal         go to state 22
     GetConstant      go to state 23
-
-
-State 86
-
-    6 BodyExpressions: BodyExpressions . Terminator Expression
-    8                | BodyExpressions . Terminator
-   46 If: IF OPEN_PAREN BodyExpressions CLOSE_PAREN Terminator BodyExpressions . END
-
-    END      shift, and go to state 92
-    NEWLINE  shift, and go to state 42
-
-    Terminator  go to state 69
 
 
 State 87
@@ -1383,10 +1404,10 @@ State 88
     8                | BodyExpressions . Terminator
    35 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions . END
 
-    END      shift, and go to state 93
-    NEWLINE  shift, and go to state 42
+    END      shift, and go to state 92
+    NEWLINE  shift, and go to state 43
 
-    Terminator  go to state 69
+    Terminator  go to state 77
 
 
 State 89
@@ -1395,10 +1416,10 @@ State 89
     8                | BodyExpressions . Terminator
    37 Lambda: LAMBDA DO PIPE Parameters PIPE Terminator BodyExpressions . END
 
-    END      shift, and go to state 94
-    NEWLINE  shift, and go to state 42
+    END      shift, and go to state 93
+    NEWLINE  shift, and go to state 43
 
-    Terminator  go to state 69
+    Terminator  go to state 77
 
 
 State 90
@@ -1414,34 +1435,27 @@ State 91
     8                | BodyExpressions . Terminator
    36 Function: OPERATOR Operators OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions . END
 
-    END      shift, and go to state 95
-    NEWLINE  shift, and go to state 42
+    END      shift, and go to state 94
+    NEWLINE  shift, and go to state 43
 
-    Terminator  go to state 69
+    Terminator  go to state 77
 
 
 State 92
-
-   46 If: IF OPEN_PAREN BodyExpressions CLOSE_PAREN Terminator BodyExpressions END .
-
-    $default  reduce using rule 46 (If)
-
-
-State 93
 
    35 Function: FUNC IDENTIFIER OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END .
 
     $default  reduce using rule 35 (Function)
 
 
-State 94
+State 93
 
    37 Lambda: LAMBDA DO PIPE Parameters PIPE Terminator BodyExpressions END .
 
     $default  reduce using rule 37 (Lambda)
 
 
-State 95
+State 94
 
    36 Function: OPERATOR Operators OPEN_PAREN Parameters CLOSE_PAREN Terminator BodyExpressions END .
 

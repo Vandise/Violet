@@ -285,9 +285,9 @@ Class:
   ;
 
 If:
-    IF OPEN_PAREN BodyExpressions CLOSE_PAREN Terminator
+    IF BodyExpressions Terminator
       BodyExpressions
-    END                           { $$ = new Nodes::IfNode($3, $6); }
+    END                           { $$ = new Nodes::IfNode($2, $4); }
   ;
   
 SetLocal:
