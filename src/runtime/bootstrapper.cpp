@@ -34,8 +34,10 @@ Bootstrapper::run()
   lambdaClass->addMethod(std::string("call"),&lambda_call_method);
 
   objectClass->addMethod(std::string("print"),&object_print_method);
+  objectClass->addMethod(std::string("send"),&object_send_method);
 
   intClass->addMethod(std::string("+"),&int_add_method);
+  intClass->addMethod(std::string("add"),&int_add_overload_method);
   intClass->addMethod(std::string("-"),&int_subtract_method);
   intClass->addMethod(std::string("*"),&int_multiply_method);
   intClass->addMethod(std::string("/"),&int_divide_method);

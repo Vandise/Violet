@@ -4,6 +4,18 @@
 #include "runtime/headers/runtime.hpp"
 #include "runtime/headers/valueobject.hpp"
 
+struct IntAdd : Method
+{
+  Runtime::Object* call(Runtime::Object *receiver, std::vector<Runtime::Object*> arguments)
+  {
+    return new Runtime::ValueObject(
+      boost::get<int>(receiver->getValue())
+      +
+      boost::get<int>(arguments[0]->getValue())
+    );
+  }
+};
+
 struct IntAddOp: OperatorMethod<int>
 {
   Runtime::Object* perform(int receiver, int argument, std::string receiver_class, std::string argument_class)
@@ -61,6 +73,7 @@ struct IntEqualOp: OperatorMethod<int>
 };
 
 IntAddOp         int_add_method;
+IntAdd           int_add_overload_method;
 IntMinusOp       int_subtract_method;
 IntMultOp        int_multiply_method;
 IntDivOp         int_divide_method;
