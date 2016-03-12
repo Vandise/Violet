@@ -117,7 +117,6 @@
 %left  EQ "!="
 %left  "&&"
 %left  "||"
-%right ASSIGN
 %left  COMMA
 
 /* token types */

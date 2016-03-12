@@ -681,7 +681,7 @@ namespace FrontEnd {
           switch (yyn)
             {
   case 2:
-#line 148 "src/grammar/parser.yy" // lalr1.cc:859
+#line 147 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                               std::vector<Nodes::AbstractNode *> nodes;
                                               nodes.push_back((yystack_[0].value.abs_node));
@@ -692,7 +692,7 @@ namespace FrontEnd {
     break;
 
   case 3:
-#line 154 "src/grammar/parser.yy" // lalr1.cc:859
+#line 153 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                               (yystack_[2].value.driver)->push_node((yystack_[0].value.abs_node));
                                               (yylhs.value.driver) = (yystack_[2].value.driver);
@@ -701,7 +701,7 @@ namespace FrontEnd {
     break;
 
   case 4:
-#line 158 "src/grammar/parser.yy" // lalr1.cc:859
+#line 157 "src/grammar/parser.yy" // lalr1.cc:859
     {
     
                                             }
@@ -709,7 +709,7 @@ namespace FrontEnd {
     break;
 
   case 5:
-#line 161 "src/grammar/parser.yy" // lalr1.cc:859
+#line 160 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                               (yylhs.value.driver) = (yystack_[1].value.driver);
                                             }
@@ -717,7 +717,7 @@ namespace FrontEnd {
     break;
 
   case 6:
-#line 168 "src/grammar/parser.yy" // lalr1.cc:859
+#line 167 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                             std::vector<Nodes::AbstractNode *> nodes;
                                             nodes.push_back((yystack_[0].value.abs_node));
@@ -728,7 +728,7 @@ namespace FrontEnd {
     break;
 
   case 7:
-#line 174 "src/grammar/parser.yy" // lalr1.cc:859
+#line 173 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                             (yystack_[2].value.nodes)->add((yystack_[0].value.abs_node));
                                             (yylhs.value.nodes) = (yystack_[2].value.nodes);
@@ -737,13 +737,13 @@ namespace FrontEnd {
     break;
 
   case 8:
-#line 178 "src/grammar/parser.yy" // lalr1.cc:859
+#line 177 "src/grammar/parser.yy" // lalr1.cc:859
     { /* do nothing */ }
 #line 743 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 9:
-#line 179 "src/grammar/parser.yy" // lalr1.cc:859
+#line 178 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                             (yylhs.value.nodes) = (yystack_[1].value.nodes);
                                           }
@@ -751,13 +751,13 @@ namespace FrontEnd {
     break;
 
   case 20:
-#line 195 "src/grammar/parser.yy" // lalr1.cc:859
+#line 194 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = (yystack_[1].value.abs_node); }
 #line 757 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 21:
-#line 199 "src/grammar/parser.yy" // lalr1.cc:859
+#line 198 "src/grammar/parser.yy" // lalr1.cc:859
     {
                               (yylhs.value.abs_node) = new Nodes::LiteralNode((yystack_[0].value.ival));
                             }
@@ -765,7 +765,7 @@ namespace FrontEnd {
     break;
 
   case 22:
-#line 202 "src/grammar/parser.yy" // lalr1.cc:859
+#line 201 "src/grammar/parser.yy" // lalr1.cc:859
     {
                               (yylhs.value.abs_node) = new Nodes::LiteralNode((yystack_[0].value.fval));
                             }
@@ -773,7 +773,7 @@ namespace FrontEnd {
     break;
 
   case 23:
-#line 205 "src/grammar/parser.yy" // lalr1.cc:859
+#line 204 "src/grammar/parser.yy" // lalr1.cc:859
     {
                               (yylhs.value.abs_node) = new Nodes::LiteralNode(*(yystack_[0].value.sval));
                             }
@@ -781,7 +781,7 @@ namespace FrontEnd {
     break;
 
   case 24:
-#line 208 "src/grammar/parser.yy" // lalr1.cc:859
+#line 207 "src/grammar/parser.yy" // lalr1.cc:859
     {
                               (yylhs.value.abs_node) = new Nodes::SelfNode();
                             }
@@ -789,13 +789,13 @@ namespace FrontEnd {
     break;
 
   case 33:
-#line 213 "src/grammar/parser.yy" // lalr1.cc:859
+#line 212 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.sval) = (yystack_[0].value.sval); }
 #line 795 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 34:
-#line 216 "src/grammar/parser.yy" // lalr1.cc:859
+#line 215 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                                                     std::vector<Nodes::AbstractNode*> arguments;
                                                                     arguments.push_back((yystack_[0].value.abs_node));
@@ -805,19 +805,19 @@ namespace FrontEnd {
     break;
 
   case 35:
-#line 221 "src/grammar/parser.yy" // lalr1.cc:859
+#line 220 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = new Nodes::CallNode(*(yystack_[3].value.sval), NULL, *(yystack_[1].value.arguments)); }
 #line 811 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 36:
-#line 222 "src/grammar/parser.yy" // lalr1.cc:859
+#line 221 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = new Nodes::CallNode(*(yystack_[3].value.sval), (yystack_[5].value.abs_node), *(yystack_[1].value.arguments));   }
 #line 817 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 37:
-#line 228 "src/grammar/parser.yy" // lalr1.cc:859
+#line 227 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     (yylhs.value.abs_node) = new Nodes::MethodDefinitionNode(*(yystack_[6].value.sval), *(yystack_[4].value.parameters), (yystack_[1].value.nodes));
                                   }
@@ -825,7 +825,7 @@ namespace FrontEnd {
     break;
 
   case 38:
-#line 234 "src/grammar/parser.yy" // lalr1.cc:859
+#line 233 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     (yylhs.value.abs_node) = new Nodes::MethodDefinitionNode(*(yystack_[6].value.sval), *(yystack_[4].value.parameters), (yystack_[1].value.nodes));
                                   }
@@ -833,7 +833,7 @@ namespace FrontEnd {
     break;
 
   case 39:
-#line 243 "src/grammar/parser.yy" // lalr1.cc:859
+#line 242 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     (yylhs.value.abs_node) = new Nodes::LambdaNode(*(yystack_[4].value.parameters),(yystack_[1].value.nodes));
                                   }
@@ -841,7 +841,7 @@ namespace FrontEnd {
     break;
 
   case 40:
-#line 249 "src/grammar/parser.yy" // lalr1.cc:859
+#line 248 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                   std::vector<Nodes::AbstractNode*> *arguments = new std::vector<Nodes::AbstractNode*>();
                                   arguments->push_back((yystack_[0].value.abs_node));
@@ -851,7 +851,7 @@ namespace FrontEnd {
     break;
 
   case 41:
-#line 254 "src/grammar/parser.yy" // lalr1.cc:859
+#line 253 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                   (yystack_[2].value.arguments)->push_back((yystack_[0].value.abs_node));
                                   (yylhs.value.arguments) = (yystack_[2].value.arguments);
@@ -860,7 +860,7 @@ namespace FrontEnd {
     break;
 
   case 42:
-#line 258 "src/grammar/parser.yy" // lalr1.cc:859
+#line 257 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                   std::vector<Nodes::AbstractNode*> *arguments = new std::vector<Nodes::AbstractNode*>();
                                   (yylhs.value.arguments) = arguments;
@@ -869,7 +869,7 @@ namespace FrontEnd {
     break;
 
   case 43:
-#line 265 "src/grammar/parser.yy" // lalr1.cc:859
+#line 264 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     std::vector<std::string> *parameters = new std::vector<std::string>();
                                     parameters->push_back(*(yystack_[0].value.sval));
@@ -879,13 +879,13 @@ namespace FrontEnd {
     break;
 
   case 44:
-#line 270 "src/grammar/parser.yy" // lalr1.cc:859
+#line 269 "src/grammar/parser.yy" // lalr1.cc:859
     { (yystack_[2].value.parameters)->push_back(*(yystack_[0].value.sval)); (yylhs.value.parameters) = (yystack_[2].value.parameters); }
 #line 885 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 45:
-#line 271 "src/grammar/parser.yy" // lalr1.cc:859
+#line 270 "src/grammar/parser.yy" // lalr1.cc:859
     { 
                                     std::vector<std::string> *parameters = new std::vector<std::string>();
                                     (yylhs.value.parameters) = parameters;
@@ -894,7 +894,7 @@ namespace FrontEnd {
     break;
 
   case 46:
-#line 280 "src/grammar/parser.yy" // lalr1.cc:859
+#line 279 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     (yylhs.value.abs_node) = new Nodes::ClassDefinitionNode(*(yystack_[5].value.sval), *(yystack_[3].value.sval), (yystack_[1].value.nodes));
                                   }
@@ -902,7 +902,7 @@ namespace FrontEnd {
     break;
 
   case 47:
-#line 285 "src/grammar/parser.yy" // lalr1.cc:859
+#line 284 "src/grammar/parser.yy" // lalr1.cc:859
     {
                                     (yylhs.value.abs_node) = new Nodes::ClassDefinitionNode(*(yystack_[3].value.sval), std::string(""), (yystack_[1].value.nodes));
                                   }
@@ -910,31 +910,31 @@ namespace FrontEnd {
     break;
 
   case 48:
-#line 293 "src/grammar/parser.yy" // lalr1.cc:859
+#line 292 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = new Nodes::IfNode((yystack_[3].value.nodes), (yystack_[1].value.nodes)); }
 #line 916 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 49:
-#line 297 "src/grammar/parser.yy" // lalr1.cc:859
+#line 296 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = new Nodes::ReturnNode((yystack_[0].value.nodes)); }
 #line 922 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 50:
-#line 301 "src/grammar/parser.yy" // lalr1.cc:859
+#line 300 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = new Nodes::LocalAssignNode(*(yystack_[2].value.sval), (yystack_[0].value.abs_node)); }
 #line 928 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 51:
-#line 305 "src/grammar/parser.yy" // lalr1.cc:859
+#line 304 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = new Nodes::LocalNode(*(yystack_[0].value.sval)); }
 #line 934 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
 
   case 52:
-#line 309 "src/grammar/parser.yy" // lalr1.cc:859
+#line 308 "src/grammar/parser.yy" // lalr1.cc:859
     { (yylhs.value.abs_node) = new Nodes::ConstantNode(*(yystack_[0].value.sval)); }
 #line 940 "src/frontend/parser.tab.cpp" // lalr1.cc:859
     break;
@@ -1113,7 +1113,7 @@ namespace FrontEnd {
      -48,   -48,   -48,   -48,   -48,   -48,    80,    80,    -7,    33,
       32,     6,   -48,   -48,   -48,   -48,   -48,   -48,   -48,   -48,
      -48,    35,    12,    81,    12,   -48,   -48,    80,    43,    80,
-     -48,    81,    53,   -48,    58,    58,    66,    80,    58,    80,
+      81,    81,    53,   -48,    58,    58,    66,    80,    58,    80,
       80,    81,    65,    81,   -48,    80,   -48,    59,    22,    12,
      -10,    69,    -9,    81,    81,    80,    81,    12,    84,    12,
       80,   -48,    12,   -48,    83,    80,   -48,    80,    -8,    80,
@@ -1242,12 +1242,12 @@ namespace FrontEnd {
   const unsigned short int
   Parser::yyrline_[] =
   {
-       0,   148,   148,   154,   158,   161,   168,   174,   178,   179,
-     185,   186,   187,   188,   189,   190,   191,   192,   193,   194,
-     195,   199,   202,   205,   208,   213,   213,   213,   213,   213,
-     213,   213,   213,   213,   216,   221,   222,   226,   232,   241,
-     249,   254,   258,   265,   270,   271,   278,   283,   291,   297,
-     301,   305,   309,   313
+       0,   147,   147,   153,   157,   160,   167,   173,   177,   178,
+     184,   185,   186,   187,   188,   189,   190,   191,   192,   193,
+     194,   198,   201,   204,   207,   212,   212,   212,   212,   212,
+     212,   212,   212,   212,   215,   220,   221,   225,   231,   240,
+     248,   253,   257,   264,   269,   270,   277,   282,   290,   296,
+     300,   304,   308,   312
   };
 
   // Print the state stack on the debug stream.
@@ -1333,7 +1333,7 @@ namespace FrontEnd {
 #line 4 "src/grammar/parser.yy" // lalr1.cc:1167
 } // FrontEnd
 #line 1336 "src/frontend/parser.tab.cpp" // lalr1.cc:1167
-#line 315 "src/grammar/parser.yy" // lalr1.cc:1168
+#line 314 "src/grammar/parser.yy" // lalr1.cc:1168
 
 
 

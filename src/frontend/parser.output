@@ -10,6 +10,7 @@ Terminals unused in grammar
 
 State 43 conflicts: 10 shift/reduce
 State 44 conflicts: 1 shift/reduce
+State 50 conflicts: 10 shift/reduce
 State 59 conflicts: 1 reduce/reduce
 State 63 conflicts: 10 shift/reduce
 State 73 conflicts: 1 reduce/reduce
@@ -827,6 +828,27 @@ State 50
    35     | Expression . DOT IDENTIFIER OPEN_PAREN Arguments CLOSE_PAREN
    49 SetLocal: IDENTIFIER ASSIGN Expression .
 
+    DOT    shift, and go to state 48
+    PLUS   shift, and go to state 32
+    MINUS  shift, and go to state 33
+    MULT   shift, and go to state 34
+    DIV    shift, and go to state 35
+    GT     shift, and go to state 36
+    LT     shift, and go to state 37
+    GE     shift, and go to state 38
+    LE     shift, and go to state 39
+    EQ     shift, and go to state 40
+
+    DOT       [reduce using rule 49 (SetLocal)]
+    PLUS      [reduce using rule 49 (SetLocal)]
+    MINUS     [reduce using rule 49 (SetLocal)]
+    MULT      [reduce using rule 49 (SetLocal)]
+    DIV       [reduce using rule 49 (SetLocal)]
+    GT        [reduce using rule 49 (SetLocal)]
+    LT        [reduce using rule 49 (SetLocal)]
+    GE        [reduce using rule 49 (SetLocal)]
+    LE        [reduce using rule 49 (SetLocal)]
+    EQ        [reduce using rule 49 (SetLocal)]
     $default  reduce using rule 49 (SetLocal)
 
     Operators  go to state 49
