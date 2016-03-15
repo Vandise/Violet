@@ -133,6 +133,20 @@ end
 User == 10
 => Called == on User Object, passed argument: 10
 ```
+
+#### Overloading operators in core objects
+Ever want to prove to your friend that 1 + 1 = 4? Here's how you would do it in Azalea:
+```
+class Integer
+  operator +(int)
+    ret self.add(int).add(2)
+  end
+end
+
+print(1 + 1)
+=> 4
+```
+
 ### Conditionals and control structures
 
 #### IF
