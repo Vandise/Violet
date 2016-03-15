@@ -72,6 +72,32 @@ expressions.IDENTIFIER(arguments)
 self.print("Hello World")
 ```
 
+### Casting to a specific datatype
+With operator methods (+, -, *, ==, >=, etc.) Azalea will attempt to convert the argument to the same datatype as the receiver. For example:
+```
+//attempt to compare an Integer with a Float
+Object.print(1 == 1.5)
+```
+Azalea will complain with the following error:
+```
+No implicit conversion from class float to class integer. 
+Try casting reciever of class type integer to class type float.
+```
+The syntax for converting an object to another is "to_{some object name}". In this case:
+```
+//attempt to compare an Integer with a Float
+Object.print(1.to_float() == 1.5)
+//=> false (0)
+```
+You can also create your own type casts to core objects following this convention. I.E.
+```
+class PI
+  func to_float
+    ret 3.14159
+  end
+end
+```
+
 ### Lambda
 The lambda body is executed within a child scope, meaning it has access to parent variables.
 ```
