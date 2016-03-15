@@ -16,6 +16,16 @@ struct IntAdd : Method
   }
 };
 
+struct IntToFloat : Method
+{
+  Runtime::Object* call(Runtime::Object *receiver, std::vector<Runtime::Object*> arguments)
+  {
+    return new Runtime::ValueObject(
+      static_cast< float >(boost::get<int>(receiver->getValue()))
+    );
+  }
+};
+
 struct IntAddOp: OperatorMethod<int>
 {
   Runtime::Object* perform(int receiver, int argument, std::string receiver_class, std::string argument_class)
@@ -81,3 +91,5 @@ IntDivOp         int_divide_method;
 IntLessThanOp    int_less_than_method;
 IntGreaterThanOp int_greater_than_method;
 IntEqualOp       int_equal_method;
+
+IntToFloat       int_to_float_method;

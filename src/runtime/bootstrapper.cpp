@@ -44,6 +44,9 @@ Bootstrapper::run()
   intClass->addMethod(std::string("<"),&int_less_than_method);
   intClass->addMethod(std::string(">"),&int_greater_than_method);
   intClass->addMethod(std::string("=="),&int_equal_method);
+  intClass->addMethod(std::string("to_float"),&int_to_float_method);
+
+  floatClass->addMethod(std::string("=="),&float_equal_method);
 
   return new Context(main);
 }
