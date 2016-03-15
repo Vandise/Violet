@@ -126,6 +126,34 @@ print(outside_int)
 => 5
 ```
 
+### More On Lambda Scope
+When a lambda function is defined, it has access to variables from the scope in which it is defined. For example if we had a class that accepted a number and a callable (lambda) object.
+```
+class MyClass
+  func add_number(number, callable)
+    callable.call(number)
+  end  
+end
+```
+and we defined our lambda function to update the variable "my_var" found in its parent scope
+```
+my_var = 10
+
+lambda = -> do |x|
+  my_var = my_var + x
+end
+```
+if this lambda object was to be sent to the "add_number" method:
+```
+MyClass.add_number(10, lambda)
+```
+my_var will have 10 added to it.
+```
+print(my_var)
+//=> 20
+```
+This is due to the lambda object preserving its defined scope and parent scope -- in this case, Object.
+
 ### Class Definitions
 ```
 class CONSTANT
